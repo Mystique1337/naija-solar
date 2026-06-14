@@ -36,9 +36,19 @@ A clean, labelled diagram lays out your appliances, the panels on your roof, and
 
 And for the part that makes people smile, the app builds your living room in 3D, with the exact recommended panels on the roof, your appliances inside, and the inverter and battery on the wall.
 
-## Step four: it speaks the result back, and answers your questions
+## Step four: it writes your plan, then reads it aloud
 
-This is the part I care about most. The app reads your plan aloud in the same language you chose, so you do not need to read anything at all. Then it waits for your questions. You can ask why it picked those panels, or whether the system can run your air conditioner at night, and it answers in plain words, grounded only in the plan it just built for you.
+This is the part I care about most. The moment your result is ready, the plan appears in plain words on the screen, and then the very same words are read aloud in the language you chose. You can read it, listen, or both. Putting the writing first matters more than it sounds. A voice has to warm up and speak, which takes a few seconds, but the words are there instantly, so you are never left watching a spinner waiting to be told what to buy.
+
+![The plan in writing, then read aloud in your language](https://huggingface.co/spaces/build-small-hackathon/naija-solar/resolve/main/assets/05_narration.png)
+
+Then it waits for your questions. You can ask why it picked those panels, whether the system can run your air conditioner at night, or how it compares to your generator, and it answers in plain words, grounded in the plan it just built for you.
+
+## The small things that make it feel like an app
+
+A few touches turn this from a demo into something you would actually keep open. The first time you arrive, a short guided tour points out how to speak, type, or photograph your appliances, in your own language. There is a light mode and a dark mode, and the app remembers which you prefer. You can make an account to save your sizings and open them again later. And the front page carries real ratings from people who have used it, each shown with the language they sized in, so a Hausa speaker can see another Hausa speaker vouch for it.
+
+![A guided first run, in dark mode](https://huggingface.co/spaces/build-small-hackathon/naija-solar/resolve/main/assets/06_dark.png)
 
 ## Under the hood: how it all fits together
 
@@ -60,11 +70,11 @@ There is a quiet rule behind the whole project. Every model Naija Solar uses is 
 
 This is not a stunt. It is the point. An app meant for everyday Nigerians has to be cheap to run, or it will never survive past a demo. So the language work runs on Qwen3 at 1.7 billion parameters, speech recognition runs on a small Whisper model, the voices use Kokoro and F5-TTS, and reading appliances from a photo runs on MiniCPM-V at three and a half billion. The largest single piece is still smaller than four billion, and the whole stack lives on Modal, where each part wakes up when it is needed and goes back to sleep when it is not. There is no frontier model behind the curtain and no per word billing to worry about. Small, open models can carry a real product if you give them the right jobs.
 
-To keep the five languages dependable, the spoken explanation for Pidgin, Yoruba, Hausa, and Igbo comes from carefully written templates rather than the small model, because a 1.7 billion parameter model is not reliable at those languages yet. That single choice is what makes the promise hold: pick Yoruba, and you really do get Yoruba.
+To keep the five languages dependable, the explanation for Pidgin, Yoruba, Hausa, and Igbo comes from carefully written templates rather than the small model, because a 1.7 billion parameter model is not reliable at those languages yet. The words you read on screen are exactly the words you hear, so nothing drifts between the two. That single choice is what makes the promise hold: pick Yoruba, and you really do get Yoruba.
 
 ## Where it goes next
 
-Right now the app sizes a system and speaks it back. I want it to remember a household over time, follow real generation, and become the thing a vendor opens with a customer rather than a barrier between them. The usage counter, the feedback buttons, and the optional email list are already in place, because the goal was never a single demo. The goal is the shop owner in Aba who hears, in Igbo, exactly what it takes to keep her freezer cold and her lights on.
+Right now the app sizes a system, writes it out, and speaks it back. Accounts and saved history are already in place, alongside a live count of systems sized, ratings from real users, and an optional email list, because the goal was never a single demo. Next I want it to remember a household over time, follow real generation, and become the thing a vendor opens with a customer rather than a barrier between them. The goal is the shop owner in Aba who hears, in Igbo, exactly what it takes to keep her freezer cold and her lights on.
 
 If you have ever stared at a solar quote and felt locked out, this one is for you.
 

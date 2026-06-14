@@ -1,0 +1,11 @@
+# Naija Solar — Space runtime deps (platform vendored at deploy).
+# Bespoke frontend served by FastAPI/uvicorn (server.py). Gradio is kept only so app.py's
+# logic/generators import cleanly (its Blocks is never built); it is also the one-line fallback.
+fastapi
+uvicorn[standard]
+python-multipart
+gradio>=6.0
+numpy
+pillow
+requests
+huggingface_hub

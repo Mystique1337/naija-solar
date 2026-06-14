@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Virtual envs and local secrets (NEVER commit)
+.venv/
+venv/
+.env
+.env.*
+env/
+*.key
+
+# Local runtime data, model weights, generated media
+/data/
+user_data/
+*.gguf
+*.bin
+*.safetensors
+*.onnx
+*.wav
+*.mp3
+*.mp4
+traces/
+.session_key
+.admin_key
+.testi_reset_v1
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.log

@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>/* set the theme before first paint so there is no flash */(function(){try{var t=localStorage.getItem('ns-theme');if(t!=='light'&&t!=='dark')t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<title>Naija Solar — solar sizing in your language</title>
+<meta name="description" content="Say your appliances in 5 Nigerian languages and get your exact solar system, drawn in 2D and 3D, spoken back to you. Every model under 4B parameters.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/app.css?v=__V__">
+<link rel="stylesheet" href="/web/shell.css?v=__V__">
+<!--HEAD-->
+</head>
+<body>
+<div id="solarbg" class="solarbg" aria-hidden="true"></div>
+<button id="themeBtn" class="themebtn" aria-label="Switch theme" title="Switch theme"></button>
+<div id="acct" class="acct"></div>
+<div class="wrap">
+  <div class="topbar" id="logo"></div>
+  <div id="ucount"></div>
+  <div class="langlabel" data-i18n="chooseLang">🌍 Choose your language</div>
+  <div class="langrow" id="langrow"></div>
+
+  <!-- ════ HOME ════ -->
+  <div id="home" class="view">
+    <section class="hsection hero">
+      <h1 class="hh1" data-i18n="home_h1">Power your home with the sun, in your language</h1>
+      <p class="hsub" data-i18n="home_sub">Say your appliances out loud. Get your exact solar system, drawn in 2D and 3D, and spoken back to you.</p>
+      <div class="ctarow">
+        <button class="bigcta" id="ctaSize" data-i18n="cta_size">☀️ Size your system free</button>
+        <button class="ghostcta" id="ctaHow" data-i18n="cta_how">See how it works</button>
+      </div>
+      <div class="hstats">
+        <div class="hstat"><b id="hsCount">—</b><span data-i18n="testi_h2" data-fixed="systems sized">systems sized</span></div>
+        <div class="hstat"><b>5</b><span data-i18n="stat_langs">5 languages</span></div>
+        <div class="hstat"><b>&lt;4B</b><span data-i18n="stat_models">Models under 4B</span></div>
+      </div>
+    </section>
+
+    <section class="hsection card">
+      <h2 data-i18n="prob_h">Solar should be simple. It usually isn't.</h2>
+      <ul class="probs">
+        <li data-i18n="prob_1"></li>
+        <li data-i18n="prob_2"></li>
+        <li data-i18n="prob_3"></li>
+      </ul>
+    </section>
+
+    <section class="hsection" id="howSec">
+      <h2 class="ctr" data-i18n="how_h">How it works</h2>
+      <div class="howgrid">
+        <div class="howcard"><div class="hi">🗣️</div><div class="ht" data-i18n="how_1t"></div><div class="hsx" data-i18n="how_1s"></div></div>
+        <div class="howcard"><div class="hi">🧮</div><div class="ht" data-i18n="how_2t"></div><div class="hsx" data-i18n="how_2s"></div></div>
+        <div class="howcard"><div class="hi">🏠</div><div class="ht" data-i18n="how_3t"></div><div class="hsx" data-i18n="how_3s"></div></div>
+        <div class="howcard"><div class="hi">🔊</div><div class="ht" data-i18n="how_4t"></div><div class="hsx" data-i18n="how_4s"></div></div>
+      </div>
+    </section>
+
+    <section class="hsection testi">
+      <h2 class="ctr" data-i18n="testi_h">What people are saying</h2>
+      <p class="hsub2 ctr" data-i18n="testi_sub"></p>
+      <div class="marquee"><div class="track" id="testiTrack"></div></div>
+    </section>
+
+    <section class="hsection card why">
+      <h2 data-i18n="why_h">Small models, real impact</h2>
+      <p data-i18n="why_s"></p>
+    </section>
+
+    <section class="hsection finalcta">
+      <h2 class="ctr" data-i18n="final_h">Ready to leave the generator behind?</h2>
+      <button class="bigcta" id="ctaSize2" data-i18n="final_cta">☀️ Size your system now</button>
+    </section>
+  </div>
+
+  <!-- ════ APP ════ -->
+  <div id="app" class="view" hidden>
+    <div class="apptop">
+      <button class="backbtn" id="backHome" data-i18n="back_home">← Home</button>
+      <button class="tourbtn" id="tourBtn">🧭 <span data-i18n="tour_start">Quick tour</span></button>
+    </div>
+    <details class="acc" id="guideAcc"><summary id="guideTitle">New here? How Naija Solar works</summary>
+      <div class="accbody" id="guide"></div></details>
+    <div class="locrow">
+      <select id="state" aria-label="State"></select>
+      <button class="locbtn" id="geoBtn" data-i18n="loc_btn">Use my location</button>
+    </div>
+    <div class="locnote" id="locnote"></div>
+
+    <div class="miccard">
+      <div class="imode">🎤 <b data-i18n="speak">Speak your appliances</b> <span data-i18n="speak_sub">tap Record, speak, tap Stop</span></div>
+      <div class="voicewrap">
+        <button class="recordbtn" id="recBtn"><span class="dot"></span><span id="recLbl" data-i18n="record">Record</span></button>
+        <span class="voicehint" data-i18n="voicehint">It transcribes and sizes itself.</span>
+      </div>
+      <div class="imode">⌨️ <b data-i18n="type">Or type them</b></div>
+      <div class="inrow">
+        <input class="typein" id="textIn" placeholder="or type: 1 fridge, 2 fans, 6 bulbs">
+        <button class="gobtn" id="sizeBtn" data-i18n="sizeit">Size it</button>
+      </div>
+      <div class="imode">✨ <b data-i18n="ex_h">New here? Tap an example</b> <span data-i18n="ex_sub">a full result in one click</span></div>
+      <div class="exrow" id="exrow"></div>
+      <div class="imode">📷 <b data-i18n="photo">Or snap / upload photos</b></div>
+      <label class="drop" id="dropZone">
+        <input type="file" id="fileIn" accept="image/*" multiple>
+        <div data-i18n="photo_drop">Tap to add photos of your room (up to 5)</div>
+        <div class="thumbs" id="thumbs"></div>
+      </label>
+      <button class="gobtn full" id="photoBtn" data-i18n="detect" style="margin-top:10px">Detect appliances from photo</button>
+    </div>
+
+    <div class="status" id="status"></div>
+
+    <div id="result">
+      <div id="savednote" class="savednote"></div>
+      <div class="tabbar">
+        <button class="tabbtn on" data-tab="t3d" data-i18n="tab_3d">🏠 3D Home</button>
+        <button class="tabbtn" data-tab="t2d" data-i18n="tab_2d">🖼️ 2D View</button>
+        <button class="tabbtn" data-tab="tsys" data-i18n="tab_sys">⚡ System</button>
+      </div>
+      <div class="tabpanel on" id="t3d">
+        <div class="chcard"><div class="chttl"><span data-i18n="hd_3d">Your home in 3D</span> <span class="chsub" data-i18n="hd_3d_sub">drag to look around · scroll to zoom</span></div>
+          <div id="house3d" class="house3d"></div></div>
+      </div>
+      <div class="tabpanel" id="t2d"><div id="twod"></div></div>
+      <div class="tabpanel" id="tsys"><div id="system"></div><div id="breakdown"></div></div>
+
+      <div class="narrcard">
+        <div class="nhd">🔊 <span data-i18n="hear">Your plan, in your language</span></div>
+        <div id="narrText" class="narrtext"></div>
+        <div id="narrStatus" class="narrstatus"></div>
+        <audio id="narrAudio" controls preload="none" hidden></audio>
+      </div>
+
+      <div id="content"></div>
+
+      <details class="acc"><summary data-i18n="adj">🛠️ Adjust appliances</summary><div class="accbody">
+        <div class="addbar">
+          <select id="picker" aria-label="Appliance"></select>
+          <input type="number" id="qty" value="1" min="1" max="50" aria-label="Quantity">
+          <button class="fbbtn" id="addBtn" data-i18n="add">➕ Add</button>
+          <button class="fbbtn" id="clearBtn" data-i18n="clear">Clear</button>
+        </div>
+        <div id="applist"></div>
+        <button class="gobtn full" id="recalcBtn" data-i18n="update" style="margin-top:10px">Update sizing</button>
+      </div></details>
+
+      <details class="acc"><summary data-i18n="askt">💬 Ask about your system</summary><div class="accbody">
+        <div class="inrow"><input class="typein" id="qaIn" placeholder="e.g. Why these panels?">
+        <button class="gobtn" id="qaBtn" data-i18n="ask_btn">Ask</button></div>
+        <div class="qaout" id="qaOut"></div>
+      </div></details>
+
+      <details class="acc"><summary data-i18n="where">🛒 Where to buy</summary><div class="accbody" id="vendors"></div></details>
+
+      <details class="acc"><summary data-i18n="fb_acc">💛 Was this helpful? Get updates</summary><div class="accbody">
+        <input class="typein" id="fbComment" data-i18n-ph="fb_ph" placeholder="Any comment to help us improve? (optional)" style="width:100%;margin-bottom:8px">
+        <div class="exrow"><button class="fbbtn" id="fbUp" data-i18n="fb_up">👍 Helpful</button><button class="fbbtn" id="fbDown" data-i18n="fb_down">👎 Could be better</button></div>
+        <div id="fbMsg"></div>
+        <div class="ehint" data-i18n="email_hint">📩 Want solar tips, or your result saved? Add your email, optional and no spam.</div>
+        <div class="inrow"><input class="typein" id="emailIn" data-i18n-ph="email_ph" placeholder="you@email.com"><button class="gobtn" id="emailBtn" data-i18n="notify">Notify me</button></div>
+        <div id="emailMsg"></div>
+      </div></details>
+    </div>
+  </div>
+
+  <div class="footnote" data-i18n="footer">Estimates from current Nigerian prices. Confirm with a licensed installer. · Built in Lagos ☀️</div>
+</div>
+<div id="sumbar"></div>
+
+<div id="authModal" class="modal" hidden>
+  <div class="modalcard">
+    <button class="modalx" id="authClose" aria-label="Close">×</button>
+    <div class="modalhd" id="authTitle" data-i18n="acc_create">Create your account</div>
+    <div class="modalsub" id="authSub" data-i18n="acc_create_sub">Save your sizings and pick up where you left off, anytime.</div>
+    <input class="typein mfield" id="auName" data-i18n-ph="f_name" placeholder="Your name" autocomplete="name">
+    <input class="typein mfield" id="auEmail" placeholder="you@email.com" type="email" autocomplete="email">
+    <input class="typein mfield" id="auPass" data-i18n-ph="f_pass" placeholder="Password (6+ characters)" type="password">
+    <div id="authErr" class="warnmsg" style="display:none"></div>
+    <button class="gobtn full" id="authSubmit" data-i18n="btn_create">Create account</button>
+    <div class="modaltoggle" id="authToggleWrap"></div>
+  </div>
+</div>
+
+<div id="histModal" class="modal" hidden>
+  <div class="modalcard">
+    <button class="modalx" id="histClose" aria-label="Close">×</button>
+    <div class="modalhd" data-i18n="hist_h">Your saved results</div>
+    <div class="modalsub" data-i18n="hist_sub">Tap any result to open it again.</div>
+    <div id="histList" class="histlist"></div>
+  </div>
+</div>
+
+<div id="rateModal" class="modal" hidden>
+  <div class="modalcard">
+    <button class="modalx" id="rateClose" aria-label="Close">×</button>
+    <div class="modalhd" data-i18n="rate_h">How was your result?</div>
+    <div class="modalsub" data-i18n="rate_sub">Your rating helps others trust it.</div>
+    <div class="stars" id="stars"></div>
+    <input class="typein mfield" id="rateName" data-i18n-ph="f_name" placeholder="Your name" style="margin-top:8px">
+    <input class="typein mfield" id="rateComment" data-i18n-ph="rate_ph" placeholder="Add a word about your experience (optional)">
+    <button class="gobtn full" id="rateSend" data-i18n="rate_send">Send rating</button>
+    <div id="rateMsg"></div>
+  </div>
+</div>
+
+<div id="tourOv" class="tourov" hidden></div>
+<div id="tourBox" class="tourbox" hidden></div>
+
+<script src="/web/app.js?v=__V__"></script>
+</body>
+</html>

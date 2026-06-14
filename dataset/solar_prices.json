@@ -1,0 +1,1918 @@
+{
+  "meta": {
+    "compiled": "2026-06-07",
+    "currency": "NGN",
+    "disclaimer": "Nigerian solar prices vary widely by vendor, location, condition (new vs used) and date, and track the USD/NGN rate (~1,500-1,600/USD in 2026). ~95% of panels, inverters and lithium cells are imported, so prices shift month to month. Every entry carries a source URL, a date_seen, and a confidence tag. Re-verify before quoting an end user.",
+    "confidence_key": {
+      "high": "exact price read from a live Nigerian product page",
+      "medium": "vendor category/aggregator listing or dated price-list blog",
+      "low": "range midpoint, premium-brand estimate, or stale (pre-2024) figure"
+    },
+    "benchmarks": {
+      "panel_ngn_per_watt": [
+        173,
+        289
+      ],
+      "lithium_ngn_per_kwh": [
+        230000,
+        320000
+      ],
+      "tubular_ngn_per_kwh": [
+        70000,
+        175000
+      ],
+      "home_sweet_spot_kva": [
+        3.5,
+        5
+      ]
+    },
+    "sources": [
+      "jumia.com.ng",
+      "konga.com",
+      "shop.arnergy.com",
+      "mercurydirect.com.ng",
+      "zit.ng",
+      "solarkobo.com",
+      "maypatronic.com",
+      "me3energy.ng",
+      "stellarmart.ng",
+      "kara.com.ng",
+      "naturesolar.ng",
+      "smksolar.com.ng",
+      "energymall.ng",
+      "solardepotng.com",
+      "cloudenergy.com.ng",
+      "techpoint.africa",
+      "solarlify.com.ng",
+      "naijatechguide.com",
+      "nigerianprice.com",
+      "solarenergysupplystores.com"
+    ],
+    "categories": [
+      "panels",
+      "inverters",
+      "batteries",
+      "systems",
+      "vendors",
+      "generators"
+    ]
+  },
+  "panels": [
+    {
+      "brand": "Sunshine",
+      "watts": 150,
+      "type": "mono",
+      "price_ngn": 42000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-monocrystalline-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Generic",
+      "watts": 150,
+      "type": "mono",
+      "price_ngn": 45872,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-monocrystalline-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Arnergy",
+      "watts": 150,
+      "type": "mono",
+      "price_ngn": 55000,
+      "vendor": "Arnergy",
+      "source_url": "https://shop.arnergy.com/products/150w-monocrystalline-solar-pv-panel",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Su-Kam",
+      "watts": 150,
+      "type": "mono",
+      "price_ngn": 70000,
+      "vendor": "NigerianPrice",
+      "source_url": "https://nigerianprice.com/solar-panel-prices-in-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "low"
+    },
+    {
+      "brand": "Jinko",
+      "watts": 200,
+      "type": "mono",
+      "price_ngn": 60000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-monocrystalline-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Canadian Solar",
+      "watts": 200,
+      "type": "mono",
+      "price_ngn": 60000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-monocrystalline-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Canadian Solar",
+      "watts": 200,
+      "type": "mono",
+      "price_ngn": 53000,
+      "vendor": "Jiji (via Techpoint)",
+      "source_url": "https://techpoint.africa/guide/solar-panel-cost-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Dice",
+      "watts": 200,
+      "type": "mono",
+      "price_ngn": 75000,
+      "vendor": "NigerianPrice",
+      "source_url": "https://nigerianprice.com/solar-panel-prices-in-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "low"
+    },
+    {
+      "brand": "Jinko",
+      "watts": 250,
+      "type": "mono",
+      "price_ngn": 65000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-monocrystalline-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Canadian Solar",
+      "watts": 250,
+      "type": "mono",
+      "price_ngn": 65000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-monocrystalline-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Hithium",
+      "watts": 250,
+      "type": "mono",
+      "price_ngn": 75991,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-monocrystalline-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Canadian Solar",
+      "watts": 300,
+      "type": "mono",
+      "price_ngn": 70000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-300w-monocrystalline-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Jinko",
+      "watts": 300,
+      "type": "mono",
+      "price_ngn": 70000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-300w-monocrystalline-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Trina",
+      "watts": 300,
+      "type": "mono",
+      "price_ngn": 70000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-300w-monocrystalline-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Longi",
+      "watts": 300,
+      "type": "mono",
+      "price_ngn": 65086,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-300w-monocrystalline-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Felicity",
+      "watts": 300,
+      "type": "mono",
+      "price_ngn": 78000,
+      "vendor": "De Solar Place",
+      "source_url": "https://desolarplace.com/product/felicity-300w-24v-monocrystalline-solar-panel-2/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Jinko",
+      "watts": 350,
+      "type": "mono",
+      "price_ngn": 75000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-monocrystalline-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Trina",
+      "watts": 350,
+      "type": "mono",
+      "price_ngn": 75000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-monocrystalline-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Arnergy",
+      "watts": 350,
+      "type": "mono",
+      "price_ngn": 130260,
+      "vendor": "Arnergy",
+      "source_url": "https://shop.arnergy.com/products/350w-monocrystalline-solar-panel-success",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Canadian Solar",
+      "watts": 400,
+      "type": "mono",
+      "price_ngn": 85000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-mono-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Trina",
+      "watts": 400,
+      "type": "mono",
+      "price_ngn": 85000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-monocrystalline-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Canadian Solar",
+      "watts": 400,
+      "type": "mono",
+      "price_ngn": 77850,
+      "vendor": "Jumia (via Techpoint)",
+      "source_url": "https://techpoint.africa/guide/solar-panel-cost-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Jinko",
+      "watts": 450,
+      "type": "mono",
+      "price_ngn": 95000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/jinko-450w-solar-panel-mono-2436v48v-419404270.html",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Canadian Solar",
+      "watts": 450,
+      "type": "mono",
+      "price_ngn": 95000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-mono-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Trina",
+      "watts": 450,
+      "type": "mono",
+      "price_ngn": 95000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/mlp-mono-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Longi",
+      "watts": 450,
+      "type": "mono",
+      "price_ngn": 130000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/longi-450w-solar-panel-mono-36v48v-411207631.html",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "JA Solar",
+      "watts": 450,
+      "type": "mono",
+      "price_ngn": 108000,
+      "vendor": "Jumia (via Techpoint)",
+      "source_url": "https://techpoint.africa/guide/solar-panel-cost-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Jinko",
+      "watts": 550,
+      "type": "mono",
+      "price_ngn": 95000,
+      "vendor": "Nature Solar Global",
+      "source_url": "https://naturesolar.ng/product/550w-jinko-mono-solar-panel-bifacial/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Jinko",
+      "watts": 550,
+      "type": "mono",
+      "price_ngn": 140000,
+      "vendor": "TeezaBaz (range)",
+      "source_url": "https://teezabaz.com/top-10-solar-panel-brands-in-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Canadian Solar",
+      "watts": 550,
+      "type": "mono",
+      "price_ngn": 147000,
+      "vendor": "TeezaBaz (range)",
+      "source_url": "https://teezabaz.com/top-10-solar-panel-brands-in-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "JA Solar",
+      "watts": 550,
+      "type": "mono",
+      "price_ngn": 171250,
+      "vendor": "Jumia (via Techpoint)",
+      "source_url": "https://techpoint.africa/guide/solar-panel-cost-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Trina",
+      "watts": 550,
+      "type": "mono",
+      "price_ngn": 138000,
+      "vendor": "TeezaBaz (range)",
+      "source_url": "https://teezabaz.com/top-10-solar-panel-brands-in-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "low"
+    },
+    {
+      "brand": "Jinko",
+      "watts": 600,
+      "type": "mono",
+      "price_ngn": 135000,
+      "vendor": "AbuGod Global (Alaba)",
+      "source_url": "https://abugodglobal.com/product/jinko-600w-solar-panel/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Generic (144-cell)",
+      "watts": 600,
+      "type": "mono",
+      "price_ngn": 110000,
+      "vendor": "Nature Solar Global",
+      "source_url": "https://naturesolar.ng/product/600w-solar-panel-144-cells-price-in-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Canadian Solar",
+      "watts": 600,
+      "type": "mono",
+      "price_ngn": 180000,
+      "vendor": "SolarEnergySupplyStores (range)",
+      "source_url": "https://solarenergysupplystores.com/solar-panel-price-in-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "low"
+    }
+  ],
+  "inverters": [
+    {
+      "brand": "Luminous",
+      "kva": 1.0,
+      "voltage": "24V",
+      "type": "pure sine",
+      "price_ngn": 299999,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/inverters/luminous/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Luminous",
+      "kva": 1.1,
+      "voltage": "24V",
+      "type": "pure sine",
+      "price_ngn": 220000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/inverters/luminous/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Mercury",
+      "kva": 1.5,
+      "voltage": "24V",
+      "type": "hybrid MPPT",
+      "price_ngn": 259000,
+      "vendor": "Mercury Direct",
+      "source_url": "https://mercurydirect.com.ng/product/mercury-1-5kva-hybrid-solar-inverter-mppt/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Luminous",
+      "kva": 1.6,
+      "voltage": "24V",
+      "type": "pure sine",
+      "price_ngn": 290000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/inverters/luminous/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Genus",
+      "kva": 1.5,
+      "voltage": "24V",
+      "type": "pure sine",
+      "price_ngn": 200000,
+      "vendor": "Jumia / NaijaTechGuide",
+      "source_url": "https://www.jumia.com.ng/1.5kva24v-pure-sine-wave-inverter-genus-mpg78199.html",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Prag",
+      "kva": 1.2,
+      "voltage": "12V",
+      "type": "pure sine",
+      "price_ngn": 250000,
+      "vendor": "NaijaTechGuide",
+      "source_url": "https://www.naijatechguide.com/prag-inverter-price-nigeria.html",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Prag",
+      "kva": 2.5,
+      "voltage": "24V",
+      "type": "pure sine",
+      "price_ngn": 290000,
+      "vendor": "NaijaTechGuide",
+      "source_url": "https://www.naijatechguide.com/prag-inverter-price-nigeria.html",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Mercury",
+      "kva": 2.4,
+      "voltage": "24V",
+      "type": "hybrid MPPT",
+      "price_ngn": 325000,
+      "vendor": "Mercury Direct",
+      "source_url": "https://solarenergysupplystores.com/solar-inverter-price-in-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Blue Gate",
+      "kva": 2.0,
+      "voltage": "24V",
+      "type": "pure sine",
+      "price_ngn": 294999,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/inverters/bluegate/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Blue Gate",
+      "kva": 3.0,
+      "voltage": "24V",
+      "type": "hybrid MPPT",
+      "price_ngn": 600000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/inverters/bluegate/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Felicity",
+      "kva": 3.0,
+      "voltage": "24V",
+      "type": "hybrid MPPT",
+      "price_ngn": 387100,
+      "vendor": "solarenergysupplystores.com",
+      "source_url": "https://solarenergysupplystores.com/solar-inverter-price-in-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Mercury",
+      "kva": 3.5,
+      "voltage": "24V",
+      "type": "hybrid MPPT",
+      "price_ngn": 335000,
+      "vendor": "Mercury Direct",
+      "source_url": "https://mercurydirect.com.ng/product/mercury-3-5kva-hybrid-solar-inverter-mppt/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Blue Gate",
+      "kva": 3.5,
+      "voltage": "24V",
+      "type": "pure sine",
+      "price_ngn": 427000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/inverters/bluegate/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Felicity",
+      "kva": 3.5,
+      "voltage": "24V",
+      "type": "pure sine",
+      "price_ngn": 410000,
+      "vendor": "Dolkon Limited",
+      "source_url": "https://shop.dolkon.ng/product/3-5kva-24v-pure-sine-wave-inverter/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Su-Kam",
+      "kva": 3.5,
+      "voltage": "48V",
+      "type": "pure sine",
+      "price_ngn": 540000,
+      "vendor": "SolarKobo",
+      "source_url": "https://www.solarkobo.com/product-page/su-kam-3-5kva-48v-fusion-series-pure-sine-wave-inverter",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Felicity",
+      "kva": 5.0,
+      "voltage": "48V",
+      "type": "hybrid MPPT",
+      "price_ngn": 986000,
+      "vendor": "Zit Nigeria",
+      "source_url": "https://zit.ng/products/felicity-solar-5kva-48volt-hybrid-inverter-pure-sine-wave/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Felicity",
+      "kva": 5.0,
+      "voltage": "48V",
+      "type": "hybrid MPPT",
+      "price_ngn": 780000,
+      "vendor": "Jiji.ng",
+      "source_url": "https://jiji.ng/ojo/power-equipments/5kva-48v-felicity-hybrid-inverter-upR9VLEfvUmIgJAxsmFCIc5U.html",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Mercury",
+      "kva": 5.0,
+      "voltage": "48V",
+      "type": "hybrid MPPT",
+      "price_ngn": 595000,
+      "vendor": "Mercury Direct",
+      "source_url": "https://mercurydirect.com.ng/product/mercury-5kva-hybrid-solar-inverter-mppt/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Growatt",
+      "kva": 5.0,
+      "voltage": "48V",
+      "type": "hybrid MPPT",
+      "price_ngn": 546250,
+      "vendor": "Zit Nigeria",
+      "source_url": "https://zit.ng/products/growatt-5kva-48v-hybrid-solar-inverter-spf-5000es/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Must",
+      "kva": 5.0,
+      "voltage": "48V",
+      "type": "hybrid MPPT",
+      "price_ngn": 960000,
+      "vendor": "solarenergysupplystores.com",
+      "source_url": "https://solarenergysupplystores.com/solar-inverter-price-in-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Prag",
+      "kva": 5.0,
+      "voltage": "48V",
+      "type": "pure sine",
+      "price_ngn": 865700,
+      "vendor": "NaijaTechGuide",
+      "source_url": "https://www.naijatechguide.com/prag-inverter-price-nigeria.html",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Felicity",
+      "kva": 7.5,
+      "voltage": "48V",
+      "type": "pure sine",
+      "price_ngn": 635000,
+      "vendor": "StellarMart",
+      "source_url": "https://www.stellarmart.ng/product/powerful-low-frequency-7-5kva-output-solar-inverter-for-home-appliances/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Felicity",
+      "kva": 7.5,
+      "voltage": "48V",
+      "type": "hybrid MPPT",
+      "price_ngn": 1100000,
+      "vendor": "Zit Nigeria",
+      "source_url": "https://zit.ng/products/felicity-solar-7-5kva-48volt-hybrid-inverter-with-120ah-charge-controller/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Felicity",
+      "kva": 10.0,
+      "voltage": "48V",
+      "type": "pure sine",
+      "price_ngn": 1255000,
+      "vendor": "Greco Power",
+      "source_url": "https://grecopower.com.ng/product/felicity-10kva-48v-pure-sine-wave-inverter/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Felicity",
+      "kva": 10.0,
+      "voltage": "48V",
+      "type": "hybrid MPPT",
+      "price_ngn": 1480000,
+      "vendor": "Maypatronic",
+      "source_url": "https://maypatronic.com/product/felicity-10kva-inverter/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Growatt",
+      "kva": 10.0,
+      "voltage": "48V",
+      "type": "hybrid MPPT",
+      "price_ngn": 1900000,
+      "vendor": "Sygnite",
+      "source_url": "https://sygniteng.com/product/growatt-inverter-10kva-48v/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Prag",
+      "kva": 10.0,
+      "voltage": "48V",
+      "type": "pure sine",
+      "price_ngn": 2380000,
+      "vendor": "NaijaTechGuide",
+      "source_url": "https://www.naijatechguide.com/prag-inverter-price-nigeria.html",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Victron",
+      "kva": 5.0,
+      "voltage": "48V",
+      "type": "pure sine",
+      "price_ngn": 2000000,
+      "vendor": "Solar Depot NG (premium)",
+      "source_url": "https://solarenergysupplystores.com/product/victron-inverters/",
+      "date_seen": "2026-06-07",
+      "confidence": "low"
+    }
+  ],
+  "batteries": [
+    {
+      "brand": "Pylontech",
+      "chemistry": "LiFePO4",
+      "voltage": 48,
+      "ah": 50,
+      "kwh": 2.4,
+      "price_ngn": 1530000,
+      "vendor": "Me3 Energy",
+      "source_url": "https://me3energy.ng/us2000-pylontech-48v-2-4kwh-lithium-battery",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Pylontech",
+      "chemistry": "LiFePO4",
+      "voltage": 48,
+      "ah": 74,
+      "kwh": 3.6,
+      "price_ngn": 2117000,
+      "vendor": "Me3 Energy",
+      "source_url": "https://me3energy.ng/pylontech-us3000c-48v-3-6-kwh-lithium-ion-battery",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Pylontech",
+      "chemistry": "LiFePO4",
+      "voltage": 48,
+      "ah": 100,
+      "kwh": 4.8,
+      "price_ngn": 2956052,
+      "vendor": "Zit Nigeria",
+      "source_url": "https://zit.ng/products/pylontech-4-8kwh-lithium-ion-solar-battery-up5000/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Felicity",
+      "chemistry": "LiFePO4",
+      "voltage": 48,
+      "ah": 100,
+      "kwh": 5.0,
+      "price_ngn": 1200000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/felicity-solar-48v-100ah-5kwh-lithiumlifepo4battery-308083446.html",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Felicity",
+      "chemistry": "LiFePO4",
+      "voltage": 48,
+      "ah": 200,
+      "kwh": 10.0,
+      "price_ngn": 2200000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/felicity-48v-10kwh-200ah-lithium-battery-lifepo4-401684739.html",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Felicity",
+      "chemistry": "LiFePO4",
+      "voltage": 24,
+      "ah": 200,
+      "kwh": 5.0,
+      "price_ngn": 1450000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/felicity-solar-24v-5kwh-200ah-lithiumlifepo4battery-419174522.html",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Felicity",
+      "chemistry": "LiFePO4",
+      "voltage": 48,
+      "ah": 300,
+      "kwh": 15.0,
+      "price_ngn": 2350000,
+      "vendor": "Maypatronic",
+      "source_url": "https://maypatronic.com/product-category/lithium-battery-price-nigeria/felicity-lithium-battery/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Blue Carbon",
+      "chemistry": "LiFePO4",
+      "voltage": 24,
+      "ah": 200,
+      "kwh": 5.0,
+      "price_ngn": 1150000,
+      "vendor": "Maypatronic",
+      "source_url": "https://maypatronic.com/product-category/lithium-battery-price-nigeria/blue-carbon-lithium-battery/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Blue Carbon",
+      "chemistry": "LiFePO4",
+      "voltage": 48,
+      "ah": 200,
+      "kwh": 10.0,
+      "price_ngn": 1850000,
+      "vendor": "Maypatronic",
+      "source_url": "https://maypatronic.com/product/blue-carbon-15kwh-lithium/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Blue Carbon",
+      "chemistry": "LiFePO4",
+      "voltage": 48,
+      "ah": 100,
+      "kwh": 5.0,
+      "price_ngn": 1450000,
+      "vendor": "Zeus Electrical",
+      "source_url": "https://zel.ng/product/blue-carbon-5kwh-48v-lithium-ion-battery/",
+      "date_seen": "2026-06-07",
+      "confidence": "low"
+    },
+    {
+      "brand": "Dyness",
+      "chemistry": "LiFePO4",
+      "voltage": 48,
+      "ah": 100,
+      "kwh": 5.12,
+      "price_ngn": 1500000,
+      "vendor": "Solar Depot NG (quote)",
+      "source_url": "https://solardepotng.com/",
+      "date_seen": "2026-06-07",
+      "confidence": "low"
+    },
+    {
+      "brand": "Dyness",
+      "chemistry": "LiFePO4",
+      "voltage": 48,
+      "ah": 200,
+      "kwh": 10.24,
+      "price_ngn": 2500000,
+      "vendor": "Solar Depot NG (quote)",
+      "source_url": "https://www.solardepotng.com/",
+      "date_seen": "2026-06-07",
+      "confidence": "low"
+    },
+    {
+      "brand": "BSL",
+      "chemistry": "LiFePO4",
+      "voltage": 48,
+      "ah": 100,
+      "kwh": 5.12,
+      "price_ngn": 1500000,
+      "vendor": "NG vendors (range)",
+      "source_url": "https://solarlify.com.ng/blog/battery-price-in-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "low"
+    },
+    {
+      "brand": "Luminous",
+      "chemistry": "tubular",
+      "voltage": 12,
+      "ah": 220,
+      "kwh": 2.64,
+      "price_ngn": 420000,
+      "vendor": "SolarKobo",
+      "source_url": "https://www.solarkobo.com/product-page/luminous-220ah-12v-inverlast-tall-tubular-battery",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Luminous",
+      "chemistry": "tubular",
+      "voltage": 12,
+      "ah": 200,
+      "kwh": 2.4,
+      "price_ngn": 299000,
+      "vendor": "Kara",
+      "source_url": "https://kara.com.ng/electrical-appliances-power-supplies-price/inverters/batteries",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Quanta (Amaron)",
+      "chemistry": "tubular",
+      "voltage": 12,
+      "ah": 200,
+      "kwh": 2.4,
+      "price_ngn": 313000,
+      "vendor": "Solarlify",
+      "source_url": "https://solarlify.com.ng/blog/battery-price-in-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Genus",
+      "chemistry": "tubular",
+      "voltage": 12,
+      "ah": 220,
+      "kwh": 2.64,
+      "price_ngn": 339000,
+      "vendor": "StellarMart",
+      "source_url": "https://www.stellarmart.ng/product/genus-invomax-220ah-12v-tall-tubular-battery/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "brand": "Genus",
+      "chemistry": "tubular",
+      "voltage": 12,
+      "ah": 200,
+      "kwh": 2.4,
+      "price_ngn": 170000,
+      "vendor": "Solarlify",
+      "source_url": "https://solarlify.com.ng/blog/battery-price-in-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Mercury Elite",
+      "chemistry": "tubular",
+      "voltage": 12,
+      "ah": 220,
+      "kwh": 2.64,
+      "price_ngn": 277000,
+      "vendor": "Kara",
+      "source_url": "https://kara.com.ng/electrical-appliances-power-supplies-price/inverters/batteries",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "brand": "SLA generic deep-cycle",
+      "chemistry": "tubular",
+      "voltage": 12,
+      "ah": 200,
+      "kwh": 2.4,
+      "price_ngn": 285000,
+      "vendor": "Solarlify / Kara (range)",
+      "source_url": "https://solarlify.com.ng/blog/battery-price-in-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    }
+  ],
+  "systems": [
+    {
+      "system_kva": 1.0,
+      "panels": "4x 250W",
+      "inverter_kva": 1.5,
+      "battery": "2x 200Ah",
+      "covers": "Lights, charging, small fridge, TV, fans",
+      "price_ngn": "800000-1200000",
+      "installed": true,
+      "vendor": "Offcamp (aggregated quotes)",
+      "source_url": "https://www.offcamp.com/how-to/solar-panel-price-in-nigeria-complete-guide/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "system_kva": 1.6,
+      "panels": "4x 300W",
+      "inverter_kva": 1.6,
+      "battery": "n/a",
+      "covers": "Lights, TV, fans, fridge, charging",
+      "price_ngn": 1050000,
+      "installed": false,
+      "vendor": "Mercury Direct",
+      "source_url": "https://mercurydirect.com.ng/product-category/complete-solar-system/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "system_kva": 2.4,
+      "panels": "4x 420W mono",
+      "inverter_kva": 2.4,
+      "battery": "2x 200Ah deep cycle",
+      "covers": "Lights, TVs, fans, fridge, home theatre, blender",
+      "price_ngn": 2363000,
+      "installed": false,
+      "vendor": "Mercury Direct",
+      "source_url": "https://mercurydirect.com.ng/product-category/complete-solar-system/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "system_kva": 2.5,
+      "panels": "4-6x 300-450W",
+      "inverter_kva": 2.5,
+      "battery": "2-4x 200Ah or 3-5kWh lithium",
+      "covers": "Lights, 2 TVs, fans, fridge, freezer, charging",
+      "price_ngn": "1500000-2200000",
+      "installed": true,
+      "vendor": "Nigerian Price / Sosai-Arnergy band",
+      "source_url": "https://nigerianprice.com/complete-solar-system-prices-in-nigeria/",
+      "date_seen": "2026-06-07",
+      "confidence": "low"
+    },
+    {
+      "system_kva": 3.0,
+      "panels": "10x 300W",
+      "inverter_kva": 3.5,
+      "battery": "4x 200Ah lithium",
+      "covers": "Medium home, larger appliances, possible AC",
+      "price_ngn": "2000000-2800000",
+      "installed": true,
+      "vendor": "Offcamp / Sosai & Arnergy quotes",
+      "source_url": "https://www.offcamp.com/how-to/solar-panel-price-in-nigeria-complete-guide/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "system_kva": 3.5,
+      "panels": "6x 350W mono",
+      "inverter_kva": 3.5,
+      "battery": "2x 220Ah deep cycle 24V",
+      "covers": "Bulbs, ceiling fans, home theatre, laptop, fridge, blender",
+      "price_ngn": 2159500,
+      "installed": true,
+      "vendor": "SMK Solar (Lagos)",
+      "source_url": "https://smksolar.com.ng/3-5kva-24v-solar-installation-package/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "system_kva": 3.5,
+      "panels": "panels extra",
+      "inverter_kva": 3.5,
+      "battery": "1x 5kWh 24V LiFePO4",
+      "covers": "10 bulbs, 2 fans, 2 TVs, home theatre, 1 fridge (~7h backup)",
+      "price_ngn": 1947000,
+      "installed": false,
+      "vendor": "SMK Solar (Lagos)",
+      "source_url": "https://smksolar.com.ng/product/3-5kva-solar-inverter-5kwh-24v-lithium-battery-package/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "system_kva": 3.5,
+      "panels": "8x 300W mono",
+      "inverter_kva": 3.5,
+      "battery": "4x 200Ah deep cycle",
+      "covers": "Lights, TVs, fans, fridge, freezer, electronics",
+      "price_ngn": 2650000,
+      "installed": false,
+      "vendor": "Mercury Direct",
+      "source_url": "https://mercurydirect.com.ng/product-category/complete-solar-system/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "system_kva": 3.5,
+      "panels": "8x 450W mono",
+      "inverter_kva": 3.5,
+      "battery": "5kWh lithium",
+      "covers": "Mid home with lithium storage",
+      "price_ngn": 3400000,
+      "installed": false,
+      "vendor": "Mercury Direct",
+      "source_url": "https://mercurydirect.com.ng/product-category/complete-solar-system/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "system_kva": 5.0,
+      "panels": "8x 300W mono",
+      "inverter_kva": 5.0,
+      "battery": "4x 200Ah deep cycle",
+      "covers": "3-bed flat: lights, TVs, fans, fridge, freezer",
+      "price_ngn": 2743000,
+      "installed": false,
+      "vendor": "Mercury Direct",
+      "source_url": "https://mercurydirect.com.ng/product-category/complete-solar-system/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "system_kva": 5.0,
+      "panels": "16x 450W mono",
+      "inverter_kva": 5.0,
+      "battery": "10kWh lithium",
+      "covers": "Full home, AC-capable, fridge, freezer, full load",
+      "price_ngn": 5538000,
+      "installed": false,
+      "vendor": "Mercury Direct",
+      "source_url": "https://mercurydirect.com.ng/product-category/complete-solar-system/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "system_kva": 5.0,
+      "panels": "16-20x 300W",
+      "inverter_kva": 5.0,
+      "battery": "8x 200Ah lithium",
+      "covers": "Full household plus small business",
+      "price_ngn": "3500000-4500000",
+      "installed": true,
+      "vendor": "Offcamp / Sosai & Arnergy quotes",
+      "source_url": "https://www.offcamp.com/how-to/solar-panel-price-in-nigeria-complete-guide/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "system_kva": 5.0,
+      "panels": "Arnergy ARN-OPL (panels separate)",
+      "inverter_kva": 5.0,
+      "battery": "5kWh scalable to 15kWh LiFePO4",
+      "covers": "Home/SME off-grid, scalable",
+      "price_ngn": "4530000-9050000",
+      "installed": false,
+      "vendor": "Arnergy",
+      "source_url": "https://shop.arnergy.com/products/arn-opl-5kw-solar-system",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "system_kva": 6.0,
+      "panels": "6x 565W mono",
+      "inverter_kva": 6.0,
+      "battery": "1x 5kWh 51.2V lithium",
+      "covers": "10 lights, 2 TVs, blender, 2 fans, 2 PCs, 1 inverter fridge",
+      "price_ngn": 5875000,
+      "installed": true,
+      "vendor": "Solar Depot Nigeria",
+      "source_url": "https://www.solardepotng.com/sunpower1-solar-inverter-package",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "system_kva": 6.6,
+      "panels": "10x 565W mono",
+      "inverter_kva": 6.0,
+      "battery": "14.3kWh 51.2V lithium",
+      "covers": "Larger home off-grid, near-full load",
+      "price_ngn": 8290000,
+      "installed": true,
+      "vendor": "Solar Depot Nigeria",
+      "source_url": "https://www.solardepotng.com/solar-packages",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "system_kva": 7.5,
+      "panels": "n/a",
+      "inverter_kva": 7.5,
+      "battery": "n/a",
+      "covers": "Large home: full lighting, multiple TVs, fridge/freezer",
+      "price_ngn": 7440000,
+      "installed": false,
+      "vendor": "Mercury Direct",
+      "source_url": "https://mercurydirect.com.ng/product-category/complete-solar-system/",
+      "date_seen": "2026-06-07",
+      "confidence": "medium"
+    },
+    {
+      "system_kva": 10.0,
+      "panels": "12x 550W Jinko (6.6kW)",
+      "inverter_kva": 11.0,
+      "battery": "1x 15.6kWh lithium",
+      "covers": "5 TVs, 2 fridges, 2 freezers, 10 fans, 50 lights, 10 laptops",
+      "price_ngn": 4678157,
+      "installed": false,
+      "vendor": "EnergyMall",
+      "source_url": "https://energymall.ng/product/10kva-lithium-plus-solar-bundle/",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    },
+    {
+      "system_kva": 10.0,
+      "panels": "Arnergy 10kW (panels separate)",
+      "inverter_kva": 10.0,
+      "battery": "10kWh scalable to 30kWh LiFePO4",
+      "covers": "Large home / SME off-grid, scalable",
+      "price_ngn": "9050000-18090000",
+      "installed": false,
+      "vendor": "Arnergy",
+      "source_url": "https://shop.arnergy.com/collections/all-in-one-solar-home-system",
+      "date_seen": "2026-06-07",
+      "confidence": "high"
+    }
+  ],
+  "vendors": [
+    {
+      "name": "Arnergy",
+      "website": "https://arnergy.com",
+      "offers": [
+        "panels",
+        "inverters",
+        "lithium batteries",
+        "full installs",
+        "lease-to-own (Z-Lite)"
+      ],
+      "coverage": "Lagos HQ, 35 states",
+      "financing": "lease",
+      "notes": "Venture-backed (Breakthrough Energy). Z-Lite lease, zero down, fixed monthly over 5-10 years. 1,800+ systems. Custom quotes.",
+      "source_url": "https://arnergy.com/energy-solutions/payment-plan/",
+      "confidence": "high"
+    },
+    {
+      "name": "Blue Camel Energy",
+      "website": "https://bluecamel.energy",
+      "offers": [
+        "panels (local assembly)",
+        "inverters",
+        "batteries",
+        "installs",
+        "streetlights",
+        "mini-grids",
+        "training academy"
+      ],
+      "coverage": "Kaduna HQ, national",
+      "financing": "no",
+      "notes": "Indigenous, solar assembly plant + training academy in Kaduna. End-to-end. No published prices.",
+      "source_url": "https://bluecamel.energy/about-us/",
+      "confidence": "high"
+    },
+    {
+      "name": "Rubitec Solar",
+      "website": "https://www.rubitecsolar.com",
+      "offers": [
+        "panels",
+        "inverters",
+        "batteries",
+        "off-grid installs",
+        "mini-grids",
+        "streetlights",
+        "pumps",
+        "O&M"
+      ],
+      "coverage": "Ikeja Lagos HQ, national",
+      "financing": "no",
+      "notes": "Founded 2004, COREN-certified. Mini-grids (Gbamugbamu, Ogun). Prices not published.",
+      "source_url": "https://www.rubitecsolar.com/products-services/",
+      "confidence": "high"
+    },
+    {
+      "name": "Sosai Renewable Energies",
+      "website": "https://sosairen.org",
+      "offers": [
+        "solar home systems",
+        "mini-grids",
+        "solar dryers/fridges",
+        "irrigation",
+        "cookstoves"
+      ],
+      "coverage": "Kaduna HQ, rural North",
+      "financing": "no",
+      "notes": "Woman-led social enterprise (Habiba Ali), founded 2010. ~2M reached. Prices not published.",
+      "source_url": "https://sosairen.org/",
+      "confidence": "high"
+    },
+    {
+      "name": "Sun King (Greenlight Planet)",
+      "website": "https://ng.sunking.com",
+      "offers": [
+        "solar lanterns",
+        "home systems",
+        "inverter systems",
+        "PAYG (EasyBuy)"
+      ],
+      "coverage": "Nationwide retail + agents",
+      "financing": "PAYG",
+      "notes": "Global leader, in Nigeria since 2011. EasyBuy: small deposit then installments via mobile money. Quote via store/agent.",
+      "source_url": "https://ng.sunking.com/",
+      "confidence": "high"
+    },
+    {
+      "name": "d.light",
+      "website": "https://payment.dlight.com.ng",
+      "offers": [
+        "solar lanterns",
+        "home systems",
+        "appliances",
+        "PAYG"
+      ],
+      "coverage": "Nationwide",
+      "financing": "PAYG",
+      "notes": "Daily PAYG via mobile money (~$25 deposit + ~$1/day over 24 months). $7.4M Nigeria financing.",
+      "source_url": "https://empowerafrica.com/d-light-secures-7-4-million-to-expand-solar-power-access-in-nigeria/",
+      "confidence": "high"
+    },
+    {
+      "name": "Lumos Nigeria (MTN Mobile Electricity)",
+      "website": "https://www.lumos-global.com",
+      "offers": [
+        "solar home system kits",
+        "PAYG via MTN airtime",
+        "subscription-to-own"
+      ],
+      "coverage": "Nationwide via MTN",
+      "financing": "PAYG",
+      "notes": "Down payment (~$50) then ~50c/day prepaid up to 5 years, then ownership. 88,000+ systems.",
+      "source_url": "https://www.gsma.com/solutions-and-impact/connectivity-for-good/mobile-for-development/gsma_resources/lumos-pay-as-you-go-solar-in-nigeria-with-mtn/",
+      "confidence": "high"
+    },
+    {
+      "name": "Daystar Power (Shell)",
+      "website": "https://daystar-power.com",
+      "offers": [
+        "C&I hybrid solar",
+        "battery storage",
+        "Solar-as-a-Service",
+        "O&M"
+      ],
+      "coverage": "Nigeria multi-state + 4 W.Africa countries",
+      "financing": "lease",
+      "notes": "Acquired by Shell 2022. SaaS: pay per-kWh or monthly, zero capex. 400+ installs, 150MW+. C&I, not residential.",
+      "source_url": "https://daystar-power.com/en/news-article?post_id=880074",
+      "confidence": "high"
+    },
+    {
+      "name": "Starsight Energy",
+      "website": "https://starsightenergy.com",
+      "offers": [
+        "C&I solar",
+        "battery storage",
+        "Energy-as-a-Service",
+        "cooling",
+        "PPAs",
+        "O&M"
+      ],
+      "coverage": "All 36 states (500+ sites) + 5 countries",
+      "financing": "lease",
+      "notes": "Pure-play C&I, zero upfront, pay for energy. ~48MW + ~35MWh. Not residential.",
+      "source_url": "https://starsightenergy.com/",
+      "confidence": "high"
+    },
+    {
+      "name": "Rensource Energy",
+      "website": "https://rensource.energy",
+      "offers": [
+        "solar micro-utilities for markets",
+        "mini-grids",
+        "Power-as-a-Service",
+        "prepaid metering"
+      ],
+      "coverage": "Lagos HQ, ~8 markets",
+      "financing": "lease",
+      "notes": "Market micro-utility. Sabon Gari (Kano) powers 11,000+ shops. Subscription tariffs.",
+      "source_url": "https://rensource.energy/",
+      "confidence": "high"
+    },
+    {
+      "name": "Cloud Energy Photoelectric",
+      "website": "https://cloudenergy.com.ng",
+      "offers": [
+        "panels",
+        "inverters (own brand)",
+        "lithium & tubular batteries",
+        "full installs",
+        "appliances"
+      ],
+      "coverage": "Lagos (Ikorodu Road), nationwide",
+      "financing": "no",
+      "notes": "Founded 2013. PUBLISHES PRICES (sample systems ~N1.0M-N1.7M). Installation + after-sales.",
+      "source_url": "https://cloudenergy.com.ng/",
+      "confidence": "high"
+    },
+    {
+      "name": "Auxano Solar",
+      "website": "https://auxanosolar.com",
+      "offers": [
+        "panel manufacturing (400-600Wp)",
+        "hybrid inverters (1.5-20kVA)",
+        "LiFePO4 batteries",
+        "installs"
+      ],
+      "coverage": "Ibeju-Lekki Lagos factory, 36 states",
+      "financing": "no",
+      "notes": "Nigeria's first private solar PV assembly factory (100MW+, 2023). Backed by Shell All On, BOI, REA. Custom quotes.",
+      "source_url": "https://auxanosolar.com/",
+      "confidence": "high"
+    },
+    {
+      "name": "EM-ONE Energy Solutions",
+      "website": "https://www.emone.energy",
+      "offers": [
+        "solar EPC",
+        "microgrids",
+        "battery storage (BESS)",
+        "engineering"
+      ],
+      "coverage": "Abuja, national",
+      "financing": "no",
+      "notes": "300+ microgrids. Univ. of Abuja 3.1MWp, Mabushi 1.52MW. Utility/institutional EPC, not retail.",
+      "source_url": "https://www.emone.energy/news/uni-abuja",
+      "confidence": "high"
+    },
+    {
+      "name": "Green Village Electricity (GVE)",
+      "website": "https://gve-group.com",
+      "offers": [
+        "PV mini-grids",
+        "home systems",
+        "PAYG",
+        "prepaid metering",
+        "C&I"
+      ],
+      "coverage": "Nationwide rural/off-grid",
+      "financing": "PAYG",
+      "notes": "Founded 2009. Wuse Market (Abuja) 1MW interconnected mini-grid. 8,900+ households. Tariffs/connection fees.",
+      "source_url": "https://gve-group.com/",
+      "confidence": "high"
+    },
+    {
+      "name": "ASOLAR Nigeria",
+      "website": "https://asolarnig.com",
+      "offers": [
+        "solar home systems",
+        "off-grid",
+        "solar TVs/AC/PoS",
+        "installment financing via Access Bank"
+      ],
+      "coverage": "Abuja HQ, national via Access agents",
+      "financing": "yes",
+      "notes": "Solar Power Naija partner. Products ~N150k-N300k over ~6 months via Access Bank. ~80,000 units.",
+      "source_url": "https://asolarnig.com/",
+      "confidence": "high"
+    },
+    {
+      "name": "SolarKobo",
+      "website": "https://www.solarkobo.com",
+      "offers": [
+        "panels",
+        "inverters",
+        "batteries",
+        "charge controllers",
+        "full installs",
+        "pumps",
+        "audits"
+      ],
+      "coverage": "Lagos (2-day), rest of NG (~5 days)",
+      "financing": "yes",
+      "notes": "In-house engineers, financing, online cost estimator. Quotes via sales@solarkobo.com. Useful price blog.",
+      "source_url": "https://www.solarkobo.com/",
+      "confidence": "high"
+    },
+    {
+      "name": "Jumia (solar store)",
+      "website": "https://www.jumia.com.ng/solar-wind-power/",
+      "offers": [
+        "panels",
+        "inverters",
+        "batteries",
+        "kits/bundles",
+        "accessories"
+      ],
+      "coverage": "Nationwide e-commerce (COD)",
+      "financing": "no",
+      "notes": "2,700+ products, PUBLISHES PRICES. Hardware only (no install). Best for component price benchmarking.",
+      "source_url": "https://www.jumia.com.ng/solar-wind-power/",
+      "confidence": "high"
+    },
+    {
+      "name": "Konga (solar store)",
+      "website": "https://www.konga.com/category/solar-energy-5918",
+      "offers": [
+        "panels",
+        "inverters",
+        "batteries",
+        "complete kits"
+      ],
+      "coverage": "Nationwide e-commerce",
+      "financing": "no",
+      "notes": "Dedicated solar categories, PUBLISHES PRICES. Hardware only.",
+      "source_url": "https://www.konga.com/category/solar-energy-5918",
+      "confidence": "high"
+    },
+    {
+      "name": "Mercury Direct",
+      "website": "https://mercurydirect.com.ng",
+      "offers": [
+        "inverters (own brand)",
+        "complete solar systems",
+        "batteries"
+      ],
+      "coverage": "Nationwide",
+      "financing": "no",
+      "notes": "Publishes complete-system bundle prices by kVA (1.6 to 10kVA). Good itemized BOM reference.",
+      "source_url": "https://mercurydirect.com.ng/product-category/complete-solar-system/",
+      "confidence": "high"
+    },
+    {
+      "name": "Solar Depot Nigeria",
+      "website": "https://www.solardepotng.com",
+      "offers": [
+        "complete packages",
+        "premium inverters (Victron/Schneider)",
+        "lithium (Dyness)",
+        "installs"
+      ],
+      "coverage": "Lagos + surrounding (installed)",
+      "financing": "no",
+      "notes": "Publishes SunPower package prices with full BOM. Premium tier.",
+      "source_url": "https://www.solardepotng.com/solar-packages",
+      "confidence": "high"
+    },
+    {
+      "name": "Felicity Solar Nigeria",
+      "website": "https://www.felicitysolar.ng/",
+      "offers": [
+        "inverters",
+        "lithium & gel batteries",
+        "panels",
+        "complete kits"
+      ],
+      "coverage": "Nationwide (Lagos, Abuja, PH, Enugu, Yola)",
+      "financing": "no",
+      "notes": "Manufacturer with a strong NG distributor network; widely resold on Jumia (~₦386k to ₦1.65M).",
+      "source_url": "https://www.felicitysolar.ng/",
+      "confidence": "high"
+    },
+    {
+      "name": "Zit Electronics (Zit.ng)",
+      "website": "https://zit.ng/",
+      "offers": [
+        "inverters",
+        "batteries",
+        "panels",
+        "bundles"
+      ],
+      "coverage": "Nationwide online, pay on delivery",
+      "financing": "no",
+      "notes": "Electronics e-tailer with an inverters/batteries category; sample bundle ~₦1.67M.",
+      "source_url": "https://zit.ng/collections/inverters-batteries",
+      "confidence": "high"
+    },
+    {
+      "name": "Maypatronic",
+      "website": "https://maypatronic.com/",
+      "offers": [
+        "solar & inverter sales",
+        "design",
+        "installation"
+      ],
+      "coverage": "Lagos, Abuja, nationwide",
+      "financing": "no",
+      "notes": "Installer/retailer; data-driven sizing; most installs in 48 to 72 hours.",
+      "source_url": "https://maypatronic.com/solar-panel-installation-in-nigeria/",
+      "confidence": "high"
+    },
+    {
+      "name": "Me3 Energy",
+      "website": "https://me3energy.ng/",
+      "offers": [
+        "pure sine inverters",
+        "panels",
+        "batteries",
+        "design & install"
+      ],
+      "coverage": "Nationwide",
+      "financing": "no",
+      "notes": "Since 2002; NSE-registered engineers; 2-year warranty, 24/7 after-sales.",
+      "source_url": "https://me3energy.ng/about-us",
+      "confidence": "high"
+    },
+    {
+      "name": "StellarMart",
+      "website": "https://www.stellarmart.ng/",
+      "offers": [
+        "batteries",
+        "inverters",
+        "panels",
+        "solar generators",
+        "street lights"
+      ],
+      "coverage": "Lagos, online",
+      "financing": "no",
+      "notes": "Owned by Royal De Beaver Ltd; distribution and installation.",
+      "source_url": "https://www.stellarmart.ng/about-us/",
+      "confidence": "high"
+    },
+    {
+      "name": "Sygnite Power & Energy",
+      "website": "https://sygniteng.com/",
+      "offers": [
+        "solar home systems",
+        "C&I EPC",
+        "mini-grids"
+      ],
+      "coverage": "Nationwide",
+      "financing": "PAYG",
+      "notes": "Official Zola partner; 500+ installs; PAYG/installment home systems.",
+      "source_url": "https://sygniteng.com/solar-home-systems/",
+      "confidence": "high"
+    },
+    {
+      "name": "Greco Power & Energy",
+      "website": "https://grecopower.com.ng/",
+      "offers": [
+        "solar street lights",
+        "solar water pumps",
+        "hot water",
+        "EPC"
+      ],
+      "coverage": "Nigeria",
+      "financing": "no",
+      "notes": "Since 2012; full value chain incl. project finance and EPC.",
+      "source_url": "https://grecopower.com.ng/company/",
+      "confidence": "high"
+    },
+    {
+      "name": "EnergyMall",
+      "website": "https://energymall.ng/",
+      "offers": [
+        "panels",
+        "inverters",
+        "batteries",
+        "complete kits"
+      ],
+      "coverage": "All 36 states",
+      "financing": "no",
+      "notes": "Warranties + after-sales installation; extended support hours.",
+      "source_url": "https://energymall.ng/",
+      "confidence": "high"
+    },
+    {
+      "name": "SMK Solar Nigeria",
+      "website": "https://smksolar.com.ng/",
+      "offers": [
+        "SMK hybrid inverters",
+        "LiFePO4",
+        "panels",
+        "solar fridges"
+      ],
+      "coverage": "Nigeria (5 service centers)",
+      "financing": "no",
+      "notes": "Own-brand hardware tuned for Nigeria; since 2016.",
+      "source_url": "https://smksolar.com.ng/about-us/",
+      "confidence": "high"
+    },
+    {
+      "name": "SunFi",
+      "website": "https://www.sunfi.co/",
+      "offers": [
+        "solar marketplace",
+        "embedded financing"
+      ],
+      "coverage": "Nationwide marketplace",
+      "financing": "lease",
+      "notes": "Fintech: lease-to-own and subscription; manages 1500+ systems (~4MW).",
+      "source_url": "https://www.sunfi.co/",
+      "confidence": "high"
+    },
+    {
+      "name": "Eden Power",
+      "website": "https://edenpower.ng/",
+      "offers": [
+        "portable solar generators",
+        "panels",
+        "kits"
+      ],
+      "coverage": "Nigeria, online",
+      "financing": "no",
+      "notes": "Plug-and-play portable solar generator combos (296Wh/518Wh kits).",
+      "source_url": "https://edenpower.ng/product-category/solar-generator/",
+      "confidence": "high"
+    },
+    {
+      "name": "Beebeejump",
+      "website": "https://www.beebeejump.ng/",
+      "offers": [
+        "solar home systems",
+        "solar generators",
+        "panels"
+      ],
+      "coverage": "Nationwide (Jumia, Jiji, Konga)",
+      "financing": "PAYG",
+      "notes": "Affordable/entry-level household solar; PAYG/installments.",
+      "source_url": "https://www.beebeejump.ng/",
+      "confidence": "medium"
+    },
+    {
+      "name": "9Solar",
+      "website": "https://9solar.ng/",
+      "offers": [
+        "panels",
+        "lithium batteries",
+        "installation"
+      ],
+      "coverage": "Lagos, West Africa",
+      "financing": "no",
+      "notes": "Local manufacturing focus; wholesale and DIY.",
+      "source_url": "https://9solar.ng/",
+      "confidence": "medium"
+    },
+    {
+      "name": "Nedcomoaks",
+      "website": "https://www.vanguardngr.com/2022/07/innovation-first-nigerias-fully-solar-powered-estate-unveiled-in-lagos/",
+      "offers": [
+        "solar-powered estates"
+      ],
+      "coverage": "Lagos",
+      "financing": "no",
+      "notes": "Developer of fully solar-powered residential estates (solar bundled into property).",
+      "source_url": "https://www.vanguardngr.com/2022/07/innovation-first-nigerias-fully-solar-powered-estate-unveiled-in-lagos/",
+      "confidence": "medium"
+    }
+  ],
+  "generators": [
+    {
+      "brand": "EcoFlow",
+      "model": "RIVER 2",
+      "wh": 256,
+      "w": 300,
+      "price_ngn": 268500,
+      "vendor": "EcoFlow Nigeria",
+      "source_url": "https://ng.ecoflow.com/",
+      "date_seen": "2026-06-08",
+      "confidence": "high"
+    },
+    {
+      "brand": "EcoFlow",
+      "model": "RIVER 2 Max",
+      "wh": 512,
+      "w": 500,
+      "price_ngn": 292940,
+      "vendor": "EcoFlow Nigeria / Jumia",
+      "source_url": "https://ng.ecoflow.com/",
+      "date_seen": "2026-06-08",
+      "confidence": "high"
+    },
+    {
+      "brand": "EcoFlow",
+      "model": "RIVER 2 Pro",
+      "wh": 768,
+      "w": 800,
+      "price_ngn": 578676,
+      "vendor": "Jumia (EcoFlow store)",
+      "source_url": "https://ng.naijatechguide.com/ecoflow-portable-power-station-price-in-nigeria/",
+      "date_seen": "2026-06-08",
+      "confidence": "high"
+    },
+    {
+      "brand": "EcoFlow",
+      "model": "RIVER 3 Plus",
+      "wh": 286,
+      "w": 600,
+      "price_ngn": 512645,
+      "vendor": "EcoFlow Nigeria",
+      "source_url": "https://ng.ecoflow.com/",
+      "date_seen": "2026-06-08",
+      "confidence": "high"
+    },
+    {
+      "brand": "EcoFlow",
+      "model": "DELTA 2",
+      "wh": 1024,
+      "w": 1800,
+      "price_ngn": 767302,
+      "vendor": "Jumia (EcoFlow store)",
+      "source_url": "https://ng.naijatechguide.com/ecoflow-portable-power-station-price-in-nigeria/",
+      "date_seen": "2026-06-08",
+      "confidence": "high"
+    },
+    {
+      "brand": "EcoFlow",
+      "model": "DELTA 2 Max",
+      "wh": 2048,
+      "w": 2400,
+      "price_ngn": 1428794,
+      "vendor": "Jumia / EcoFlow NG",
+      "source_url": "https://ng.ecoflow.com/",
+      "date_seen": "2026-06-08",
+      "confidence": "high"
+    },
+    {
+      "brand": "EcoFlow",
+      "model": "DELTA Pro",
+      "wh": 3600,
+      "w": 3600,
+      "price_ngn": 2202100,
+      "vendor": "Jumia (EcoFlow store)",
+      "source_url": "https://ng.naijatechguide.com/ecoflow-portable-power-station-price-in-nigeria/",
+      "date_seen": "2026-06-08",
+      "confidence": "high"
+    },
+    {
+      "brand": "Bluetti",
+      "model": "EB3A",
+      "wh": 268,
+      "w": 600,
+      "price_ngn": 420000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/generators-portable-power/brand-bluetti/",
+      "date_seen": "2026-06-08",
+      "confidence": "high"
+    },
+    {
+      "brand": "Bluetti",
+      "model": "AC50P",
+      "wh": 504,
+      "w": 700,
+      "price_ngn": 954986,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/generators-portable-power/brand-bluetti/",
+      "date_seen": "2026-06-08",
+      "confidence": "high"
+    },
+    {
+      "brand": "Bluetti",
+      "model": "AC70",
+      "wh": 768,
+      "w": 1000,
+      "price_ngn": 723580,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/generators-portable-power/brand-bluetti/",
+      "date_seen": "2026-06-08",
+      "confidence": "high"
+    },
+    {
+      "brand": "Bluetti",
+      "model": "AC180",
+      "wh": 1152,
+      "w": 1800,
+      "price_ngn": 950000,
+      "vendor": "Jumia",
+      "source_url": "https://www.jumia.com.ng/bluetti-ac180-1800w-power-station-401871654.html",
+      "date_seen": "2026-06-08",
+      "confidence": "high"
+    },
+    {
+      "brand": "Bluetti",
+      "model": "AC200MAX",
+      "wh": 2048,
+      "w": 2200,
+      "price_ngn": 2853999,
+      "vendor": "Bluetti Nigeria",
+      "source_url": "https://ng.bluettipower.com/collections/portable-power-station",
+      "date_seen": "2026-06-08",
+      "confidence": "high"
+    },
+    {
+      "brand": "Bluetti",
+      "model": "EB70",
+      "wh": 716,
+      "w": 1000,
+      "price_ngn": 994999,
+      "vendor": "Bluetti Nigeria",
+      "source_url": "https://ng.bluettipower.com/collections/portable-power-station",
+      "date_seen": "2026-06-08",
+      "confidence": "high"
+    },
+    {
+      "brand": "Bluetti",
+      "model": "EB55",
+      "wh": 537,
+      "w": 700,
+      "price_ngn": 892999,
+      "vendor": "Bluetti Nigeria",
+      "source_url": "https://ng.bluettipower.com/collections/portable-power-station",
+      "date_seen": "2026-06-08",
+      "confidence": "high"
+    },
+    {
+      "brand": "Oraimo",
+      "model": "PowerStation 600",
+      "wh": 448,
+      "w": 600,
+      "price_ngn": 750000,
+      "vendor": "Jumia / Oraimo NG",
+      "source_url": "https://www.jumia.com.ng/oraimo-oraimo-powerstation-600w-portable-power-station-22.4v-20ah-448wh-418559915.html",
+      "date_seen": "2026-06-08",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Jackery",
+      "model": "Explorer 1000 v2",
+      "wh": 1070,
+      "w": 1500,
+      "price_ngn": 707762,
+      "vendor": "Jumia (discounted)",
+      "source_url": "https://www.u-buy.com.ng/",
+      "date_seen": "2026-06-08",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Eden Power",
+      "model": "300W Solar Generator (+fan +50W panel)",
+      "wh": 296,
+      "w": 300,
+      "price_ngn": 435000,
+      "vendor": "Eden Power Nigeria",
+      "source_url": "https://edenpower.ng/product/portable-solar-generator-with-dc-fan-and-solar-panel/",
+      "date_seen": "2026-06-08",
+      "confidence": "high"
+    },
+    {
+      "brand": "Eden Power",
+      "model": "500W Solar Generator (+fan +100W panel)",
+      "wh": 518,
+      "w": 500,
+      "price_ngn": 650000,
+      "vendor": "Eden Power Nigeria",
+      "source_url": "https://edenpower.ng/product/500w-portable-power-station-with-100w-solar-panel-and-standing-fan/",
+      "date_seen": "2026-06-08",
+      "confidence": "high"
+    }
+  ]
+}

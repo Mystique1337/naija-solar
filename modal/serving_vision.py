@@ -12,6 +12,7 @@ import os
 import modal
 
 MODEL = os.environ.get("VISION_MODEL", "Qwen/Qwen2.5-VL-3B-Instruct")
+ENDPOINT_KEY = os.environ.get("ENDPOINT_API_KEY", "")  # when set, require Authorization: Bearer <key>
 image = (
     modal.Image.debian_slim(python_version="3.11")
     .pip_install("torch", "torchvision", "transformers==4.51.3", "accelerate", "qwen-vl-utils",
@@ -30,7 +31,8 @@ PROMPT = ("List every household electrical appliance you can see in this image, 
 @app.cls(image=image, gpu="L4", scaledown_window=300,
          min_containers=int(os.environ.get("MIN_CONTAINERS", "0")),
          max_containers=int(os.environ.get("MAX_CONTAINERS", "1")),   # cap GPUs/app (workspace has a 10-GPU limit)
-         volumes={"/root/.cache/huggingface": cache})
+         volumes={"/root/.cache/huggingface": cache},
+         secrets=[modal.Secret.from_name("buildsmall-api")])
 class Vision:
     @modal.enter()
     def load(self):
@@ -58,10 +60,18 @@ class Vision:
         import base64
         import io
 
-        from fastapi import FastAPI
+        from fastapi import FastAPI, Request
+        from fastapi.responses import JSONResponse
         from PIL import Image
 
         api = FastAPI(redirect_slashes=False)
+
+        @api.middleware("http")
+        async def _auth(request: Request, call_next):
+            key = os.environ.get("ENDPOINT_API_KEY", "")   # from the buildsmall-api secret, at runtime
+            if key and request.headers.get("authorization") != f"Bearer {key}":
+                return JSONResponse({"error": "unauthorized"}, status_code=401)
+            return await call_next(request)
 
         @api.post("/v1/chat/completions")
         @api.post("/chat/completions")

@@ -34,7 +34,8 @@ app = modal.App("buildsmall-vllm")
 cache = modal.Volume.from_name("buildsmall-hf-cache", create_if_missing=True)
 # Public models need no token. For GATED models: `modal secret create huggingface HF_TOKEN=...`
 # then deploy with USE_HF_SECRET=1.
-SECRETS = [modal.Secret.from_name("huggingface")] if os.environ.get("USE_HF_SECRET") else []
+SECRETS = ([modal.Secret.from_name("buildsmall-api")]            # provides VLLM_API_KEY in the container
+           + ([modal.Secret.from_name("huggingface")] if os.environ.get("USE_HF_SECRET") else []))
 
 
 @app.function(
@@ -50,11 +51,12 @@ SECRETS = [modal.Secret.from_name("huggingface")] if os.environ.get("USE_HF_SECR
 @modal.concurrent(max_inputs=64)       # many requests per GPU container (Modal 1.4 API)
 @modal.web_server(port=PORT, startup_timeout=900)
 def serve():
+    api_key = os.environ.get("VLLM_API_KEY", API_KEY)   # from the buildsmall-api secret, at runtime
     cmd = (
         f"vllm serve {MODEL} --host 0.0.0.0 --port {PORT} "
-        f"--api-key {API_KEY} --served-model-name {MODEL}"
+        f"--api-key {api_key} --served-model-name {MODEL}"
     )
-    print("starting:", cmd)
+    print("starting vllm; api-key configured:", bool(api_key))   # never print the key itself
     subprocess.Popen(cmd, shell=True)
 
 

@@ -15,6 +15,7 @@ LANG_MODEL = {
     "en": "facebook/mms-tts-eng", "pcm": "facebook/mms-tts-eng",
     "yo": "facebook/mms-tts-yor", "ha": "facebook/mms-tts-hau", "ig": "facebook/mms-tts-ibo",
 }
+ENDPOINT_KEY = os.environ.get("ENDPOINT_API_KEY", "")  # when set, require Authorization: Bearer <key>
 image = (
     modal.Image.debian_slim(python_version="3.11")
     .pip_install("transformers", "torch", "scipy", "numpy",
@@ -27,7 +28,8 @@ cache = modal.Volume.from_name("buildsmall-hf-cache", create_if_missing=True)
 
 @app.cls(image=image, gpu="T4", scaledown_window=300,
          min_containers=int(os.environ.get("MIN_CONTAINERS", "0")),  # set 1 to keep warm (real-time)
-         volumes={"/root/.cache/huggingface": cache})
+         volumes={"/root/.cache/huggingface": cache},
+         secrets=[modal.Secret.from_name("buildsmall-api")])
 class TTS:
     @modal.enter()
     def load(self):
@@ -48,11 +50,18 @@ class TTS:
         import io
         import numpy as np
         import scipy.io.wavfile as wavfile
-        from fastapi import FastAPI
-        from fastapi.responses import Response
+        from fastapi import FastAPI, Request
+        from fastapi.responses import JSONResponse, Response
         from pydantic import BaseModel
 
         api = FastAPI()
+
+        @api.middleware("http")
+        async def _auth(request: Request, call_next):
+            key = os.environ.get("ENDPOINT_API_KEY", "")   # from the buildsmall-api secret, at runtime
+            if key and request.headers.get("authorization") != f"Bearer {key}":
+                return JSONResponse({"error": "unauthorized"}, status_code=401)
+            return await call_next(request)
 
         class Req(BaseModel):
             input: str

@@ -947,7 +947,7 @@ footer{display:none!important}
 .livepill{display:inline-flex;align-items:center;gap:6px;font-size:.64rem;font-weight:700;color:#0c4a30;background:#eaf7ee;border:1px solid #bfe3cf;border-radius:999px;padding:4px 9px;letter-spacing:.07em;text-transform:uppercase}
 .livedot{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:livepulse 2s infinite}
 @keyframes livepulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 7px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
-.logo .wm{font-weight:800;font-size:1.5rem;color:#064e3b;letter-spacing:-.02em;line-height:1}
+.logo .wm{font-weight:800;font-size:1.5rem;color:var(--green-d);letter-spacing:-.02em;line-height:1}
 .logo .tag{display:block;font-size:.6rem;font-weight:700;color:#059669;letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
 .langrow{justify-content:center;gap:8px;margin-top:12px}.langrow .wrap{justify-content:center;gap:8px;flex-wrap:wrap}
 .langrow label{border:1.6px solid #bfe3d0!important;border-radius:999px!important;padding:7px 16px!important;background:#fff!important;font-weight:600!important;color:#15803d!important;transition:transform .16s ease,box-shadow .16s ease,background .16s ease}

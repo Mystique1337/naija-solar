@@ -110,6 +110,13 @@ Every choice in this project points at one person: someone who could leave the g
 
 Right now the app sizes a system, writes it out, and speaks it back. Accounts and saved history are already in place, alongside a live count of systems sized, ratings from real users, and an optional email list, because the goal was never a single demo. Next I want it to remember a household over time, follow real generation, and become the thing a vendor opens with a customer rather than a barrier between them. The goal is the shop owner in Aba who hears, in Igbo, exactly what it takes to keep her freezer cold and her lights on.
 
+## The stack, in short
+
+- **Frontend:** hand-built HTML, CSS, and vanilla JS with a Three.js 3D home, served by **FastAPI** on a free Hugging Face Space (CPU).
+- **Sizing:** a deterministic **Python** engine over a real Nigerian price catalogue. No model touches the maths.
+- **Models, all under 4B, self-hosted on Modal and scaled to zero:** Qwen3-1.7B (text and Q&A), Whisper-small (speech to text), **SoroTTS**, my own Orpheus-3B fine-tune (voice in 5 languages), and MiniCPM-V-2 from OpenBMB (appliances from a photo).
+- **Training:** the voice was fine-tuned with **Unsloth** (LoRA, r=64) over **SNAC**-encoded audio on an **NVIDIA B200**, training only 2.86% of the weights in about 31 minutes, the whole pipeline a single Modal job.
+
 ## See it, hear it, read the code
 
 - **Live app:** [huggingface.co/spaces/build-small-hackathon/naija-solar](https://huggingface.co/spaces/build-small-hackathon/naija-solar)

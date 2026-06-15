@@ -279,6 +279,67 @@ def _template(r, lang):
     return T.get(lang, T["en"])
 
 
+# ── speech-friendly narration for the Nigerian languages ──────────────────────
+# SoroTTS is a Yorùbá/Hausa/Igbo voice: it reads pure prose beautifully but stumbles on English
+# digits and units ("2.66", "1.5 kVA") read mid-sentence, which is what made the voice sound off.
+# So for yo/ha/ig the narration spells counts as words, drops the hardest units, and rounds the cost
+# to a spoken approximation. The exact figures still show in the result tiles, and because this same
+# text is both shown and read, "you hear what you read" still holds. English/Pidgin keep the precise
+# wording (their voices read digits fine).
+_NUM = {
+    "yo": ["", "ọ̀kan", "méjì", "mẹ́ta", "mẹ́rin", "márùn-ún", "mẹ́fà", "méje", "mẹ́jọ", "mẹ́sàn-án", "mẹ́wàá",
+           "mọ́kànlá", "méjìlá", "mẹ́tàlá", "mẹ́rìnlá", "mẹ́ẹ̀ẹ́dógún", "mẹ́rìndínlógún", "mẹ́tàdínlógún",
+           "méjìdínlógún", "mọ́kàndínlógún", "ogún"],
+    "ha": ["", "ɗaya", "biyu", "uku", "huɗu", "biyar", "shida", "bakwai", "takwas", "tara", "goma",
+           "goma sha ɗaya", "goma sha biyu", "goma sha uku", "goma sha huɗu", "goma sha biyar",
+           "goma sha shida", "goma sha bakwai", "goma sha takwas", "goma sha tara", "ashirin"],
+    "ig": ["", "otu", "abụọ", "atọ", "anọ", "ise", "isii", "asaa", "asatọ", "itoolu", "iri",
+           "iri na otu", "iri na abụọ", "iri na atọ", "iri na anọ", "iri na ise", "iri na isii",
+           "iri na asaa", "iri na asatọ", "iri na itoolu", "iri abụọ"],
+}
+
+
+def _num_words(n, lang):
+    t = _NUM.get(lang)
+    try:
+        n = int(n)
+    except (TypeError, ValueError):
+        return str(n)
+    return t[n] if (t and 1 <= n <= 20) else str(n)
+
+
+def _cost_words(total, lang):
+    """A spoken, mostly-round amount in millions (sub-million numerals are unspeakable in these
+    languages). The exact naira figure is shown in the cost card."""
+    m = round((total or 0) / 1_000_000)
+    if m < 1:
+        return {"yo": "ìdajì mílíọ̀nù náírà", "ha": "rabin miliyan naira", "ig": "ọkara nde naịra"}[lang]
+    w = _num_words(m, lang)
+    return {"yo": f"mílíọ̀nù náírà {w}", "ha": f"naira miliyan {w}", "ig": f"naịra nde {w}"}[lang]
+
+
+def _template_tts(r, lang):
+    """Speech-friendly narration for yo/ha/ig (numbers as words, hard units dropped, cost rounded);
+    English/Pidgin fall back to the precise template."""
+    if lang not in ("yo", "ha", "ig"):
+        return _template(r, lang)
+    p, b = r["panel"]["count"], r["batteries"]["durable"]["count"]
+    kw = max(1, round(r["daily_kwh"]))
+    P, B, KW = _num_words(p, lang), _num_words(b, lang), _num_words(kw, lang)
+    C = _cost_words(r["batteries"]["durable"]["total"], lang)
+    if lang == "yo":
+        return (f"Iná tí o ń lò tó ìwọ̀n {KW} lójoojúmọ́. Mo dábàá pánẹ́ẹ̀lì oòrùn {P}, "
+                f"ẹ̀rọ̀ amúná ọ̀kan, àti bátìrì {B}. Ètò náà yóò ná tó {C}. "
+                f"Jọ̀wọ́ bèèrè lọ́wọ́ onímọ̀ tó ní ìwé àṣẹ.")
+    if lang == "ha":
+        return (f"Kana amfani da wuta kusan {KW} a kullum. Ina ba da shawarar panel hasken rana {P}, "
+                f"inverter ɗaya, da batir {B}. Tsarin zai kai kusan {C}. "
+                f"Don Allah ka tabbatar da ƙwararren mai shigarwa.")
+    return (f"Ị na-eji ọkụ dịka {KW} kwa ụbọchị. Ana m atụ aro panel anyanwụ {P}, "
+            f"otu inverter, na batrị {B}. Usoro a ga-efu ihe dịka {C}. "
+            f"Biko kwado ya na onye ọrụ nwere ikike.")
+
+
 def _clean(t):
     return re.sub(r"<think>.*?</think>", "", t or "", flags=re.DOTALL).strip()
 
@@ -287,8 +348,10 @@ def narrate(r, lang):
     """The plan in one localized paragraph. It is shown on screen AND read aloud, so the written
     words and the spoken words are always identical. It is a deterministic template, so it is
     instant (no model call before the voice), reusable from cache, and dependable in all five
-    languages, which a 1.7B model is not for Yoruba, Hausa or Igbo."""
-    return _template(r, lang)
+    languages, which a 1.7B model is not for Yoruba, Hausa or Igbo. For yo/ha/ig the wording is
+    speech-friendly (numbers as words, no bare digits/units), which is what the voice reads cleanly;
+    the exact figures live in the result tiles."""
+    return _template_tts(r, lang)
 
 
 def _for_tts(text):
@@ -723,11 +786,31 @@ def run(audio, text, state, geolat, uilang, sess):
             system_view(r), load_breakdown_html(sel), content, applist_html(_sel_to_df(sel)), "", sess, r, outlang, SHOW, _sel_to_df(sel))
 
 
-_TTS_CACHE = "./traces/tts_cache"
+# Persistent on /data so cached audio survives Space restarts (was ./traces, which is wiped on
+# every rebuild, so the slow first-generation was paid again after each restart).
+_TTS_CACHE = str(_DATA_DIR / "tts_cache")
 # Bump this whenever the voice itself changes (e.g. MMS -> SoroTTS). It is part of the cache key,
 # so old audio rendered by a previous voice is never reused. Without it, a cached Yoruba clip from
 # the old MMS voice would keep playing for the same plan even after the voice was upgraded.
-_TTS_VERSION = os.environ.get("TTS_CACHE_VERSION", "sorotts-2")
+_TTS_VERSION = os.environ.get("TTS_CACHE_VERSION", "sorotts-3")
+_TTS_CACHE_KEEP = int(os.environ.get("TTS_CACHE_KEEP", "800"))   # cap clips on disk (LRU eviction)
+
+
+def _prune_tts_cache(keep=None):
+    """Keep the audio cache bounded on the persistent disk: evict the least-recently-used clips."""
+    keep = _TTS_CACHE_KEEP if keep is None else keep
+    try:
+        files = [os.path.join(_TTS_CACHE, f) for f in os.listdir(_TTS_CACHE) if f.endswith(".wav")]
+        if len(files) <= keep:
+            return
+        files.sort(key=os.path.getmtime)                 # oldest (least recently used) first
+        for p in files[:len(files) - keep]:
+            try:
+                os.remove(p)
+            except OSError:
+                pass
+    except OSError:
+        pass
 
 
 def speak(r, lang, sess):
@@ -740,11 +823,16 @@ def speak(r, lang, sess):
     key = hashlib.md5(("%s|%s|%s" % (_TTS_VERSION, lang, words)).encode("utf-8")).hexdigest()
     path = os.path.join(_TTS_CACHE, key + ".wav")
     if os.path.exists(path) and os.path.getsize(path) > 1200:
+        try:
+            os.utime(path, None)                         # mark recently used so it is kept (LRU)
+        except OSError:
+            pass
         sess.event("walkthrough", lang=lang, cached=True)
         return path, sess
     audio = None
     try:
         audio = tts.speak(_for_tts(words), lang=lang, out_path=path)
+        _prune_tts_cache()
     except Exception:
         audio = None
     sess.event("walkthrough", lang=lang, cached=False)

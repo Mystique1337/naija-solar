@@ -84,12 +84,13 @@ A guided first-run tour walks every new user through the app, in their own langu
 
 | Role | Model | Params |
 |---|---|---|
-| Text (Q&A, parsing) | `openbmb/MiniCPM5-1B` (OpenBMB MiniCPM) | **1B** |
+| Appliance understanding (free-text) | `openbmb/MiniCPM5-1B` (OpenBMB MiniCPM) | **1B** |
+| Follow-up Q&A | `Qwen/Qwen3-1.7B` | **1.7B** |
 | Speech to text | `openai/whisper-small` | **0.24B** |
 | Voice (all 5 languages) | **[SoroTTS](https://huggingface.co/Shinzmann/sorotts)**, our own Orpheus-3B fine-tune | **3B** |
 | Vision (appliances from a photo) | `openbmb/MiniCPM-V-2` (OpenBMB MiniCPM) | **3.4B** |
 
-**Two of the four models are OpenBMB MiniCPM** (`MiniCPM5-1B` for text, `MiniCPM-V-2` for the photo reader). The largest single model is **3.4B** (the MiniCPM-V vision model), comfortably under the 4B line. To stay within Modal's web-function cap, **one endpoint serves both `MiniCPM5-1B` and `Qwen/Qwen3-1.7B`** ([`modal/serving_text_dual.py`](modal/serving_text_dual.py)), routing by the requested model name, so a sibling deployment can keep using Qwen with no extra GPU. Everything is self-hosted on **Modal**, where each model wakes on demand and scales back to zero when idle, so there is no GPU bill running in the background.
+**Two of the five models are OpenBMB MiniCPM**, each with a real job: `MiniCPM5-1B` reads your free-text appliances when you type something messy, and `MiniCPM-V-2` reads appliances straight from a photo. `Qwen3-1.7B` answers your follow-up questions. The largest single model is **3.4B** (the MiniCPM-V vision model), comfortably under the 4B line. To stay within Modal's web-function cap, **one endpoint serves both `MiniCPM5-1B` and `Qwen/Qwen3-1.7B`** ([`modal/serving_text_dual.py`](modal/serving_text_dual.py)), routing by the requested model name, so no extra GPU is needed. Everything is self-hosted on **Modal**, where each model wakes on demand and scales back to zero when idle, so there is no GPU bill running in the background.
 
 To keep the five languages dependable, the **words** of the spoken plan come from carefully written, localized templates rather than a small model, because a 1.7B model is not reliable at Yorùbá, Hausa, or Igbo prose yet. The same templates are what you see written on screen, so the words you read are exactly the words you hear.
 
@@ -163,7 +164,7 @@ Each model has a serving script in `modal/`. Deploy the ones you need and point 
 
 ```bash
 pip install modal && modal token new
-modal deploy modal/serving_vllm.py       # text (Qwen3-1.7B)
+modal deploy modal/serving_text_dual.py  # text: MiniCPM5-1B (understanding) + Qwen3-1.7B (Q&A) in one slot
 modal deploy modal/serving_whisper.py    # speech to text
 modal deploy modal/serving_tts.py        # voice (SoroTTS, our Orpheus-3B fine-tune)
 modal deploy modal/serving_minicpm.py    # vision (MiniCPM-V-2, OpenBMB), primary

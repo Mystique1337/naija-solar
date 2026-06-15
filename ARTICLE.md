@@ -88,7 +88,7 @@ The front end is an ordinary Hugging Face Space on a free CPU box. It holds the 
 
 There is a quiet rule behind the whole project. Every model Naija Solar uses is under four billion parameters.
 
-This is not a stunt. It is the point. An app meant for everyday Nigerians has to be cheap to run, or it will never survive past a demo. So the language work runs on Qwen3 at 1.7 billion parameters, speech recognition runs on a small Whisper model, reading appliances from a photo runs on MiniCPM-V, OpenBMB's small open vision model, and the voice comes from a three billion parameter model I fine-tuned myself. The largest single piece is still under four billion, and the whole stack scales to zero when it is idle. There is no frontier model behind the curtain and no per word billing to worry about. Small, open models can carry a real product if you give them the right jobs.
+This is not a stunt. It is the point. An app meant for everyday Nigerians has to be cheap to run, or it will never survive past a demo. So the app reads your typed appliances with MiniCPM5-1B and answers your follow-up questions with Qwen3 at 1.7 billion parameters, speech recognition runs on a small Whisper model, reading appliances from a photo runs on MiniCPM-V, OpenBMB's small open vision model, and the voice comes from a three billion parameter model I fine-tuned myself. Two of those are OpenBMB's small open MiniCPM models, each given a real job. The largest single piece is still under four billion, and the whole stack scales to zero when it is idle. There is no frontier model behind the curtain and no per word billing to worry about. Small, open models can carry a real product if you give them the right jobs.
 
 To keep the five languages dependable, the explanation for Pidgin, Yoruba, Hausa, and Igbo comes from carefully written templates rather than the small model, because a 1.7 billion parameter model is not reliable at those languages yet. The words you read on screen are exactly the words you hear, so nothing drifts between the two. That single choice is what makes the promise hold: pick Yoruba, and you really do get Yoruba.
 
@@ -114,7 +114,7 @@ Right now the app sizes a system, writes it out, and speaks it back. Accounts an
 
 - **Frontend:** hand-built HTML, CSS, and vanilla JS with a Three.js 3D home, served by **FastAPI** on a free Hugging Face Space (CPU).
 - **Sizing:** a deterministic **Python** engine over a real Nigerian price catalogue. No model touches the maths.
-- **Models, all under 4B, self-hosted on Modal and scaled to zero:** Qwen3-1.7B (text and Q&A), Whisper-small (speech to text), **SoroTTS**, my own Orpheus-3B fine-tune (voice in 5 languages), and MiniCPM-V-2 from OpenBMB (appliances from a photo).
+- **Models, all under 4B, self-hosted on Modal and scaled to zero:** MiniCPM5-1B from OpenBMB (understands your typed appliances) and Qwen3-1.7B (answers your follow-up questions), Whisper-small (speech to text), **SoroTTS**, my own Orpheus-3B fine-tune (voice in 5 languages), and MiniCPM-V-2 from OpenBMB (appliances from a photo). Two of the five are OpenBMB MiniCPM models.
 - **Training:** the voice was fine-tuned with **Unsloth** (LoRA, r=64) over **SNAC**-encoded audio on an **NVIDIA B200**, training only 2.86% of the weights in about 31 minutes, the whole pipeline a single Modal job.
 
 ## See it, hear it, read the code

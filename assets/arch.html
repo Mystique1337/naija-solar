@@ -1,0 +1,89 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',system-ui,sans-serif;background:#fff}
+  .wrap{width:1480px;padding:46px 48px 40px;background:
+      radial-gradient(900px 360px at 80% -8%,rgba(255,138,0,.10),transparent 60%),
+      linear-gradient(180deg,#fffdf8 0%,#fdf6e9 100%);}
+  .head{display:flex;align-items:center;gap:16px;margin-bottom:6px}
+  .logo{width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,#ff8a00,#f4a300);
+    display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 8px 22px rgba(244,163,0,.34)}
+  h1{font-family:'Space Grotesk',sans-serif;font-size:30px;color:#1b1b1b;letter-spacing:-.5px}
+  h1 b{background:linear-gradient(90deg,#ff8a00,#f4a300);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:#6b7280;font-size:15px;margin:3px 0 26px;font-weight:500}
+  .layer{border-radius:22px;padding:20px 24px;margin-bottom:14px;position:relative}
+  .ltag{position:absolute;top:-11px;left:24px;font-size:11.5px;font-weight:700;letter-spacing:.10em;
+    text-transform:uppercase;padding:3px 12px;border-radius:999px;color:#fff}
+  .l1{background:linear-gradient(135deg,#fff7e9,#fffdf8);border:1.6px solid #f6e2bd}
+  .l1 .ltag{background:linear-gradient(135deg,#ff8a00,#f4a300)}
+  .l2{background:linear-gradient(135deg,#f1fbf6,#fff);border:1.6px solid #cdeadb}
+  .l2 .ltag{background:linear-gradient(135deg,#10b981,#059669)}
+  .l3{background:linear-gradient(135deg,#f7f9ff,#fff);border:1.6px solid #d7def2}
+  .l3 .ltag{background:linear-gradient(135deg,#4f6bed,#3b53cf)}
+  .row{display:flex;gap:14px;flex-wrap:wrap}
+  .chip{flex:1;min-width:150px;background:#fff;border:1.4px solid #ececf3;border-radius:15px;padding:14px 16px;
+    box-shadow:0 4px 14px rgba(20,20,40,.05)}
+  .chip .t{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15.5px;color:#1b1b1b}
+  .chip .d{color:#6b7280;font-size:12.7px;margin-top:3px;line-height:1.45}
+  .chip .p{display:inline-block;margin-top:9px;font-size:11px;font-weight:700;color:#475569;
+    background:#f1f5f9;border-radius:999px;padding:2px 9px}
+  .chip.bmb{border-color:#c9d6ff;background:linear-gradient(135deg,#f5f8ff,#fff)}
+  .chip.bmb .p{background:#e7edff;color:#3b53cf}
+  .chip.ours{border-color:#f6d9a8;background:linear-gradient(135deg,#fff8ec,#fff)}
+  .chip.ours .p{background:#ffedcf;color:#b9760a}
+  .badge{font-size:10.5px;font-weight:700;letter-spacing:.04em;border-radius:6px;padding:1px 7px;margin-left:7px;vertical-align:middle}
+  .badge.b{background:#3b53cf;color:#fff}
+  .badge.o{background:#f4a300;color:#fff}
+  .app{display:flex;gap:14px;flex-wrap:wrap}
+  .app .chip{border-color:#cdeadb;background:linear-gradient(135deg,#f6fcf9,#fff)}
+  .arrow{text-align:center;color:#c9a24a;font-size:20px;line-height:1;margin:1px 0 9px;font-weight:700}
+  .foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;color:#8a8f99;font-size:12.5px;font-weight:500}
+  .foot b{color:#475569}
+  .pills{display:flex;gap:8px}
+  .pill{background:#fff;border:1.3px solid #e7e2d4;border-radius:999px;padding:4px 12px;font-size:11.5px;font-weight:600;color:#6b7280}
+</style></head>
+<body><div class="wrap">
+  <div class="head">
+    <div class="logo">☀️</div>
+    <div><h1><b>Naija Solar</b> — how it works</h1></div>
+  </div>
+  <div class="sub">Voice-first solar sizing in 5 Nigerian languages. Five small open models, each under 4B, self-hosted and scaled to zero.</div>
+
+  <div class="layer l1">
+    <div class="ltag">You</div>
+    <div class="row">
+      <div class="chip"><div class="t">⌨️ Type</div><div class="d">"2 fridges, 6 bulbs, 1 TV, fan" — in your own words</div></div>
+      <div class="chip"><div class="t">🎙️ Speak</div><div class="d">Say it out loud in your language</div></div>
+      <div class="chip"><div class="t">📷 Snap a photo</div><div class="d">Point at the appliance or its label</div></div>
+      <div class="chip"><div class="t">🌍 Pick a language</div><div class="d">English · Pidgin · Yorùbá · Hausa · Igbo</div></div>
+    </div>
+  </div>
+  <div class="arrow">↓</div>
+
+  <div class="layer l2">
+    <div class="ltag">Naija Solar · FastAPI + Gradio on Hugging Face Spaces</div>
+    <div class="app">
+      <div class="chip"><div class="t">🧮 Sizing engine</div><div class="d">Rule-based math (no LLM in the numbers) — panels, battery, inverter, naira cost</div></div>
+      <div class="chip"><div class="t">🗣️ Narration templates</div><div class="d">Localized, hand-written plan in all 5 languages — what you read is exactly what you hear</div></div>
+      <div class="chip"><div class="t">⚡ One warm-up call</div><div class="d">Opening the app wakes every model so the first answer is fast</div></div>
+    </div>
+  </div>
+  <div class="arrow">↓ &nbsp; calls on demand, each scales back to zero when idle &nbsp; ↓</div>
+
+  <div class="layer l3">
+    <div class="ltag">Models · serverless on Modal</div>
+    <div class="row">
+      <div class="chip bmb"><div class="t">MiniCPM5-1B<span class="badge b">OpenBMB</span></div><div class="d">Understands your typed appliances</div><span class="p">1B · text</span></div>
+      <div class="chip"><div class="t">Qwen3-1.7B</div><div class="d">Answers your follow-up questions</div><span class="p">1.7B · text</span></div>
+      <div class="chip"><div class="t">Whisper-small</div><div class="d">Turns your speech into text</div><span class="p">0.24B · ASR</span></div>
+      <div class="chip ours"><div class="t">SoroTTS<span class="badge o">our fine-tune</span></div><div class="d">Speaks the plan — Orpheus-3B taught 4 Nigerian languages</div><span class="p">3B · voice</span></div>
+      <div class="chip bmb"><div class="t">MiniCPM-V-2<span class="badge b">OpenBMB</span></div><div class="d">Reads appliances from a photo</div><span class="p">3.4B · vision</span></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><b>Two OpenBMB MiniCPM models</b>, each with a real job &nbsp;·&nbsp; largest single model 3.4B &nbsp;·&nbsp; everything under the 4B "Tiny Titan" line</div>
+    <div class="pills"><span class="pill">scales to zero</span><span class="pill">no frontier model</span><span class="pill">no per-word billing</span></div>
+  </div>
+</div></body></html>

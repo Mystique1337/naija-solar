@@ -355,9 +355,7 @@ def api_testimonials():
         seen.add(k)
         items.append({"name": t.get("name", "A user"), "text": txt,
                       "rating": t.get("rating", 5), "lang": t.get("lang", "en")})
-    seeds = [{"name": s["name"], "text": s["text"], "rating": s["rating"], "lang": s.get("lang", "en")}
-             for s in strings.SEED_TESTIMONIALS]
-    return {"items": (items + seeds)[:24], "realCount": len(items)}
+    return {"items": items[:24], "realCount": len(items)}   # real reviews only, no seeded placeholders
 
 
 @app.post("/api/email")

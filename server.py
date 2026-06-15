@@ -1,4 +1,4 @@
-"""Naija Solar — bespoke custom frontend served over FastAPI (the off-brand surface).
+"""Naija Solar: bespoke custom frontend served over FastAPI (the off-brand surface).
 
 This is a fully hand-built web app (web/index.html + web/app.js + web/shell.css) served by FastAPI.
 All the heavy lifting is reused from app.py: the deterministic sizing engine, every SVG/HTML
@@ -25,9 +25,9 @@ sys.path.insert(0, str(HERE))
 if not (HERE / "buildsmall").exists():
     sys.path.insert(0, str(HERE.parents[1] / "_platform"))
 
-import app as core  # noqa: E402  — reuse all logic/generators (Gradio build is skipped)
-import store  # noqa: E402  — durable accounts + sizing history (Modal Dict)
-import strings  # noqa: E402  — all UI text in 5 languages + seed testimonials
+import app as core  # noqa: E402  reuse all logic/generators (Gradio build is skipped)
+import store  # noqa: E402  durable accounts + sizing history (Modal Dict)
+import strings  # noqa: E402  all UI text in 5 languages + seed testimonials
 
 from fastapi import FastAPI, File, Form, Request, UploadFile  # noqa: E402
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response  # noqa: E402

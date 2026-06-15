@@ -102,7 +102,7 @@ def count_html():
 
 def submit_feedback(rating, comment):
     track_event("feedback", {"rating": rating, "comment": (comment or "").strip()[:400]})
-    return '<div class="okmsg">🙏 Thank you — your feedback helps make Naija Solar better.</div>'
+    return '<div class="okmsg">🙏 Thank you, your feedback helps make Naija Solar better.</div>'
 
 
 def submit_email(email):
@@ -110,9 +110,9 @@ def submit_email(email):
     if not e:
         return ""
     if "@" not in e or "." not in e.split("@")[-1] or len(e) > 120 or " " in e:
-        return '<div class="warnmsg">That email doesn\'t look right — please check it, or leave it blank.</div>'
+        return '<div class="warnmsg">That email doesn\'t look right, please check it, or leave it blank.</div>'
     track_event("email", {"email": e})
-    return '<div class="okmsg">✅ You\'re on the list — only useful solar updates, no spam.</div>'
+    return '<div class="okmsg">✅ You\'re on the list, only useful solar updates, no spam.</div>'
 
 
 UI = {
@@ -177,7 +177,7 @@ KW = [("ceiling fan", "Ceiling fan"), ("standing fan", "Standing fan"), ("securi
 KW2 = [(k, a) for k, a in KW if " " in k]
 KW1 = [(k, a) for k, a in KW if " " not in k]
 _KW1_MAP = dict(KW1)
-_FUZZ_KEYS = [k for k, _ in KW1 if len(k) >= 5]   # long keys only — safe to fuzzy-match
+_FUZZ_KEYS = [k for k, _ in KW1 if len(k) >= 5]   # long keys only, safe to fuzzy-match
 
 
 def _base(t):
@@ -549,7 +549,7 @@ def system_view(r):
 
 
 def home_2d_svg(r):
-    """Clean 2D illustrated home + system view — a labelled companion to the 3D (always renders)."""
+    """Clean 2D illustrated home + system view, a labelled companion to the 3D (always renders)."""
     panels, kva = r["panel"]["count"], r["inverter"]["kva"]
     d = r["batteries"]["durable"]
     items = r.get("profile", {}).get("items", [])[:8]
@@ -639,7 +639,7 @@ def _gen_card(r):
     if not g:
         return ""
     return ('<div class="rcard alt"><div class="ic">🧳</div><div><div class="t">Or a portable option: %s %s</div>'
-            '<div class="s">%d Wh · %d W · about ₦%s — plug-and-play, add a panel to recharge</div></div></div>') % (
+            '<div class="s">%d Wh · %d W · about ₦%s, plug-and-play, add a panel to recharge</div></div></div>') % (
         g["brand"], g["model"], g["wh"], g["w"], format(g["price_ngn"], ","))
 
 
@@ -1084,8 +1084,10 @@ CSS += """
 .statstrip{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:2px 0 6px}
 .statstrip .sp{background:#fff;border:1.5px solid #f0e6cf;border-radius:999px;padding:7px 15px;font-size:.85rem;font-weight:600;color:#6b5b3a;box-shadow:0 3px 10px rgba(180,150,60,.08)}
 .statstrip .sp b{color:#1b1b1b}
-.sectitle{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;font-size:1.05rem;color:#1b1b1b;margin:18px 2px 8px;display:flex;align-items:center;gap:8px}
-.sectitle span{font-weight:500;font-size:.8rem;color:#8a8f99}
+.sectitle{display:flex;align-items:center;flex-wrap:wrap;gap:4px 9px;font-family:'Space Grotesk',system-ui,sans-serif;margin:20px 2px 9px}
+.sectitle .si{font-size:1.18rem;line-height:1;display:inline-flex;align-items:center}
+.sectitle .st{font-weight:700;font-size:1.05rem;color:#1b1b1b;line-height:1.2}
+.sectitle .ss{font-weight:500;font-size:.8rem;color:#8a8f99;line-height:1.2}
 .modelwall{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
 .mw{display:block;text-decoration:none;background:linear-gradient(135deg,#f7fcf9,#fff);border:1.5px solid #d9ecdf;border-radius:16px;padding:14px 16px;transition:transform .12s,box-shadow .12s}
 .mw:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(16,140,90,.12)}
@@ -1100,8 +1102,16 @@ CSS += """
 .rvcard{background:#fff;border:1.5px solid #eee7d6;border-radius:16px;padding:14px 16px;box-shadow:0 4px 14px rgba(40,40,20,.05)}
 .rvstars{color:#f4a300;letter-spacing:1px;font-size:.95rem}
 .rvtext{color:#33312b;font-size:.9rem;line-height:1.5;margin:7px 0}
-.rvwho{color:#8a8f99;font-size:.8rem;font-weight:600}
-.accwelcome{background:linear-gradient(135deg,#f1fbf6,#fff);border:1.5px solid #cdeadb;border-radius:14px;padding:12px 16px;font-size:.95rem;color:#1b5e3f;margin-bottom:8px}
+.rvwho{color:#5b6470;font-size:.82rem;font-weight:700;display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}
+.rvlang{color:#aeb2bb;font-weight:500}
+.rvempty{background:linear-gradient(135deg,#fff8ec,#fff);border:1.5px dashed #f0dcb0;border-radius:14px;padding:18px;text-align:center;color:#9a7b3a;font-weight:600}
+.rvform{background:linear-gradient(135deg,#fbfdff,#fff)!important;border:1.5px solid #e6ecf5!important;border-radius:16px!important;padding:14px 16px 12px!important;margin-top:14px}
+.rvformhd{display:flex;align-items:center;flex-wrap:wrap;gap:4px 9px;margin-bottom:8px}
+.rvformhd .si{font-size:1.12rem;line-height:1}
+.rvformhd .st{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;color:#1b1b1b}
+.rvformhd .ss{font-weight:500;font-size:.8rem;color:#8a8f99}
+.rvstarsin label{color:#f4a300!important;font-size:1.02rem!important;letter-spacing:1px}
+.accwelcome{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#f1fbf6,#fff);border:1.5px solid #cdeadb;border-radius:14px;padding:12px 16px;font-size:.95rem;color:#1b5e3f;margin-bottom:8px}
 .histlist{display:flex;flex-direction:column;gap:8px}
 .histrow{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#fff;border:1.4px solid #ececf3;border-radius:12px;padding:10px 14px;flex-wrap:wrap}
 .histrow .hl{font-weight:600;color:#1b1b1b;font-size:.9rem}
@@ -1178,7 +1188,7 @@ def ask(question, r, lang, sess):
             "money or the home, reply in one short friendly line and invite them to ask about their solar setup. "
             "Question: %s /no_think" % (ctx, LANG_NAME.get(ans_lang, "English"), q))
         # The small model very occasionally returns an empty turn (only think-tags, or a truncated
-        # generation). Retry once, and never hand back a blank — fall back to a useful plan summary.
+        # generation). Retry once, and never hand back a blank, fall back to a useful plan summary.
         ans = ""
         for _ in range(2):
             try:
@@ -1449,7 +1459,6 @@ RENDER_JS = "(s) => { if(s){ var a=(''+s).split('|'); if(window.renderHouse){ wi
 
 
 # ── home extras: stats strip, model wall, reviews wall, and accounts ──────────
-_LANG_FLAG = {"en": "🇬🇧", "pcm": "🇳🇬", "yo": "🇳🇬", "ha": "🇳🇬", "ig": "🇳🇬"}
 _VALID_LANGS = ("en", "pcm", "yo", "ha", "ig")
 
 
@@ -1500,13 +1509,17 @@ def reviews_html():
             continue
         seen.add(k)
         items.append(t)
-    seeds = getattr(strings, "SEED_TESTIMONIALS", []) or []
+    if not items:
+        return ('<div class="reviews"><div class="rvempty">No reviews yet. '
+                'Be the first to share your experience, just below.</div></div>')
     cards = []
-    for t in (items + list(seeds))[:18]:
-        flag = _LANG_FLAG.get(t.get("lang", "en"), "🌍")
+    for t in items[:24]:
+        lang = t.get("lang", "en")
+        tag = ('<span class="rvlang">in %s</span>' % LANG_NAME.get(lang, "")) if lang and lang != "en" else ""
         cards.append('<div class="rvcard"><div class="rvstars">%s</div>'
-                     '<div class="rvtext">“%s”</div><div class="rvwho">%s %s</div></div>'
-                     % (_stars(t.get("rating", 5)), _esc(t.get("text", "")), flag, _esc(t.get("name", "A user"))))
+                     '<div class="rvtext">%s</div>'
+                     '<div class="rvwho">%s%s</div></div>'
+                     % (_stars(t.get("rating", 5)), _esc(t.get("text", "")), _esc(t.get("name", "A user")), tag))
     return '<div class="reviews"><div class="rvgrid">%s</div></div>' % "".join(cards)
 
 
@@ -1515,8 +1528,9 @@ def reviews_title():
         n = len([t for t in store.STORE.list_testimonials(60) if (t.get("text") or "").strip()])
     except Exception:
         n = 0
-    return ('<div class="sectitle">💬 What people are saying '
-            '<span>%d real rating%s, plus a few we are proud of</span></div>' % (n, "" if n == 1 else "s"))
+    sub = ("%d review%s from people who used it" % (n, "" if n == 1 else "s")) if n else "be the first to leave one below"
+    return ('<div class="sectitle"><span class="si">💬</span><span class="st">What people are saying</span>'
+            '<span class="ss">%s</span></div>' % sub)
 
 
 # ── accounts ──────────────────────────────────────────────────────────────────
@@ -1562,7 +1576,7 @@ def do_signup(email, pw, name):
     user, err = store.STORE.create_user(email, pw, name)
     if err:
         return None, _accmsg(err, False), SHOW, HIDE, "", ""
-    return user, _accmsg("Account created — welcome to Naija Solar!", True), HIDE, SHOW, acc_greeting(user), acc_history_html(user)
+    return user, _accmsg("Account created, welcome to Naija Solar!", True), HIDE, SHOW, acc_greeting(user), acc_history_html(user)
 
 
 def do_login(email, pw):
@@ -1589,17 +1603,18 @@ def save_after_size(r, df, user, state, lang):
     return (acc_greeting(user) if user else ""), (acc_history_html(user) if user else ""), user
 
 
-def do_feedback(rating, comment, user, lang):
-    msg = submit_feedback(rating, comment)
-    comment = (comment or "").strip()
-    if rating == "up" and len(comment) >= 6:                        # a positive comment becomes a public review
-        name = (user.get("name") if user else "") or "A Naija Solar user"
-        try:
-            store.STORE.add_testimonial({"name": name[:40], "text": comment[:240], "rating": 5,
-                                         "lang": lang if lang in _VALID_LANGS else "en"})
-        except Exception:
-            pass
-    return msg, reviews_html(), reviews_title()
+def post_review(name, stars, text, user, lang):
+    """A visitor posts a public review (stars + words). Refreshes the wall and clears the box."""
+    text = (text or "").strip()
+    if len(text) < 4:
+        return _accmsg("Please write a few words about your experience.", False), gr.update(), gr.update(), gr.update()
+    who = (name or "").strip() or (user.get("name") if user else "") or "A Naija Solar user"
+    try:
+        store.STORE.add_testimonial({"name": who[:40], "text": text[:240],
+                                     "rating": int(stars or 5), "lang": lang if lang in _VALID_LANGS else "en"})
+    except Exception:
+        pass
+    return _accmsg("Thank you, your review is now live below.", True), reviews_title(), reviews_html(), ""
 
 
 def build():
@@ -1608,7 +1623,7 @@ def build():
         auth_state = gr.State(None)
         gr.HTML(logo_html())
         usercount = gr.HTML(count_html(), elem_id="ucount")
-        with gr.Accordion("👤 Account — sign in to save your sizings", open=False):
+        with gr.Accordion("👤 Account, sign in to save your sizings", open=False):
             acc_msg = gr.HTML()
             with gr.Column(visible=True) as acc_out:
                 with gr.Row():
@@ -1620,7 +1635,7 @@ def build():
                     signup_btn = gr.Button("Create account", variant="primary", elem_classes="gobtn", scale=1)
             with gr.Column(visible=False) as acc_in:
                 acc_greet = gr.HTML()
-                gr.HTML('<div class="sectitle">🗂️ My saved sizings</div>')
+                gr.HTML('<div class="sectitle"><span class="si">🗂️</span><span class="st">My saved sizings</span></div>')
                 acc_hist = gr.HTML()
                 with gr.Row():
                     logout_btn = gr.Button("Log out", scale=1)
@@ -1708,17 +1723,29 @@ def build():
                 fb_up = gr.Button("👍 Helpful", elem_classes="fbbtn")
                 fb_down = gr.Button("👎 Could be better", elem_classes="fbbtn")
             fb_msg = gr.HTML()
-            gr.HTML('<div class="ehint">📩 Want solar tips, or your result saved? Add your email — optional, no spam.</div>')
+            gr.HTML('<div class="ehint">📩 Want solar tips, or your result saved? Add your email, optional, no spam.</div>')
             with gr.Row():
                 email_in = gr.Textbox(placeholder="you@email.com", show_label=False, scale=3, elem_classes="typein")
                 email_btn = gr.Button("Notify me", elem_classes="gobtn", scale=1)
             email_msg = gr.HTML()
 
-        gr.HTML('<div class="sectitle">⚙️ Powered by four small open models '
-                '<span>every one under 4B, self-hosted on Modal, scaled to zero</span></div>')
+        gr.HTML('<div class="sectitle"><span class="si">⚙️</span><span class="st">Powered by four small open models</span>'
+                '<span class="ss">every one under 4B, self-hosted on Modal, scaled to zero</span></div>')
         gr.HTML(models_html())
         reviews_head = gr.HTML(reviews_title())
         reviews_block = gr.HTML(reviews_html())
+        with gr.Group(elem_classes="rvform"):
+            gr.HTML('<div class="rvformhd"><span class="si">⭐</span><span class="st">Leave a review</span>'
+                    '<span class="ss">tell others how it went</span></div>')
+            with gr.Row():
+                rv_name = gr.Textbox(placeholder="Your name (optional)", show_label=False, container=False,
+                                     scale=2, elem_classes="typein")
+                rv_stars = gr.Radio([("★★★★★", 5), ("★★★★", 4), ("★★★", 3), ("★★", 2), ("★", 1)], value=5,
+                                    show_label=False, container=False, scale=3, elem_classes="rvstarsin")
+            rv_text = gr.Textbox(placeholder="How was your experience with Naija Solar?", show_label=False,
+                                 lines=2, container=False, elem_classes="typein")
+            rv_post = gr.Button("Post review", variant="primary", elem_classes="gobtn")
+            rv_msg = gr.HTML()
 
         gr.HTML('<div class="gfoot">☀️ <b>Naija&nbsp;Solar</b> &nbsp;·&nbsp; '
                 '<a href="/classic" target="_blank">the original hand-built UI ↗</a> &nbsp;·&nbsp; '
@@ -1756,15 +1783,30 @@ def build():
         signup_btn.click(do_signup, [acc_email, acc_pass, acc_name], _acc_outs)
         logout_btn.click(do_logout, None, _acc_outs)
         refresh_btn.click(lambda u: (acc_greeting(u), acc_history_html(u)), auth_state, [acc_greet, acc_hist])
-        # a positive comment becomes a public review on the wall below
-        fb_up.click(lambda c, u, l: do_feedback("up", c, u, l), [fb_comment, auth_state, lang], [fb_msg, reviews_block, reviews_head])
-        fb_down.click(lambda c, u, l: do_feedback("down", c, u, l), [fb_comment, auth_state, lang], [fb_msg, reviews_block, reviews_head])
+        # public reviews: anyone can post one; it appears on the wall immediately
+        rv_post.click(post_review, [rv_name, rv_stars, rv_text, auth_state, lang], [rv_msg, reviews_head, reviews_block, rv_text])
+        # private feedback (thumbs) stays internal, separate from public reviews
+        fb_up.click(lambda c: submit_feedback("up", c), fb_comment, fb_msg)
+        fb_down.click(lambda c: submit_feedback("down", c), fb_comment, fb_msg)
         email_btn.click(submit_email, email_in, email_msg)
         demo.load(count_html, None, usercount)
     return demo
 
 
 _init_tracking()
+
+# One-time reset of the public reviews wall, controlled by the BUILDSMALL_RESET_REVIEWS Space variable.
+# Runs before build() reads the wall. The applied value is stored next to the testimonials, so it
+# clears exactly once per new value: a later restart will not wipe reviews collected since.
+_RV_NONCE = os.environ.get("BUILDSMALL_RESET_REVIEWS", "")
+if _RV_NONCE:
+    try:
+        if store.STORE._get(store.STORE.testi, "_reset_nonce", "") != _RV_NONCE:
+            store.STORE.reset_testimonials()
+            store.STORE._put(store.STORE.testi, "_reset_nonce", _RV_NONCE)
+    except Exception:
+        pass
+
 # The custom FastAPI frontend (server.py) imports this module for its logic/generators only,
 # so it sets BUILDSMALL_NO_GRADIO=1 to skip building the (unused) Gradio Blocks.
 demo = None if os.environ.get("BUILDSMALL_NO_GRADIO") == "1" else build()

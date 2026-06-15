@@ -4,7 +4,7 @@
 
 *Built solo in Nigeria for the Build Small Hackathon, hosted by Gradio and Hugging Face.*
 
-▶️ **[Try it live](https://huggingface.co/spaces/build-small-hackathon/naija-solar)** &nbsp;·&nbsp; 🎥 **[The Gradio app](https://youtu.be/l1FhgPJyN44)** &nbsp;·&nbsp; **[the hand-built UI](https://youtu.be/PfQeRfNof8Y)** &nbsp;·&nbsp; 💻 **[Code on GitHub](https://github.com/Mystique1337/naija-solar)** &nbsp;·&nbsp; 🔊 **[The SoroTTS voice](https://huggingface.co/Shinzmann/sorotts)**
+▶️ **[Try it live](https://huggingface.co/spaces/build-small-hackathon/naija-solar)** &nbsp;·&nbsp; 🎥 **[The Gradio app](https://youtu.be/l1FhgPJyN44)** &nbsp;·&nbsp; **[the hand-built UI](https://youtu.be/PfQeRfNof8Y)** &nbsp;·&nbsp; 💻 **[Code on GitHub](https://github.com/Mystique1337/naija-solar)** &nbsp;·&nbsp; 🔊 **[The SoroTTS voice](https://huggingface.co/Shinzmann/sorotts)** &nbsp;·&nbsp; 📣 **[Launch post on LinkedIn](https://www.linkedin.com/posts/ashinze-emmanuel-5a6757193_buildsmallhackathon-solar-nigeria-ugcPost-7472388380643991552-nDuH/)**
 
 Two faces, one engine: a polished **Gradio app** (the default) and a fully **hand-built single-page UI** at `/classic`. Both do the same voice-first sizing.
 

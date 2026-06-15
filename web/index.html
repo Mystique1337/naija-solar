@@ -64,9 +64,24 @@
       <div class="marquee"><div class="track" id="testiTrack"></div></div>
     </section>
 
-    <section class="hsection card why">
+    <section class="hsection card why" id="modelsSec">
       <h2 data-i18n="why_h">Small models, real impact</h2>
       <p data-i18n="why_s"></p>
+      <div class="modelgrid">
+        <div class="mcard"><div class="mrole" data-i18n="m_text">Understands you</div><div class="mname">Qwen3-1.7B</div><div class="mparam">1.7B</div></div>
+        <div class="mcard"><div class="mrole" data-i18n="m_asr">Hears you</div><div class="mname">Whisper small</div><div class="mparam">0.24B</div></div>
+        <a class="mcard feat" href="https://huggingface.co/Shinzmann/sorotts" target="_blank" rel="noopener">
+          <div class="mrole" data-i18n="m_voice">Speaks your language</div>
+          <div class="mname">SoroTTS <span class="ext">↗</span></div>
+          <div class="mparam">3B · <span data-i18n="m_ours">our fine-tune</span></div>
+        </a>
+        <div class="mcard"><div class="mrole" data-i18n="m_vision">Reads your photos</div><div class="mname">Qwen2.5-VL-3B</div><div class="mparam">3B</div></div>
+      </div>
+      <p class="modelnote" data-i18n="models_note">SoroTTS is our own fine-tune of Orpheus-3B, taught to speak Yorùbá, Hausa, Igbo, and Pidgin. Every model is under 4B, self-hosted on Modal, and scales to zero when idle.</p>
+      <div class="linkrow">
+        <a class="linkbtn primary" href="https://huggingface.co/Shinzmann/sorotts" target="_blank" rel="noopener">🔊 <span data-i18n="lnk_soro">The SoroTTS voice model</span></a>
+        <a class="linkbtn" href="https://github.com/Mystique1337/naija-solar" target="_blank" rel="noopener">💻 <span data-i18n="lnk_git">View the code on GitHub</span></a>
+      </div>
     </section>
 
     <section class="hsection finalcta">
@@ -169,6 +184,13 @@
     </div>
   </div>
 
+  <div class="footlinks">
+    <a href="https://github.com/Mystique1337/naija-solar" target="_blank" rel="noopener" data-i18n="lnk_git">View the code on GitHub</a>
+    <span>·</span>
+    <a href="https://huggingface.co/Shinzmann/sorotts" target="_blank" rel="noopener" data-i18n="lnk_soro">The SoroTTS voice model</a>
+    <span>·</span>
+    <a href="https://huggingface.co/spaces/build-small-hackathon/naija-solar" target="_blank" rel="noopener" data-i18n="lnk_space">Hugging Face Space</a>
+  </div>
   <div class="footnote" data-i18n="footer">Estimates from current Nigerian prices. Confirm with a licensed installer. · Built in Lagos ☀️</div>
 </div>
 <div id="sumbar"></div>

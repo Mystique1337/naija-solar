@@ -1111,7 +1111,7 @@ CSS += """
 .rvformhd .st{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;color:#1b1b1b}
 .rvformhd .ss{font-weight:500;font-size:.8rem;color:#8a8f99}
 .rvstarsin label{color:#f4a300!important;font-size:1.02rem!important;letter-spacing:1px}
-.accwelcome{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#f1fbf6,#fff);border:1.5px solid #cdeadb;border-radius:14px;padding:12px 16px;font-size:.95rem;color:#1b5e3f;margin-bottom:8px}
+.accwelcome{background:linear-gradient(135deg,#f1fbf6,#fff);border:1.5px solid #cdeadb;border-radius:14px;padding:12px 16px;font-size:.95rem;line-height:1.5;color:#1b5e3f;margin-bottom:8px}
 .histlist{display:flex;flex-direction:column;gap:8px}
 .histrow{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#fff;border:1.4px solid #ececf3;border-radius:12px;padding:10px 14px;flex-wrap:wrap}
 .histrow .hl{font-weight:600;color:#1b1b1b;font-size:.9rem}

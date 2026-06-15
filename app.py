@@ -235,7 +235,8 @@ def extract(text):
         return sel
     try:
         out = llm.json(f"List home appliances and integer quantities from: '{text}'. Use ONLY names from "
-                       f"this list: {list(data.APPLIANCES)}. Reply a JSON object name to count.")
+                       f"this list: {list(data.APPLIANCES)}. Reply a JSON object name to count.",
+                       model="openbmb/MiniCPM5-1B")   # MiniCPM5-1B understands messy free-text appliances
         if isinstance(out, dict):
             return {k: int(v) for k, v in out.items() if k in data.APPLIANCES and str(v).strip().lstrip('-').isdigit()}
     except Exception:
@@ -1144,7 +1145,7 @@ def ask(question, r, lang, sess):
         ans = ""
         for _ in range(2):
             try:
-                ans = _clean(llm.complete(prompt, max_tokens=230, timeout=190))
+                ans = _clean(llm.complete(prompt, max_tokens=230, timeout=190, model="Qwen/Qwen3-1.7B"))   # Qwen answers follow-up questions
             except Exception:
                 ans = ""
             if len(ans) >= 8:

@@ -11,6 +11,8 @@ Naija Solar is a voice-first solar-sizing assistant for Nigeria. Speak, type, or
 
 ![Naija Solar home screen](assets/01_home.png)
 
+**▶️ It is a live Gradio app.** Open the Space, choose your language, then speak, type, tap an example, or snap a photo, and it sizes itself. A bespoke single-page edition of the same engine is one tap away at **`/classic`**.
+
 ---
 
 ## Why it exists

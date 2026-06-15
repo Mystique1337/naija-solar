@@ -508,10 +508,38 @@ footer{display:none !important}
 .gobtn:hover{box-shadow:0 13px 32px rgba(255,138,0,.38) !important; transform:translateY(-1px); filter:brightness(1.03)}
 /* language pills breathe a little more */
 .langrow{gap:8px !important; row-gap:8px !important}
+/* footer with the classic-UI / GitHub / SoroTTS links */
+.gfoot{text-align:center; margin:26px 0 6px; font-size:.9rem; color:#6b7280}
+.gfoot a{color:#1f7a4d; text-decoration:none; font-weight:600}
+.gfoot a:hover{text-decoration:underline}
+"""
+
+# Warm-up + first-load disclaimer for the Gradio interface (mirrors the SPA). Added only to the
+# Gradio head, so the SPA at /classic keeps its own warm logic with no double-fire. It POSTs
+# /api/warm (waking text, speech, voice, vision) and shows a dismissible "models are waking" note.
+GRADIO_WARM_JS = """
+<script>
+(function(){
+  var s=document.createElement('style'); s.textContent='@keyframes nsspin{to{transform:rotate(360deg)}}'; document.head.appendChild(s);
+  function warm(){
+    try{ fetch('/api/warm',{method:'POST'}); }catch(e){}
+    if(document.getElementById('ns-warm')) return;
+    var n=document.createElement('div'); n.id='ns-warm';
+    n.style.cssText='position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:99999;max-width:560px;width:calc(100% - 28px);background:#fff7e9;border:1.5px solid #f3d9a8;border-radius:14px;padding:10px 14px;color:#7a4a12;font:600 13px/1.4 Inter,system-ui,sans-serif;box-shadow:0 12px 34px rgba(120,80,20,.20);display:flex;align-items:center;gap:9px';
+    n.innerHTML='<span style="flex:none;width:13px;height:13px;border:2px solid #e3b770;border-top-color:transparent;border-radius:50%;display:inline-block;animation:nsspin .8s linear infinite"></span>'
+      +'<span>Waking up the AI models. They sleep when idle to stay free, so your first result may take a few extra seconds.</span>'
+      +'<button aria-label="Dismiss" style="flex:none;margin-left:auto;background:none;border:none;color:#b07d3a;font-size:19px;line-height:1;cursor:pointer" onclick="this.parentNode.remove()">×</button>';
+    document.body.appendChild(n);
+    setTimeout(function(){ var e=document.getElementById('ns-warm'); if(e){ e.remove(); } }, 55000);
+  }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', function(){ setTimeout(warm,700); }); }
+  else { setTimeout(warm,700); }
+})();
+</script>
 """
 
 # In Gradio 6 the styling/head parameters are passed to mount_gradio_app (not the Blocks constructor),
 # so the off-brand design system (core.CSS), the theme, and the Three.js / voice / count-up head block
 # (core.THREE_HEAD) all apply to the mounted Gradio interface.
 app = gr.mount_gradio_app(app, core.build(), path="/", ssr_mode=False,   # client-side render; no Node needed in the Docker image
-                          css=core.CSS + GRADIO_CSS, theme=core.THEME, head=core.THREE_HEAD)
+                          css=core.CSS + GRADIO_CSS, theme=core.THEME, head=core.THREE_HEAD + GRADIO_WARM_JS)

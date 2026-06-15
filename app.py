@@ -1503,6 +1503,11 @@ def build():
                 email_btn = gr.Button("Notify me", elem_classes="gobtn", scale=1)
             email_msg = gr.HTML()
 
+        gr.HTML('<div class="gfoot">☀️ <b>Naija&nbsp;Solar</b> &nbsp;·&nbsp; '
+                '<a href="/classic" target="_blank">the original hand-built UI ↗</a> &nbsp;·&nbsp; '
+                '<a href="https://github.com/Mystique1337/naija-solar" target="_blank">GitHub ↗</a> &nbsp;·&nbsp; '
+                '<a href="https://huggingface.co/Shinzmann/sorotts" target="_blank">SoroTTS voice ↗</a></div>')
+
         ins = [voice, text, state, geolat, lang, sess]
         outs = [hdata, flow, breakdown, content, applist, status, sess, result, lang, panel, appl_state]
         spk = (speak, [result, lang, sess], [walk_audio, sess])

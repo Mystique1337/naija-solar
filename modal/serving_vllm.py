@@ -29,7 +29,7 @@ image = (
     .env({"HF_HUB_ENABLE_HF_TRANSFER": "1"})
 )
 
-app = modal.App("buildsmall-vllm")
+app = modal.App(os.environ.get("VLLM_APP", "buildsmall-vllm"))   # a second app name lets MiniCPM run alongside the Qwen endpoint
 # Cache weights on a Volume so restarts don't re-download.
 cache = modal.Volume.from_name("buildsmall-hf-cache", create_if_missing=True)
 # Public models need no token. For GATED models: `modal secret create huggingface HF_TOKEN=...`

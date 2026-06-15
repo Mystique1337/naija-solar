@@ -29,8 +29,8 @@ image = (
 )
 app = modal.App(os.environ.get("VISION_APP", "buildsmall-vision"))
 cache = modal.Volume.from_name("buildsmall-hf-cache", create_if_missing=True)
-# MiniCPM-V-2 is openly licensed, but keeping the secret is harmless if you also test gated variants.
-SECRETS = [modal.Secret.from_name("huggingface")]
+# huggingface for model pulls; buildsmall-api carries ENDPOINT_API_KEY so the endpoint is gated like the others.
+SECRETS = [modal.Secret.from_name("huggingface"), modal.Secret.from_name("buildsmall-api")]
 
 PROMPT = ("List every household electrical appliance you can see in this image, with a count for each. "
           "Use simple names like fridge, ceiling fan, standing fan, TV, air conditioner, light bulb, "
@@ -67,10 +67,18 @@ class Vision:
         import base64
         import io
 
-        from fastapi import FastAPI
+        from fastapi import FastAPI, Request
+        from fastapi.responses import JSONResponse
         from PIL import Image
 
         api = FastAPI(redirect_slashes=False)
+
+        @api.middleware("http")
+        async def _auth(request: Request, call_next):
+            key = os.environ.get("ENDPOINT_API_KEY", "")   # from the buildsmall-api secret, at runtime
+            if key and request.headers.get("authorization") != f"Bearer {key}":
+                return JSONResponse({"error": "unauthorized"}, status_code=401)
+            return await call_next(request)
 
         @api.post("/v1/chat/completions")
         @api.post("/chat/completions")

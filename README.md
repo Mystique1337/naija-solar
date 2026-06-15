@@ -85,9 +85,9 @@ A guided first-run tour walks every new user through the app, in their own langu
 | Text (narration phrasing, Q&A, parsing) | `Qwen/Qwen3-1.7B` | **1.7B** |
 | Speech to text | `openai/whisper-small` | **0.24B** |
 | Voice (all 5 languages) | **[SoroTTS](https://huggingface.co/Shinzmann/sorotts)**, our own Orpheus-3B fine-tune | **3B** |
-| Vision (appliances from a photo) | `Qwen/Qwen2.5-VL-3B-Instruct` | **3B** |
+| Vision (appliances from a photo) | `openbmb/MiniCPM-V-2` (OpenBMB MiniCPM) | **3.4B** |
 
-The largest single model is **3B**, comfortably under the 4B line. Everything is self-hosted on **Modal**, where each model wakes on demand and scales back to zero when idle, so there is no GPU bill running in the background.
+The largest single model is **3.4B** (the MiniCPM-V vision model), comfortably under the 4B line. Vision can also fall back to `Qwen/Qwen2.5-VL-3B-Instruct` (`modal/serving_vision.py`), a drop-in alternative that deploys into the same slot with the same OpenAI interface. Everything is self-hosted on **Modal**, where each model wakes on demand and scales back to zero when idle, so there is no GPU bill running in the background.
 
 To keep the five languages dependable, the **words** of the spoken plan come from carefully written, localized templates rather than a small model, because a 1.7B model is not reliable at Yorùbá, Hausa, or Igbo prose yet. The same templates are what you see written on screen, so the words you read are exactly the words you hear.
 
@@ -162,7 +162,8 @@ pip install modal && modal token new
 modal deploy modal/serving_vllm.py       # text (Qwen3-1.7B)
 modal deploy modal/serving_whisper.py    # speech to text
 modal deploy modal/serving_tts.py        # voice (SoroTTS, our Orpheus-3B fine-tune)
-modal deploy modal/serving_vision.py     # vision (Qwen2.5-VL-3B)
+modal deploy modal/serving_minicpm.py    # vision (MiniCPM-V-2, OpenBMB) — primary
+# modal deploy modal/serving_vision.py   # vision fallback (Qwen2.5-VL-3B), same slot + interface
 ```
 
 To (re)train the SoroTTS voice yourself, the whole pipeline (stream + SNAC-encode the data, LoRA-train, push to the Hub) runs as one Modal job:

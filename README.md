@@ -2,7 +2,7 @@
 
 **Say what you run at home, in your own language, and get the exact solar system you need.**
 
-Naija Solar is a voice-first solar sizing assistant for Nigeria. Speak, type, or photograph your appliances in **English, Nigerian Pidgin, Yorùbá, Hausa, or Igbo**, and it works out the panels, inverter, and battery you need, prices them against a real Nigerian catalogue, draws your home in **2D and 3D**, and **reads the plan back to you in your language**. Every model it uses is **under 4 billion parameters**.
+Naija Solar is a voice-first solar-sizing assistant for Nigeria. Speak, type, or photograph your appliances in **English, Nigerian Pidgin, Yorùbá, Hausa, or Igbo**, and it works out the panels, inverter, and battery you need, prices them against a real Nigerian catalogue, draws your home in **2D and 3D**, and **reads the plan back to you in your own language**. Every model it uses is **under 4 billion parameters**.
 
 🔗 **Live demo:** https://huggingface.co/spaces/build-small-hackathon/naija-solar
 🏆 Built for the **Build Small Hackathon** (Gradio × Hugging Face) · 🇳🇬 Built in Nigeria · ⚖️ MIT licensed
@@ -26,23 +26,45 @@ This is exactly where small, local AI earns its place. Naija Solar goes after th
 
 | Step | How |
 |---|---|
-| **1. Tell it your load** | 🎤 Speak it, ⌨️ type it, or 📷 snap a photo of your room |
+| **1. Tell it your load** | 🎤 Speak it, ⌨️ type it, tap an example, or 📷 snap a photo of your room |
 | **2. It understands you** | Speech recognition, typo-tolerant parsing ("frige" becomes fridge), and a vision model that reads appliances from photos |
 | **3. It sizes the system** | A **deterministic engine** computes daily kWh, peak and surge load, the panel array, inverter kVA, and battery bank. The maths is plain Python you could check by hand, never a model guess |
 | **4. It shows you** | A clean **2D** infographic and an interactive **3D** cut-away of your home, a 24-hour sun-versus-usage chart, and ₦ cost cards over a real vendor catalogue |
 | **5. It explains, in writing and aloud** | The plan appears **in words instantly**, then the **same words are read aloud** in your language. Ask a follow-up like "can I add an AC later?" and it answers, grounded in your plan |
 
-![A sized result with the headline numbers and recommendations](assets/02_result.png)
+You can speak, type, tap an example, or photograph your room, all from one card:
 
-The plan also appears **in writing** the instant your result is ready, then the same words are read aloud in your language, so a cold or slow voice never leaves you waiting:
+![How you tell it: speak, type, tap an example, or snap a photo](assets/02_input.png)
 
-![The written plan, then read aloud](assets/03_narration.png)
+It then sizes the system and shows the headline numbers and the exact recommended hardware, priced in naira:
+
+![A sized result: daily energy, inverter size, total cost, and the exact panels, inverter, and battery](assets/03_result.png)
+
+## See your home, in 2D and 3D
+
+A clean, labelled **2D** diagram lays out your appliances, the panels on your roof, and the power system, so the whole thing makes sense at a glance:
+
+![A 2D diagram: the sun, roof panels, your appliances, and the inverter and battery](assets/04_view2d.png)
+
+And for the part that makes people smile, it builds your living room in **3D**, with the recommended panels on the roof and your appliances inside:
+
+![The same home rendered in 3D, with panels on the roof and appliances inside](assets/05_home3d.png)
+
+## It writes your plan, then reads it aloud
+
+The moment your result is ready, the plan appears **in plain words on the screen**, and then the **very same words are read aloud** in the language you chose, by a voice we built ourselves (more below). Putting the writing first matters: a voice has to warm up and speak, which takes a few seconds, but the words are there instantly, so you are never left watching a spinner.
+
+![The written plan, then read aloud in your language](assets/06_narration.png)
+
+For Yorùbá, Hausa, and Igbo the spoken plan is phrased the way a person actually speaks, with the counts as native number words rather than bare digits, while the exact figures stay on the cards. So the voice sounds natural, and what you read is what you hear.
 
 ## Features
 
-- 🗣️ **Voice-first** input with speech recognition, plus type and photo paths.
+- 🗣️ **Voice-first** input with speech recognition, plus type, example, and photo paths.
 - 🌍 **Five languages**, end to end. Switching language re-skins the **entire** app and the spoken plan.
 - 📝 **Written plan, instantly**, then read aloud in the same words, so a slow or cold voice never blocks you.
+- 📷 **Photo read-back.** When it reads your room, it shows you **exactly what it spotted** so you can confirm or adjust.
+- 🔄 **Size another system** in one tap, without losing your place.
 - 🏠 **2D and 3D** of your specific home, with the recommended panels, appliances, inverter, and battery.
 - 💬 **Ask anything** about your plan, panels, savings, generators, or adding load later.
 - 👤 **Accounts and history**, save your sizings and open them again any time.
@@ -50,11 +72,11 @@ The plan also appears **in writing** the instant your result is ready, then the 
 - 🧭 **Guided first-run tour** that walks new users through every step, in their language.
 - 💛 **Ratings and testimonials** from real users (with the language they used), a live "systems sized" counter, and optional email capture.
 
-![Dark mode home screen](assets/04_dark.png)
+![Dark mode](assets/07_dark.png)
 
 A guided first-run tour walks every new user through the app, in their own language:
 
-![The guided tour highlighting each step](assets/05_tour.png)
+![The guided tour highlighting each step](assets/08_tour.png)
 
 ## The models, every one under 4B (Tiny Titan)
 
@@ -63,26 +85,33 @@ A guided first-run tour walks every new user through the app, in their own langu
 | Text (narration phrasing, Q&A, parsing) | `Qwen/Qwen3-1.7B` | **1.7B** |
 | Speech to text | `openai/whisper-small` | **0.24B** |
 | Voice (all 5 languages) | **[SoroTTS](https://huggingface.co/Shinzmann/sorotts)**, our own Orpheus-3B fine-tune | **3B** |
-| Vision (appliances from a photo) | `openbmb/MiniCPM-V-2` | **3.43B** |
+| Vision (appliances from a photo) | `Qwen/Qwen2.5-VL-3B-Instruct` | **3B** |
 
-The largest single model is 3.43B, comfortably under the 4B line. Everything is self-hosted on **Modal**, where each model wakes on demand and scales back to zero when idle, so there is no GPU bill running in the background.
+The largest single model is **3B**, comfortably under the 4B line. Everything is self-hosted on **Modal**, where each model wakes on demand and scales back to zero when idle, so there is no GPU bill running in the background.
 
 To keep the five languages dependable, the **words** of the spoken plan come from carefully written, localized templates rather than a small model, because a 1.7B model is not reliable at Yorùbá, Hausa, or Igbo prose yet. The same templates are what you see written on screen, so the words you read are exactly the words you hear.
 
-Those words are then **spoken by SoroTTS**, a voice we built ourselves. Off-the-shelf TTS for Nigerian languages is either robotic or absent, so we fine-tuned **Orpheus-3B** (a natural open speech model that had no Nigerian languages) on Yorùbá, Hausa, Igbo, and Nigerian Pidgin, training a single LoRA adapter over 31,574 clips from NaijaVoices, WAXAL, FLEURS, BibleTTS, and the Nigerian Pidgin corpus. The result, [`Shinzmann/sorotts`](https://huggingface.co/Shinzmann/sorotts), is native and natural, and still under the 4B line. The whole fine-tune runs on Modal ([`modal/finetune_orpheus.py`](modal/finetune_orpheus.py)); see that model card for the full story. So when you pick Yorùbá, you really do get Yorùbá, in a voice trained for it.
+Those words are then **spoken by SoroTTS**, a voice we built ourselves. Off-the-shelf TTS for Nigerian languages is either robotic or absent, so we fine-tuned **Orpheus-3B** (a natural open speech model that had no Nigerian languages) on Yorùbá, Hausa, Igbo, and Nigerian Pidgin, training a single LoRA adapter over 31,574 clips from NaijaVoices, WAXAL, FLEURS, BibleTTS, and the Nigerian Pidgin corpus. The result, [`Shinzmann/sorotts`](https://huggingface.co/Shinzmann/sorotts), is native and natural, and still under the 4B line. The whole fine-tune runs on Modal ([`modal/finetune_orpheus.py`](modal/finetune_orpheus.py)); see that model card for the full story.
 
 ## Architecture
 
 ```
-Browser  ──►  FastAPI app  ──►  small models on Modal (scale to zero)
+Browser  ──►  FastAPI app  ──►  small open models on Modal (scale to zero)
 (web/)        (server.py)        text · speech · voice · vision
                   │
                   ├─ deterministic sizing engine (engine.py)  ← the honest core, pure Python
-                  ├─ Nigerian price catalogue (dataset/)
-                  └─ accounts, history, ratings (store.py, /data)
+                  ├─ Nigerian ₦ price catalogue (dataset/)
+                  ├─ accounts, history, ratings (store.py, /data)
+                  └─ persistent voice cache (/data)
 ```
 
-The front end is an ordinary Hugging Face Space on a **free CPU box**. It holds the interface, the parser, the sizing engine, and the price catalogue, and it draws the 2D and 3D views right there on your device. The part you cannot afford to get wrong, the actual maths, **never touches a language model**. The models are kept to the jobs they are genuinely good at: hearing you, reading a photo, and putting the plan into warm, human words.
+A request flows through five steps, and the part you cannot afford to get wrong, the maths, never touches a language model:
+
+![How a request flows through Naija Solar, in five steps](assets/flow.png)
+
+The front end is an ordinary Hugging Face Space on a **free CPU box**. It holds the interface, the parser, the sizing engine, and the price catalogue, and it draws the 2D and 3D views right there on your device. Whenever it needs to hear, see, or speak, it calls a handful of small models hosted on Modal, each scaling to zero when idle. A persistent cache on `/data` keeps generated voice clips between restarts, so repeat plans play back instantly.
+
+![The Naija Solar architecture: a free CPU front end calling small open models on Modal](assets/arch.png)
 
 The interface is hand-built (`web/index.html`, `web/app.js`, `web/shell.css`) and served by FastAPI, reusing all of the Python generators, the 3D scene, and the design system, so none of the default framework look is left.
 
@@ -97,7 +126,7 @@ strings.py       full 5-language UI strings + seed testimonials
 dataset/         real Nigerian panel / inverter / battery catalogue
 web/             the hand-built frontend (HTML, CSS, JS)
 buildsmall/      small shared layer that talks to the models
-modal/           Modal serving scripts for each model (text, speech, voice, vision)
+modal/           Modal serving scripts for each model + the SoroTTS fine-tune
 Dockerfile       container for Hugging Face Spaces (uvicorn on :7860)
 ```
 
@@ -133,7 +162,7 @@ pip install modal && modal token new
 modal deploy modal/serving_vllm.py       # text (Qwen3-1.7B)
 modal deploy modal/serving_whisper.py    # speech to text
 modal deploy modal/serving_tts.py        # voice (SoroTTS, our Orpheus-3B fine-tune)
-modal deploy modal/serving_minicpm.py    # vision (MiniCPM-V-2)
+modal deploy modal/serving_vision.py     # vision (Qwen2.5-VL-3B)
 ```
 
 To (re)train the SoroTTS voice yourself, the whole pipeline (stream + SNAC-encode the data, LoRA-train, push to the Hub) runs as one Modal job:
@@ -143,7 +172,7 @@ modal run --detach modal/finetune_orpheus.py     # full run, pushes <your-hf>/so
 modal run modal/test_sorotts.py                  # synthesize a sample per language
 ```
 
-Set a strong `VLLM_API_KEY` secret on Modal and use the same value for `BUILDSMALL_API_KEY` so the endpoints are not open to the public.
+Set a strong `ENDPOINT_API_KEY` secret on Modal and use the same value for `BUILDSMALL_API_KEY` so the endpoints are not open to the public.
 
 ## Deploy to Hugging Face Spaces
 
@@ -158,11 +187,11 @@ app_port: 7860
 ---
 ```
 
-Persistent storage mounted at `/data` keeps accounts, saved sizings, and ratings between restarts.
+Persistent storage mounted at `/data` keeps accounts, saved sizings, ratings, and the voice cache between restarts.
 
 ## Ethics and limits
 
-Estimates only. Every result says **confirm with a licensed installer**. Prices are current Nigerian bands and will drift over time. The free-form Q&A answers in clear English for Yorùbá, Hausa, and Igbo, because a 1.7B model garbles long prose in those languages, while the whole interface and the spoken plan stay in the chosen language.
+Estimates only. Every result says **confirm with a licensed installer**. Prices are current Nigerian bands and will drift over time. The free-form Q&A answers in clear English for Yorùbá, Hausa, and Igbo, because a 1.7B model garbles long prose in those languages, while the whole interface and the spoken plan stay in the chosen language. SoroTTS is for accessibility, not for cloning any real person's voice.
 
 ## License
 

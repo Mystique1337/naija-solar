@@ -4,12 +4,12 @@ Qwen3-1.7B and MiniCPM5-1B share one Modal web function (the `buildsmall-vllm` a
 URL), so no extra web function is used (the workspace has an 8-web-function cap). The OpenAI
 `/v1/chat/completions` endpoint routes by the requested `model`:
 
-  - any "qwen"     -> Qwen/Qwen3-1.7B       (kept for the duplicate Space, unchanged)
-  - any "minicpm"  -> openbmb/MiniCPM5-1B   (the main app's text; an OpenBMB MiniCPM model, < 4B)
+  - any "qwen"     -> Qwen/Qwen3-1.7B       (the app's text: phrasing, free-text understanding, Q&A)
+  - any "minicpm"  -> openbmb/MiniCPM5-1B   (a < 4B OpenBMB model; served + lazy-loaded only if requested)
 
-Both are under the 4B "Tiny Titan" line, both self-hosted, both scale to zero. Deploying this REPLACES
-the previous single-model vLLM server in the same slot, at the same URL, so nothing downstream changes
-except that the endpoint now also answers to MiniCPM.
+Both are under the 4B "Tiny Titan" line, both self-hosted, both scale to zero. The app routes its text to
+Qwen; MiniCPM5-1B stays available on the same slot but is not in the critical path (it tends to overthink
+structured JSON output). The photo reader is OpenBMB's MiniCPM-V-2, served from the separate vision endpoint.
 
   modal deploy modal/serving_text_dual.py   # -> https://<workspace>--buildsmall-vllm-serve.modal.run/v1
 """

@@ -486,8 +486,32 @@ app.mount("/web", StaticFiles(directory=str(WEB)), name="web")
 # both. Docker SDK is allowed as long as the interface is Gradio, which it now is.
 import gradio as gr  # noqa: E402
 
+# A beautification layer applied ONLY to the Gradio interface (it is passed to the mount, so the SPA
+# at /classic never sees it). Learns from the best Build Small Spaces: a cohesive atmospheric backdrop,
+# a more cinematic hero, premium depth on the cards, warm accent motion, and no default Gradio chrome.
+GRADIO_CSS = """
+gradio-app, .gradio-container, body{
+  background:radial-gradient(1200px 620px at 50% -14%, #fff1d2 0%, #fffaf0 42%, #edfaf3 100%) fixed !important}
+footer{display:none !important}
+.gradio-container{padding-bottom:64px !important}
+/* cinematic hero */
+.banner{border-radius:24px !important; min-height:206px !important; overflow:hidden; position:relative;
+  box-shadow:0 24px 64px rgba(16,76,52,.24) !important}
+.banner::after{content:""; position:absolute; inset:0; background:linear-gradient(105deg, rgba(6,60,42,.62) 0%, rgba(6,60,42,.18) 52%, rgba(6,60,42,0) 78%); pointer-events:none}
+.banner .bwrap{position:relative; z-index:1}
+.banner .bwrap h1{font-size:2.5rem !important; line-height:1.08 !important; letter-spacing:-.015em; text-shadow:0 2px 16px rgba(0,0,0,.32) !important}
+.banner .bwrap p{font-size:1.06rem !important; opacity:.97; text-shadow:0 1px 10px rgba(0,0,0,.28)}
+/* premium depth on the input card */
+.miccard{box-shadow:0 18px 52px rgba(120,80,20,.13) !important; border-radius:22px !important}
+/* primary buttons: warm glow + subtle lift */
+.gobtn{transition:box-shadow .18s, transform .15s, filter .15s !important}
+.gobtn:hover{box-shadow:0 13px 32px rgba(255,138,0,.38) !important; transform:translateY(-1px); filter:brightness(1.03)}
+/* language pills breathe a little more */
+.langrow{gap:8px !important; row-gap:8px !important}
+"""
+
 # In Gradio 6 the styling/head parameters are passed to mount_gradio_app (not the Blocks constructor),
 # so the off-brand design system (core.CSS), the theme, and the Three.js / voice / count-up head block
 # (core.THREE_HEAD) all apply to the mounted Gradio interface.
 app = gr.mount_gradio_app(app, core.build(), path="/", ssr_mode=False,   # client-side render; no Node needed in the Docker image
-                          css=core.CSS, theme=core.THEME, head=core.THREE_HEAD)
+                          css=core.CSS + GRADIO_CSS, theme=core.THEME, head=core.THREE_HEAD)

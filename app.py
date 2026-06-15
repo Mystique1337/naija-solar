@@ -236,7 +236,7 @@ def extract(text):
     try:
         out = llm.json(f"List home appliances and integer quantities from: '{text}'. Use ONLY names from "
                        f"this list: {list(data.APPLIANCES)}. Reply a JSON object name to count.",
-                       model="openbmb/MiniCPM5-1B")   # MiniCPM5-1B understands messy free-text appliances
+                       model="Qwen/Qwen3-1.7B")   # Qwen reads messy free-text reliably (MiniCPM5-1B overthinks structured output)
         if isinstance(out, dict):
             return {k: int(v) for k, v in out.items() if k in data.APPLIANCES and str(v).strip().lstrip('-').isdigit()}
     except Exception:

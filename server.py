@@ -276,8 +276,7 @@ async def api_warm():
         return {"ok": True, "warming": False}
     _WARM_TS[0] = now
     a = _warm_assets()
-    jobs = [lambda: core.llm.complete("Hi", model="Qwen/Qwen3-1.7B"),         # warm the Q&A model
-            lambda: core.llm.complete("Hi", model="openbmb/MiniCPM5-1B"),     # and the appliance-understanding model (same dual container)
+    jobs = [lambda: core.llm.complete("Hi", model="Qwen/Qwen3-1.7B"),         # warm the text model (Q&A + free-text understanding)
             lambda: core.tts.speak("Ready.", lang="en", out_path=tempfile.mktemp(suffix=".wav"))]
     if a.get("wav"):
         jobs.append(lambda: core.asr.transcribe(a["wav"]))

@@ -1411,7 +1411,7 @@ RENDER_JS = "(s) => { if(s){ var a=(''+s).split('|'); if(window.renderHouse){ wi
 
 
 def build():
-    with gr.Blocks(title="Naija Solar", head=THREE_HEAD, analytics_enabled=False) as demo:
+    with gr.Blocks(title="Naija Solar", analytics_enabled=False) as demo:   # css/theme/head are applied at launch()/mount in Gradio 6
         sess, result, lang = gr.State(None), gr.State(None), gr.State("en")
         gr.HTML(logo_html())
         usercount = gr.HTML(count_html(), elem_id="ucount")
@@ -1541,6 +1541,6 @@ demo = None if os.environ.get("BUILDSMALL_NO_GRADIO") == "1" else build()
 
 if __name__ == "__main__":
     on_space = bool(os.environ.get("SPACE_ID"))
-    demo.launch(css=CSS, theme=THEME,
+    demo.launch(css=CSS, theme=THEME, head=THREE_HEAD,
                 server_name="0.0.0.0" if on_space else "127.0.0.1",
                 server_port=int(os.environ.get("PORT", "7860")))

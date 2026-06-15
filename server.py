@@ -468,8 +468,9 @@ def _asset_version():
     return _ASSET_V
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/classic", response_class=HTMLResponse)
 def index():
+    """The hand-built FastAPI/SPA frontend, kept reachable while the Gradio app is the root interface."""
     shell = (WEB / "index.html").read_text(encoding="utf-8")
     # inject the reused design-system CSS and the Three.js / count-up head block + cache-bust assets
     html = shell.replace("<!--HEAD-->", core.THREE_HEAD).replace("__V__", _asset_version())
@@ -477,3 +478,16 @@ def index():
 
 
 app.mount("/web", StaticFiles(directory=str(WEB)), name="web")
+
+# ── Gradio is the Space's primary interface ──────────────────────────────────
+# The Build Small Hackathon requires the interface to be a Gradio app. The Gradio Blocks
+# (app.py build(), styled with the same off-brand design system) is mounted at the root, so the
+# Space *is* a Gradio app. The hand-built SPA stays at /classic, and all /api routes still serve
+# both. Docker SDK is allowed as long as the interface is Gradio, which it now is.
+import gradio as gr  # noqa: E402
+
+# In Gradio 6 the styling/head parameters are passed to mount_gradio_app (not the Blocks constructor),
+# so the off-brand design system (core.CSS), the theme, and the Three.js / voice / count-up head block
+# (core.THREE_HEAD) all apply to the mounted Gradio interface.
+app = gr.mount_gradio_app(app, core.build(), path="/", ssr_mode=False,   # client-side render; no Node needed in the Docker image
+                          css=core.CSS, theme=core.THEME, head=core.THREE_HEAD)

@@ -68,7 +68,11 @@ Then it waits for your questions. You can ask why it picked those panels, whethe
 
 ## The small things that make it feel like an app
 
-A few touches turn this from a demo into something you would actually keep open. The first time you arrive, a short guided tour points out how to speak, type, or photograph your appliances, in your own language. When you are done, you can size another system in a single tap. There is a light mode and a dark mode, and the app remembers which you prefer. You can make an account to save your sizings and open them again later. And the front page carries real ratings from people who have used it, each shown with the language they sized in, so a Hausa speaker can see another Hausa speaker vouch for it.
+A few touches turn this from a demo into something you would actually keep open. The first time you arrive, a short guided tour points out how to speak, type, or photograph your appliances, in your own language. When you are done, you can size another system in a single tap. There is a light mode and a dark mode, and the app remembers which you prefer. You can make an account to save your sizings, and new ones are kept automatically as you go, so you can open and compare them later. Anyone can leave a review, and the wall carries those real ratings, each shown with the language the person sized in, so a Hausa speaker can see another Hausa speaker vouch for it.
+
+![Sign in to save your sizings, and new ones are kept automatically](https://huggingface.co/spaces/build-small-hackathon/naija-solar/resolve/main/assets/09_account.png)
+
+![Leave a review for others to read](https://huggingface.co/spaces/build-small-hackathon/naija-solar/resolve/main/assets/10_reviews.png)
 
 ![A guided first run, in dark mode](https://huggingface.co/spaces/build-small-hackathon/naija-solar/resolve/main/assets/07_dark.png)
 

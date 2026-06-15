@@ -71,10 +71,14 @@ For Yorùbá, Hausa, and Igbo the spoken plan is phrased the way a person actual
 - 🔄 **Size another system** in one tap, without losing your place.
 - 🏠 **2D and 3D** of your specific home, with the recommended panels, appliances, inverter, and battery.
 - 💬 **Ask anything** about your plan, panels, savings, generators, or adding load later.
-- 👤 **Accounts and history**, save your sizings and open them again any time.
+- 👤 **Accounts, optional and never a wall.** Sign in and your sizings are saved automatically, ready to reopen and compare.
+- ⭐ **Reviews.** Anyone can leave a review on the wall (shown with the language they used); a live "systems sized" counter and an optional email list too.
 - 🌗 **Light and dark mode**, remembered across visits.
 - 🧭 **Guided first-run tour** that walks new users through every step, in their language.
-- 💛 **Ratings and testimonials** from real users (with the language they used), a live "systems sized" counter, and optional email capture.
+
+![Sign in to save your sizings, kept automatically as you size](assets/09_account.png)
+
+![Leave a review others can read](assets/10_reviews.png)
 
 ![Dark mode](assets/07_dark.png)
 

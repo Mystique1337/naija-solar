@@ -11,6 +11,7 @@ body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);
 .wrap{max-width:720px;margin:0 auto;padding:18px 16px 90px}
 a{color:var(--green)}
 /* header */
+.headcard{background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:15px 18px 13px;box-shadow:0 8px 24px rgba(120,80,20,.07);margin-bottom:8px;text-align:center}
 .topbar{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px}
 #ucount{width:100%}
 .langlabel{text-align:center;font-size:.72rem;font-weight:700;letter-spacing:.14em;color:#9ba88f;margin:14px 0 8px}
@@ -298,6 +299,7 @@ html[data-theme="dark"] .menu,html[data-theme="dark"] .modalcard,html[data-theme
 html[data-theme="dark"] .hsection.card,html[data-theme="dark"] .howcard,html[data-theme="dark"] .ghostcta,
 html[data-theme="dark"] .tcard,html[data-theme="dark"] .themebtn{background:var(--card);border-color:var(--line)}
 html[data-theme="dark"] .miccard{background:rgba(24,34,29,.93);border-color:var(--line)}
+html[data-theme="dark"] .headcard{background:rgba(24,34,29,.93);border-color:var(--line)}
 html[data-theme="dark"] .hstat{background:rgba(24,34,29,.62);border-color:var(--line)}
 html[data-theme="dark"] .voicewrap{background:linear-gradient(135deg,#1c2722,#16201b);border-color:var(--line)}
 html[data-theme="dark"] .drop{background:linear-gradient(135deg,#1a2520,#141d19);border-color:#2f4a39;color:#7fe3a9}

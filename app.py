@@ -1790,6 +1790,8 @@ def build():
         fb_down.click(lambda c: submit_feedback("down", c), fb_comment, fb_msg)
         email_btn.click(submit_email, email_in, email_msg)
         demo.load(count_html, None, usercount)
+        demo.load(reviews_title, None, reviews_head)   # so reviews posted since startup show on every fresh load
+        demo.load(reviews_html, None, reviews_block)
     return demo
 
 

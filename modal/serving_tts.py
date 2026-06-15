@@ -17,7 +17,7 @@ import modal
 
 BASE = os.environ.get("SOROTTS_BASE", "hypaai/hypaai_orpheus_v5")
 ADAPTER = os.environ.get("SOROTTS_ADAPTER", "Shinzmann/sorotts")
-TTS_GPU = os.environ.get("TTS_GPU", "A100-40GB")   # Orpheus is autoregressive; A100 ~2-3x faster than L4
+TTS_GPU = os.environ.get("TTS_GPU", "H200")   # Orpheus is autoregressive (memory-bandwidth bound); H200 ~2-3x faster than A100
 
 image = (
     modal.Image.debian_slim(python_version="3.11")
@@ -70,52 +70,87 @@ class TTS:
         FastLanguageModel.for_inference(self.model)
         self.snac = SNAC.from_pretrained("hubertsiuzdak/snac_24khz").to("cuda").eval()
         self.snac_dev = next(self.snac.parameters()).device
-        self.SOH, self.EOT, self.EOH, self.SOS, self.EOS, self.OFF = 128259, 128009, 128260, 128257, 128258, 128266
+        # token scheme must match training (finetune_orpheus.py): each clip ends with [EOS, EOAI],
+        # and the model often signals end-of-speech with EOAI, so generation must stop on either.
+        self.SOH, self.EOT, self.EOH, self.SOS, self.EOS, self.EOAI, self.OFF = (
+            128259, 128009, 128260, 128257, 128258, 128262, 128266)
 
     def _decode(self, codes):
         import torch
+        cl = lambda v: 0 if v < 0 else (4095 if v > 4095 else v)   # clamp to SNAC's range so a stray code can never gather OOB (which would crash CUDA)
         l1, l2, l3 = [], [], []
         for i in range((len(codes) + 1) // 7):
             b = 7 * i
-            l1.append(codes[b]); l2.append(codes[b + 1] - 4096)
-            l3.append(codes[b + 2] - 2 * 4096); l3.append(codes[b + 3] - 3 * 4096)
-            l2.append(codes[b + 4] - 4 * 4096)
-            l3.append(codes[b + 5] - 5 * 4096); l3.append(codes[b + 6] - 6 * 4096)
+            l1.append(cl(codes[b])); l2.append(cl(codes[b + 1] - 4096))
+            l3.append(cl(codes[b + 2] - 2 * 4096)); l3.append(cl(codes[b + 3] - 3 * 4096))
+            l2.append(cl(codes[b + 4] - 4 * 4096))
+            l3.append(cl(codes[b + 5] - 5 * 4096)); l3.append(cl(codes[b + 6] - 6 * 4096))
         c = [torch.tensor(x).unsqueeze(0).to(self.snac_dev) for x in (l1, l2, l3)]
         with torch.inference_mode():
             return self.snac.decode(c).squeeze().cpu().numpy()
 
-    def _gen_one(self, text, voice, max_new_tokens=1200):
+    def _row_to_wave(self, row):
+        # One generated sequence -> waveform: slice from the last SOS, drop EOS/pad tokens, align to
+        # SNAC's 7-token frames, and decode to 24 kHz. Shared by the single and batched generators.
+        sos = (row == self.SOS).nonzero(as_tuple=True)[0]
+        seq = row[sos[-1].item() + 1:] if len(sos) else row
+        seq = seq[seq >= self.OFF]   # keep ONLY SNAC audio codes; drop any control token (EOS/EOAI/SOAI/pad) that would corrupt frame alignment
+        n = (seq.size(0) // 7) * 7
+        if n < 7:
+            return None
+        return self._decode([t.item() - self.OFF for t in seq[:n]])
+
+    def _trim_silence(self, wave, thresh=0.012, hop=1024, pad=1536):
+        # SoroTTS does not emit a clean end-of-speech, so each generation runs to the token cap and
+        # leaves a silent/low-energy tail. Trim the quiet head and tail by windowed RMS, keeping a
+        # small margin, so the stitched plan is tight and natural.
+        import numpy as np
+        w = np.asarray(wave, dtype=np.float32)
+        if w.size < hop * 2:
+            return w
+        n = (w.size // hop) * hop
+        rms = np.sqrt((w[:n].reshape(-1, hop) ** 2).mean(axis=1))
+        loud = np.where(rms > thresh)[0]
+        if loud.size == 0:
+            return w[:hop]
+        start = max(0, int(loud[0]) * hop - pad)
+        end = min(w.size, (int(loud[-1]) + 1) * hop + pad)
+        return w[start:end]
+
+    def _gen_one(self, text, voice, max_new_tokens=672):
         torch = self.torch
         ids = self.tok(f"{voice}: {text}", return_tensors="pt").input_ids
         ids = torch.cat([torch.tensor([[self.SOH]]), ids, torch.tensor([[self.EOT, self.EOH]])], dim=1).to(self.model.device)
         out = self.model.generate(input_ids=ids, attention_mask=torch.ones_like(ids), max_new_tokens=max_new_tokens,
                                   do_sample=True, temperature=0.55, top_p=0.95, repetition_penalty=1.1,
-                                  eos_token_id=self.EOS, use_cache=True)[0]
-        sos = (out == self.SOS).nonzero(as_tuple=True)[0]
-        out = out[sos[-1].item() + 1:] if len(sos) else out
-        out = out[out != self.EOS]
-        n = (out.size(0) // 7) * 7
-        return self._decode([t.item() - self.OFF for t in out[:n]])
+                                  eos_token_id=[self.EOS, self.EOAI], use_cache=True)[0]
+        return self._row_to_wave(out)
 
     def speak(self, text, voice):
         import re
 
         import numpy as np
-        chunks = [s.strip() for s in re.split(r"(?<=[.!?])\s+", (text or "").strip()) if s.strip()] or [text]
-        sil = np.zeros(int(0.16 * 24000), dtype=np.float32)
+        text = (text or "").strip()
+        if not text:
+            return None
+        sents = [s.strip() for s in re.split(r"(?<=[.!?])\s+", text) if s.strip()] or [text]
+        # Read the WHOLE plan, one sentence at a time (usage, recommendation, cost, disclaimer). A
+        # tight token cap per sentence plus silence-trimming keeps each clip short and clean, so all
+        # four sentences together generate fewer tokens than the old two-sentence version did, and on
+        # the H200 the voice is both faster and reads the full plan.
         waves = []
-        # Orpheus is autoregressive (~15-25s/sentence), so speak the 2 key sentences (usage +
-        # recommendation); the full plan, incl. cost + disclaimer, is shown in writing in the app.
-        for ch in chunks[:2]:
+        for s in sents[:4]:
             try:
-                w = self._gen_one(ch[:300], voice)
+                w = self._gen_one(s[:300], voice, max_new_tokens=672)
                 if w is not None and len(w) > 240:
-                    waves.append(np.asarray(w, dtype=np.float32))
+                    w = self._trim_silence(w)
+                    if len(w) > 240:
+                        waves.append(np.asarray(w, dtype=np.float32))
             except Exception as e:
                 print("chunk failed:", type(e).__name__, str(e)[:60])
         if not waves:
             return None
+        sil = np.zeros(int(0.14 * 24000), dtype=np.float32)
         out = []
         for i, w in enumerate(waves):
             out.append(w)

@@ -272,8 +272,8 @@ def _template(r, lang):
     T = {
         "en": f"You use about {kwh} kilowatt hours a day. I recommend {p} solar {pw}, a {kva} kVA inverter, and {b} {bw}. The system costs about {cost} naira. Please confirm with a licensed installer.",
         "pcm": f"You dey use about {kwh} kilowatt every day. You go need {p} solar {pw}, one {kva} kVA inverter, and {b} {bw}. E go cost around {cost} naira. Make you confirm with a licensed installer.",
-        "yo": f"O n lo to {kwh} kilowatt lojumo. Mo daba panel oorun {p}, inverter {kva} kVA kan, ati batiri {b}. Eto naa yoo na nkan bii naira {cost}. Jowo bere lowo onimo to ni iwe ase.",
-        "ha": f"Kana amfani da kusan {kwh} kilowatt a kullum. Ina ba da shawarar panel hasken rana {p}, inverter {kva} kVA daya, da batir {b}. Tsarin zai kai kusan naira {cost}. Don Allah ka tabbatar da kwararren mai shigarwa.",
+        "yo": f"O ń lo tó {kwh} kilowatt lójúmọ́. Mo dábàá panel oòrùn {p}, inverter {kva} kVA kan, àti bátìrì {b}. Ètò náà yóò ná nǹkan bíi náírà {cost}. Jọ̀wọ́ bèèrè lọ́wọ́ onímọ̀ tó ní ìwé àṣẹ.",
+        "ha": f"Kana amfani da kusan {kwh} kilowatt a kullum. Ina ba da shawarar panel hasken rana {p}, inverter {kva} kVA ɗaya, da batir {b}. Tsarin zai kai kusan naira {cost}. Don Allah ka tabbatar da ƙwararren mai shigarwa.",
         "ig": f"Ị na-eji ihe dịka {kwh} kilowatt kwa ụbọchị. Ana m atụ aro panel anyanwụ {p}, otu inverter {kva} kVA, na batrị {b}. Usoro a ga-efu ihe dịka naịra {cost}. Biko kwado ya na onye ọrụ nwere ikike.",
     }
     return T.get(lang, T["en"])
@@ -724,6 +724,10 @@ def run(audio, text, state, geolat, uilang, sess):
 
 
 _TTS_CACHE = "./traces/tts_cache"
+# Bump this whenever the voice itself changes (e.g. MMS -> SoroTTS). It is part of the cache key,
+# so old audio rendered by a previous voice is never reused. Without it, a cached Yoruba clip from
+# the old MMS voice would keep playing for the same plan even after the voice was upgraded.
+_TTS_VERSION = os.environ.get("TTS_CACHE_VERSION", "sorotts-2")
 
 
 def speak(r, lang, sess):
@@ -733,7 +737,7 @@ def speak(r, lang, sess):
     words = narrate(r, lang)
     # The narration is deterministic, so identical (result + language) reuses the audio.
     os.makedirs(_TTS_CACHE, exist_ok=True)
-    key = hashlib.md5(("%s|%s" % (lang, words)).encode("utf-8")).hexdigest()
+    key = hashlib.md5(("%s|%s|%s" % (_TTS_VERSION, lang, words)).encode("utf-8")).hexdigest()
     path = os.path.join(_TTS_CACHE, key + ".wav")
     if os.path.exists(path) and os.path.getsize(path) > 1200:
         sess.event("walkthrough", lang=lang, cached=True)

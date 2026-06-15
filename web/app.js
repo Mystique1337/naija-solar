@@ -100,10 +100,15 @@
     return '<div class="chips applchips">' + e.map(([k, v]) => `<span class="achip">${k.split(" (")[0]} <b>×${v}</b></span>`).join("") + "</div>";
   }
   function renderApplist() { $("applist").innerHTML = applistHtml(S.sel); }
+  // a short, human list of the current appliances, e.g. "1 fridge, 2 standing fans, 6 bulbs"
+  function selSummary(sel) {
+    return Object.entries(sel || {}).map(([k, v]) => { const n = k.split(" (")[0]; return v + " " + (v > 1 ? n + "s" : n); }).join(", ");
+  }
 
   function render(b) {
     S.sel = b.sel || {};
     $("content").innerHTML = (b.chips || "") + (b.tiles || "") + (b.cards || "");
+    const _det = $("detected"); if (_det) { _det.hidden = true; _det.innerHTML = ""; }   // the "from your photo" callout is shown only on the photo path
     $("system").innerHTML = b.system || "";
     $("breakdown").innerHTML = b.breakdown || "";
     $("twod").innerHTML = b.twod || "";
@@ -208,8 +213,34 @@
       const b = await (await fetch("/api/vision", { method: "POST", body: fd })).json();
       if (!b.ok) { status(b.msg || "Could not spot appliances. Try a clearer photo or type them."); return; }
       render(b);
+      // show exactly what the photo reader extracted, so the user can confirm or adjust
+      const det = $("detected"), sum = selSummary(S.sel);
+      if (det && sum) {
+        det.innerHTML = '<div class="dethd">📷 ' + (T("photo_spotted") || "From your photo, we spotted") + ":</div>"
+          + '<div class="detlist">' + sum + "</div>"
+          + '<div class="dethint">' + (T("photo_adjust") || "Not quite right? Adjust the appliances below.") + "</div>";
+        det.hidden = false;
+      }
     } catch (e) { status("Could not read the photo. Please type your appliances."); }
   });
+
+  // start a fresh sizing: clear the appliances, inputs, photos and result, and return to the input
+  function newSizing() {
+    narrSeq++;                                   // cancel any voice still loading
+    S.sel = {};
+    $("textIn").value = "";
+    photoFiles = []; $("thumbs").innerHTML = ""; try { $("fileIn").value = ""; } catch (e) {}
+    $("result").classList.remove("show");
+    $("content").innerHTML = "";
+    const det = $("detected"); if (det) { det.hidden = true; det.innerHTML = ""; }
+    $("narrText").textContent = ""; $("narrStatus").innerHTML = "";
+    const au = $("narrAudio"); if (au) { try { au.pause(); } catch (e) {} au.hidden = true; au.removeAttribute("src"); }
+    $("qaOut").textContent = ""; $("qaIn").value = "";
+    renderApplist();
+    status("");
+    const mc = document.querySelector(".miccard"); if (mc) mc.scrollIntoView({ behavior: "smooth", block: "start" });
+    setTimeout(() => { try { $("textIn").focus({ preventScroll: true }); } catch (e) {} }, 320);
+  }
 
   $("sizeBtn").addEventListener("click", () => size($("textIn").value));
   $("textIn").addEventListener("keydown", (e) => { if (e.key === "Enter") size($("textIn").value); });
@@ -404,6 +435,7 @@
     $("ctaSize2").onclick = () => { showView("app"); maybeTour(); };
     $("ctaHow").onclick = () => { const h = $("howSec"); if (h) h.scrollIntoView({ behavior: "smooth" }); };
     $("backHome").onclick = () => showView("home");
+    $("newSizing").onclick = newSizing;
     $("tourBtn").onclick = startTour;
     $("tourOv").onclick = tourEnd;
     applyLang("en");

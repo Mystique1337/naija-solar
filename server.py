@@ -242,23 +242,55 @@ async def api_vision(request: Request, files: list[UploadFile] = File(...), stat
     return b
 
 
-_WARMED = {"tts": False}
+_WARM_TS = [0.0]          # last time we fired a warm-up
+_WARM_FILES = {}          # tiny throwaway inputs for ASR/vision, made once
+
+
+def _warm_assets():
+    if not _WARM_FILES:
+        import wave
+        wp = tempfile.mktemp(suffix=".wav")
+        try:
+            with wave.open(wp, "w") as w:
+                w.setnchannels(1); w.setsampwidth(2); w.setframerate(16000)
+                w.writeframes(b"\x00\x00" * 3200)   # 0.2s of silence
+        except Exception:
+            wp = None
+        ip = tempfile.mktemp(suffix=".png")
+        try:
+            from PIL import Image
+            Image.new("RGB", (32, 32), (210, 210, 210)).save(ip)
+        except Exception:
+            ip = None
+        _WARM_FILES["wav"], _WARM_FILES["img"] = wp, ip
+    return _WARM_FILES
 
 
 @app.post("/api/warm")
 async def api_warm():
-    """Spin up the speech model in the background when a visitor enters the app, so the voice is
-    ready by the time they finish reading their plan. Fire-and-forget, once per process."""
-    if not _WARMED["tts"]:
-        _WARMED["tts"] = True
+    """Wake EVERY model (text, speech, voice, vision) in the background when a visitor arrives, so
+    the first real request is fast. The models scale to zero when idle, so this is throttled and
+    fires again whenever someone returns after a lull. Returns warming=true when it actually fired."""
+    now = time.time()
+    if now - _WARM_TS[0] < 60:
+        return {"ok": True, "warming": False}
+    _WARM_TS[0] = now
+    a = _warm_assets()
+    jobs = [lambda: core.llm.complete("Hi"),
+            lambda: core.tts.speak("Ready.", lang="en", out_path=tempfile.mktemp(suffix=".wav"))]
+    if a.get("wav"):
+        jobs.append(lambda: core.asr.transcribe(a["wav"]))
+    if a.get("img"):
+        jobs.append(lambda: core.vision.describe(a["img"], "List appliances."))
 
-        def _w():
-            try:
-                core.tts.speak("Ready.", lang="en", out_path=tempfile.mktemp(suffix=".wav"))
-            except Exception:
-                _WARMED["tts"] = False
-        threading.Thread(target=_w, daemon=True).start()
-    return {"ok": True}
+    def _run(fn):
+        try:
+            fn()
+        except Exception:
+            pass
+    for fn in jobs:
+        threading.Thread(target=_run, args=(fn,), daemon=True).start()
+    return {"ok": True, "warming": True}
 
 
 @app.post("/api/narration")

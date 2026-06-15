@@ -4,8 +4,10 @@
 
 Naija Solar is a voice-first solar-sizing assistant for Nigeria. Speak, type, or photograph your appliances in **English, Nigerian Pidgin, Yorùbá, Hausa, or Igbo**, and it works out the panels, inverter, and battery you need, prices them against a real Nigerian catalogue, draws your home in **2D and 3D**, and **reads the plan back to you in your own language**. Every model it uses is **under 4 billion parameters**.
 
-🔗 **Live demo:** https://huggingface.co/spaces/build-small-hackathon/naija-solar
+🔗 **Live demo:** https://huggingface.co/spaces/build-small-hackathon/naija-solar &nbsp;·&nbsp; 🎥 **[Watch the demo](https://youtu.be/PfQeRfNof8Y)**
 🏆 Built for the **Build Small Hackathon** (Gradio × Hugging Face) · 🇳🇬 Built in Nigeria · ⚖️ MIT licensed
+
+[![Watch the Naija Solar demo on YouTube](https://img.youtube.com/vi/PfQeRfNof8Y/hqdefault.jpg)](https://youtu.be/PfQeRfNof8Y)
 
 ![Naija Solar home screen](assets/01_home.png)
 
@@ -110,6 +112,8 @@ A request flows through five steps, and the part you cannot afford to get wrong,
 ![How a request flows through Naija Solar, in five steps](assets/flow.png)
 
 The front end is an ordinary Hugging Face Space on a **free CPU box**. It holds the interface, the parser, the sizing engine, and the price catalogue, and it draws the 2D and 3D views right there on your device. Whenever it needs to hear, see, or speak, it calls a handful of small models hosted on Modal, each scaling to zero when idle. A persistent cache on `/data` keeps generated voice clips between restarts, so repeat plans play back instantly.
+
+Because the models sleep when idle, the app **warms all of them the moment you open it** and shows a brief loading note, so the first request after a lull is only a few seconds slower, and there is no GPU bill while nobody is using it.
 
 ![The Naija Solar architecture: a free CPU front end calling small open models on Modal](assets/arch.png)
 

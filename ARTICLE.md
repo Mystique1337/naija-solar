@@ -2,7 +2,9 @@
 
 *Built for the Build Small Hackathon, hosted by Gradio and Hugging Face.*
 
-**Try it live: [huggingface.co/spaces/build-small-hackathon/naija-solar](https://huggingface.co/spaces/build-small-hackathon/naija-solar)**
+**Try it live: [huggingface.co/spaces/build-small-hackathon/naija-solar](https://huggingface.co/spaces/build-small-hackathon/naija-solar) &nbsp;·&nbsp; Watch the demo: [youtu.be/PfQeRfNof8Y](https://youtu.be/PfQeRfNof8Y)**
+
+[![Watch the Naija Solar demo on YouTube](https://img.youtube.com/vi/PfQeRfNof8Y/hqdefault.jpg)](https://youtu.be/PfQeRfNof8Y)
 
 In Nigeria, electricity is something you plan your day around. The grid arrives for a few hours if you are lucky, and the rest of the time the streets fill with the sound of petrol generators. Those generators are expensive, and they are everywhere. The country spends around fourteen billion dollars a year keeping them running, and roughly ninety million people still have no reliable power at all. That is the largest electricity gap of any country on earth.
 

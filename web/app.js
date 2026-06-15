@@ -50,11 +50,23 @@
   }
 
   // ── views ───────────────────────────────────────────────────────────────────
-  let warmed = false;
-  function warmTTS() { if (warmed) return; warmed = true; fetch("/api/warm", { method: "POST" }).catch(() => {}); }
+  let warmed = false, warmNoteTimer = null;
+  // wake EVERY model (text, speech, voice, vision) the moment someone opens the app, and tell them
+  // it is loading, because the models sleep when idle so the first request needs a few seconds.
+  function warmAll() {
+    if (warmed) return; warmed = true;
+    showWarmNote();
+    fetch("/api/warm", { method: "POST" }).catch(() => {});
+  }
+  function showWarmNote() {
+    const n = $("warmNote"); if (!n) return;
+    n.hidden = false;
+    if (warmNoteTimer) clearTimeout(warmNoteTimer);
+    warmNoteTimer = setTimeout(() => { n.hidden = true; }, 55000);   // models are warm by then
+  }
   function showView(name) {
     document.querySelectorAll(".view").forEach((v) => { v.hidden = v.id !== name; });
-    if (name === "app") warmTTS();   // wake the voice while they read, so audio is ready sooner
+    if (name === "app") warmAll();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -438,10 +450,12 @@
     $("newSizing").onclick = newSizing;
     $("tourBtn").onclick = startTour;
     $("tourOv").onclick = tourEnd;
+    const wc = $("warmClose"); if (wc) wc.onclick = () => { $("warmNote").hidden = true; };
     applyLang("en");
     await refreshAuth();
     loadTestimonials();
     showView("home");
+    warmAll();                       // wake all the models the moment the page opens
   }
   boot();
 })();

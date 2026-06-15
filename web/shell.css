@@ -12,6 +12,13 @@ body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);
 a{color:var(--green)}
 /* header */
 .headcard{background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:15px 18px 13px;box-shadow:0 8px 24px rgba(120,80,20,.07);margin-bottom:8px;text-align:center}
+/* first-load disclaimer: the models scale to zero, so warn that they are waking up */
+.warmnote{display:flex;align-items:center;gap:9px;background:#fff7e9;border:1.5px solid #f3d9a8;border-radius:14px;padding:10px 14px;margin-bottom:10px;color:#7a4a12;font-size:.85rem;font-weight:600;line-height:1.4}
+.warmnote[hidden]{display:none}
+.warmspin{flex:none;width:14px;height:14px;border:2px solid #e3b770;border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite}
+.warmx{flex:none;margin-left:auto;background:none;border:none;color:#b07d3a;font-size:1.25rem;line-height:1;cursor:pointer;padding:0 2px}
+html[data-theme="dark"] .warmnote{background:#2a2113;border-color:#6b531f;color:#f0c890}
+html[data-theme="dark"] .warmspin{border-color:#6b531f;border-top-color:transparent}
 .topbar{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px}
 #ucount{width:100%}
 .langlabel{text-align:center;font-size:.72rem;font-weight:700;letter-spacing:.14em;color:#9ba88f;margin:14px 0 8px}

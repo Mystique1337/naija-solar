@@ -4,10 +4,10 @@
 
 Naija Solar is a voice-first solar-sizing assistant for Nigeria. Speak, type, or photograph your appliances in **English, Nigerian Pidgin, Yorùbá, Hausa, or Igbo**, and it works out the panels, inverter, and battery you need, prices them against a real Nigerian catalogue, draws your home in **2D and 3D**, and **reads the plan back to you in your own language**. Every model it uses is **under 4 billion parameters**.
 
-🔗 **Live demo:** https://huggingface.co/spaces/build-small-hackathon/naija-solar &nbsp;·&nbsp; 🎥 **[Watch the demo](https://youtu.be/PfQeRfNof8Y)**
-🏆 Built for the **Build Small Hackathon** (Gradio × Hugging Face) · 🇳🇬 Built in Nigeria · ⚖️ MIT licensed
+🔗 **Live app:** https://huggingface.co/spaces/build-small-hackathon/naija-solar &nbsp;·&nbsp; 💻 **[Code on GitHub](https://github.com/Mystique1337/naija-solar)**
+🎥 **Two demos:** **[the Gradio app](https://youtu.be/l1FhgPJyN44)** &nbsp;·&nbsp; **[the hand-built UI](https://youtu.be/PfQeRfNof8Y)** &nbsp;·&nbsp; 🏆 **Build Small Hackathon** (Gradio × Hugging Face) · 🇳🇬 Built in Nigeria · ⚖️ MIT
 
-[![Watch the Naija Solar demo on YouTube](https://img.youtube.com/vi/PfQeRfNof8Y/hqdefault.jpg)](https://youtu.be/PfQeRfNof8Y)
+[![Naija Solar, the Gradio app](https://img.youtube.com/vi/l1FhgPJyN44/hqdefault.jpg)](https://youtu.be/l1FhgPJyN44) [![Naija Solar, the hand-built UI](https://img.youtube.com/vi/PfQeRfNof8Y/hqdefault.jpg)](https://youtu.be/PfQeRfNof8Y)
 
 ![Naija Solar home screen](assets/01_home.png)
 

@@ -4,9 +4,11 @@
 
 *Built solo in Nigeria for the Build Small Hackathon, hosted by Gradio and Hugging Face.*
 
-▶️ **[Try it live](https://huggingface.co/spaces/build-small-hackathon/naija-solar)** &nbsp;·&nbsp; 🎥 **[Watch the demo](https://youtu.be/PfQeRfNof8Y)** &nbsp;·&nbsp; 💻 **[Code on GitHub](https://github.com/Mystique1337/naija-solar)** &nbsp;·&nbsp; 🔊 **[The SoroTTS voice](https://huggingface.co/Shinzmann/sorotts)**
+▶️ **[Try it live](https://huggingface.co/spaces/build-small-hackathon/naija-solar)** &nbsp;·&nbsp; 🎥 **[The Gradio app](https://youtu.be/l1FhgPJyN44)** &nbsp;·&nbsp; **[the hand-built UI](https://youtu.be/PfQeRfNof8Y)** &nbsp;·&nbsp; 💻 **[Code on GitHub](https://github.com/Mystique1337/naija-solar)** &nbsp;·&nbsp; 🔊 **[The SoroTTS voice](https://huggingface.co/Shinzmann/sorotts)**
 
-[![Watch the Naija Solar demo on YouTube](https://img.youtube.com/vi/PfQeRfNof8Y/hqdefault.jpg)](https://youtu.be/PfQeRfNof8Y)
+Two faces, one engine: a polished **Gradio app** (the default) and a fully **hand-built single-page UI** at `/classic`. Both do the same voice-first sizing.
+
+[![Naija Solar, the Gradio app](https://img.youtube.com/vi/l1FhgPJyN44/hqdefault.jpg)](https://youtu.be/l1FhgPJyN44) [![Naija Solar, the hand-built UI](https://img.youtube.com/vi/PfQeRfNof8Y/hqdefault.jpg)](https://youtu.be/PfQeRfNof8Y)
 
 **At a glance**
 
@@ -124,7 +126,7 @@ Right now the app sizes a system, writes it out, and speaks it back. Accounts an
 ## See it, hear it, read the code
 
 - **Live app:** [huggingface.co/spaces/build-small-hackathon/naija-solar](https://huggingface.co/spaces/build-small-hackathon/naija-solar)
-- **Demo video:** [youtu.be/PfQeRfNof8Y](https://youtu.be/PfQeRfNof8Y)
+- **Demo videos:** the Gradio app [youtu.be/l1FhgPJyN44](https://youtu.be/l1FhgPJyN44), the hand-built UI [youtu.be/PfQeRfNof8Y](https://youtu.be/PfQeRfNof8Y)
 - **Code on GitHub:** [github.com/Mystique1337/naija-solar](https://github.com/Mystique1337/naija-solar), the full app, the Modal serving scripts, and the SoroTTS training pipeline, all open
 - **The voice model:** [Shinzmann/sorotts](https://huggingface.co/Shinzmann/sorotts), open weights, hear all four languages
 

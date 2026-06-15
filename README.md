@@ -162,7 +162,7 @@ pip install modal && modal token new
 modal deploy modal/serving_vllm.py       # text (Qwen3-1.7B)
 modal deploy modal/serving_whisper.py    # speech to text
 modal deploy modal/serving_tts.py        # voice (SoroTTS, our Orpheus-3B fine-tune)
-modal deploy modal/serving_minicpm.py    # vision (MiniCPM-V-2, OpenBMB) — primary
+modal deploy modal/serving_minicpm.py    # vision (MiniCPM-V-2, OpenBMB), primary
 # modal deploy modal/serving_vision.py   # vision fallback (Qwen2.5-VL-3B), same slot + interface
 ```
 

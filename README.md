@@ -62,13 +62,14 @@ A guided first-run tour walks every new user through the app, in their own langu
 |---|---|---|
 | Text (narration phrasing, Q&A, parsing) | `Qwen/Qwen3-1.7B` | **1.7B** |
 | Speech to text | `openai/whisper-small` | **0.24B** |
-| Voice (English, Pidgin) | `hexgrad/Kokoro-82M` | **0.08B** |
-| Voice (Yorùbá) | `naijaml/f5-tts-yoruba` (F5-TTS) | **0.34B** |
+| Voice (all 5 languages) | **[SoroTTS](https://huggingface.co/Shinzmann/sorotts)**, our own Orpheus-3B fine-tune | **3B** |
 | Vision (appliances from a photo) | `openbmb/MiniCPM-V-2` | **3.43B** |
 
 The largest single model is 3.43B, comfortably under the 4B line. Everything is self-hosted on **Modal**, where each model wakes on demand and scales back to zero when idle, so there is no GPU bill running in the background.
 
-To keep the five languages dependable, the spoken explanation is built from carefully written, localized **templates** rather than a small model, because a 1.7B model is not reliable at Yorùbá, Hausa, or Igbo prose yet. That single choice is what makes the promise hold: pick Yorùbá, and you really do get Yorùbá. The same templates are what you see written on screen, so the words you read are exactly the words you hear.
+To keep the five languages dependable, the **words** of the spoken plan come from carefully written, localized templates rather than a small model, because a 1.7B model is not reliable at Yorùbá, Hausa, or Igbo prose yet. The same templates are what you see written on screen, so the words you read are exactly the words you hear.
+
+Those words are then **spoken by SoroTTS**, a voice we built ourselves. Off-the-shelf TTS for Nigerian languages is either robotic or absent, so we fine-tuned **Orpheus-3B** (a natural open speech model that had no Nigerian languages) on Yorùbá, Hausa, Igbo, and Nigerian Pidgin, training a single LoRA adapter over 31,574 clips from NaijaVoices, WAXAL, FLEURS, BibleTTS, and the Nigerian Pidgin corpus. The result, [`Shinzmann/sorotts`](https://huggingface.co/Shinzmann/sorotts), is native and natural, and still under the 4B line. The whole fine-tune runs on Modal ([`modal/finetune_orpheus.py`](modal/finetune_orpheus.py)); see that model card for the full story. So when you pick Yorùbá, you really do get Yorùbá, in a voice trained for it.
 
 ## Architecture
 
@@ -131,8 +132,15 @@ Each model has a serving script in `modal/`. Deploy the ones you need and point 
 pip install modal && modal token new
 modal deploy modal/serving_vllm.py       # text (Qwen3-1.7B)
 modal deploy modal/serving_whisper.py    # speech to text
-modal deploy modal/serving_tts.py        # voice (Kokoro + F5-TTS)
+modal deploy modal/serving_tts.py        # voice (SoroTTS, our Orpheus-3B fine-tune)
 modal deploy modal/serving_minicpm.py    # vision (MiniCPM-V-2)
+```
+
+To (re)train the SoroTTS voice yourself, the whole pipeline (stream + SNAC-encode the data, LoRA-train, push to the Hub) runs as one Modal job:
+
+```bash
+modal run --detach modal/finetune_orpheus.py     # full run, pushes <your-hf>/sorotts
+modal run modal/test_sorotts.py                  # synthesize a sample per language
 ```
 
 Set a strong `VLLM_API_KEY` secret on Modal and use the same value for `BUILDSMALL_API_KEY` so the endpoints are not open to the public.

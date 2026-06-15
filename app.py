@@ -32,6 +32,8 @@ import data
 import dataset
 import engine
 import locations
+import store          # durable accounts + per-user sizing history (shared with the /classic SPA)
+import strings        # seed testimonials for the reviews wall
 from buildsmall import asr, config, llm, sessions, tts, vision
 
 # ── user tracking: count + feedback + optional email ──────────────────────────
@@ -1075,6 +1077,41 @@ button:focus-visible,.typein textarea:focus-visible,a:focus-visible,.langrow inp
 }
 @media(max-width:640px){.steps{grid-template-columns:1fr}.vendors{grid-template-columns:1fr}}
 """
+
+# Styles for the home extras added on top of the sizer: a stats strip, the "powered by" model wall,
+# the reviews wall, and the account panel. Appended so both demo.launch() and the FastAPI mount get them.
+CSS += """
+.statstrip{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:2px 0 6px}
+.statstrip .sp{background:#fff;border:1.5px solid #f0e6cf;border-radius:999px;padding:7px 15px;font-size:.85rem;font-weight:600;color:#6b5b3a;box-shadow:0 3px 10px rgba(180,150,60,.08)}
+.statstrip .sp b{color:#1b1b1b}
+.sectitle{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;font-size:1.05rem;color:#1b1b1b;margin:18px 2px 8px;display:flex;align-items:center;gap:8px}
+.sectitle span{font-weight:500;font-size:.8rem;color:#8a8f99}
+.modelwall{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.mw{display:block;text-decoration:none;background:linear-gradient(135deg,#f7fcf9,#fff);border:1.5px solid #d9ecdf;border-radius:16px;padding:14px 16px;transition:transform .12s,box-shadow .12s}
+.mw:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(16,140,90,.12)}
+.mw.bmb{background:linear-gradient(135deg,#f5f8ff,#fff);border-color:#cdd8ff}
+.mw.ours{background:linear-gradient(135deg,#fff8ec,#fff);border-color:#f3dcae}
+.mw .mr{font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#0a8a52}
+.mw.bmb .mr{color:#3b53cf}.mw.ours .mr{color:#b9760a}
+.mw .mn{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;color:#1b1b1b;margin-top:3px}
+.mw .mp{font-size:.74rem;color:#6b7280;margin-top:4px;font-weight:600}
+.reviews{margin-top:6px}
+.rvgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.rvcard{background:#fff;border:1.5px solid #eee7d6;border-radius:16px;padding:14px 16px;box-shadow:0 4px 14px rgba(40,40,20,.05)}
+.rvstars{color:#f4a300;letter-spacing:1px;font-size:.95rem}
+.rvtext{color:#33312b;font-size:.9rem;line-height:1.5;margin:7px 0}
+.rvwho{color:#8a8f99;font-size:.8rem;font-weight:600}
+.accwelcome{background:linear-gradient(135deg,#f1fbf6,#fff);border:1.5px solid #cdeadb;border-radius:14px;padding:12px 16px;font-size:.95rem;color:#1b5e3f;margin-bottom:8px}
+.histlist{display:flex;flex-direction:column;gap:8px}
+.histrow{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#fff;border:1.4px solid #ececf3;border-radius:12px;padding:10px 14px;flex-wrap:wrap}
+.histrow .hl{font-weight:600;color:#1b1b1b;font-size:.9rem}
+.histrow .hm{color:#0a8a52;font-weight:700;font-size:.86rem}
+.histrow .hd{color:#9aa0aa;font-size:.76rem}
+.histempty{color:#8a8f99;font-size:.88rem;padding:6px 2px}
+.accmsg-ok{color:#0a8a52;font-weight:600;font-size:.88rem;padding:4px 2px}
+.accmsg-err{color:#d4493a;font-weight:600;font-size:.88rem;padding:4px 2px}
+"""
+
 THEME = gr.themes.Soft(
     primary_hue=gr.themes.colors.emerald, secondary_hue=gr.themes.colors.amber,
     neutral_hue=gr.themes.colors.stone, radius_size=gr.themes.sizes.radius_lg,
@@ -1411,16 +1448,189 @@ setTimeout(function(){ try{ window.renderHouse(0,0,''); }catch(e){} }, 700);
 RENDER_JS = "(s) => { if(s){ var a=(''+s).split('|'); if(window.renderHouse){ window.renderHouse(parseInt(a[0])||0, parseInt(a[1])||0, a[2]||''); } } }"
 
 
+# ── home extras: stats strip, model wall, reviews wall, and accounts ──────────
+_LANG_FLAG = {"en": "🇬🇧", "pcm": "🇳🇬", "yo": "🇳🇬", "ha": "🇳🇬", "ig": "🇳🇬"}
+_VALID_LANGS = ("en", "pcm", "yo", "ha", "ig")
+
+
+def _esc(s):
+    return str(s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+
+
+def stats_html():
+    return ('<div class="statstrip"><span class="sp">🌍 <b>5</b> languages</span>'
+            '<span class="sp">🧠 <b>4</b> models, all under 4B</span>'
+            '<span class="sp">🔋 free &amp; open · scales to zero</span></div>')
+
+
+def models_html():
+    cards = [
+        ("", "Understands you & answers", "Qwen3-1.7B", "1.7B", ""),
+        ("", "Hears your speech", "Whisper small", "0.24B", ""),
+        ("ours", "Speaks your language", "SoroTTS ↗", "3B · our fine-tune", "https://huggingface.co/Shinzmann/sorotts"),
+        ("bmb", "Reads your photos", "MiniCPM-V-2 ↗", "3.4B · OpenBMB", "https://huggingface.co/openbmb/MiniCPM-V-2"),
+    ]
+    out = []
+    for cls, role, name, params, href in cards:
+        tag = ("mw " + cls).strip()
+        inner = ('<div class="mr">%s</div><div class="mn">%s</div><div class="mp">%s</div>'
+                 % (_esc(role), _esc(name), _esc(params)))
+        out.append('<a class="%s" href="%s" target="_blank" rel="noopener">%s</a>' % (tag, href, inner)
+                   if href else '<div class="%s">%s</div>' % (tag, inner))
+    return '<div class="modelwall">%s</div>' % "".join(out)
+
+
+def _stars(n):
+    n = max(1, min(5, int(n or 5)))
+    return "★" * n + "☆" * (5 - n)
+
+
+def reviews_html():
+    try:
+        real = store.STORE.list_testimonials(60)
+    except Exception:
+        real = []
+    items, seen = [], set()
+    for t in real:
+        txt = (t.get("text") or "").strip()
+        if not txt:
+            continue
+        k = ((t.get("name") or "").strip().lower(), txt.lower())
+        if k in seen:
+            continue
+        seen.add(k)
+        items.append(t)
+    seeds = getattr(strings, "SEED_TESTIMONIALS", []) or []
+    cards = []
+    for t in (items + list(seeds))[:18]:
+        flag = _LANG_FLAG.get(t.get("lang", "en"), "🌍")
+        cards.append('<div class="rvcard"><div class="rvstars">%s</div>'
+                     '<div class="rvtext">“%s”</div><div class="rvwho">%s %s</div></div>'
+                     % (_stars(t.get("rating", 5)), _esc(t.get("text", "")), flag, _esc(t.get("name", "A user"))))
+    return '<div class="reviews"><div class="rvgrid">%s</div></div>' % "".join(cards)
+
+
+def reviews_title():
+    try:
+        n = len([t for t in store.STORE.list_testimonials(60) if (t.get("text") or "").strip()])
+    except Exception:
+        n = 0
+    return ('<div class="sectitle">💬 What people are saying '
+            '<span>%d real rating%s, plus a few we are proud of</span></div>' % (n, "" if n == 1 else "s"))
+
+
+# ── accounts ──────────────────────────────────────────────────────────────────
+def _rec_history(sel, r, state, lang):
+    return {"appliances": sel, "panels": r["panel"]["count"], "kva": r["inverter"]["kva"],
+            "kwh": r["daily_kwh"], "cost": r["batteries"]["durable"]["total"], "state": state, "lang": lang,
+            "label": ", ".join("%d %s" % (v, k.split(" (")[0]) for k, v in list(sel.items())[:4])}
+
+
+def acc_greeting(user):
+    if not user:
+        return ""
+    n = user.get("count", 0)
+    return ('<div class="accwelcome">👋 Welcome, <b>%s</b> · <b>%d</b> saved sizing%s. '
+            'New sizings are saved here automatically.</div>'
+            % (_esc(user.get("name", "")), n, "" if n == 1 else "s"))
+
+
+def acc_history_html(user):
+    if not user:
+        return ""
+    try:
+        recs = store.STORE.list_sizings(user["email"])
+    except Exception:
+        recs = []
+    if not recs:
+        return '<div class="histempty">No saved sizings yet. Size a system and it lands here.</div>'
+    rows = []
+    for rec in recs[:20]:
+        when = time.strftime("%d %b %Y", time.localtime(rec.get("ts", 0))) if rec.get("ts") else ""
+        rows.append('<div class="histrow"><span class="hl">%s</span>'
+                    '<span class="hm">%d panels · %s kVA · ₦%s</span><span class="hd">%s</span></div>'
+                    % (_esc(rec.get("label", "sizing")), int(rec.get("panels", 0)),
+                       _esc(rec.get("kva", "")), format(int(rec.get("cost", 0)), ","), when))
+    return '<div class="histlist">%s</div>' % "".join(rows)
+
+
+def _accmsg(text, ok):
+    return '<div class="accmsg-%s">%s</div>' % ("ok" if ok else "err", _esc(text))
+
+
+def do_signup(email, pw, name):
+    user, err = store.STORE.create_user(email, pw, name)
+    if err:
+        return None, _accmsg(err, False), SHOW, HIDE, "", ""
+    return user, _accmsg("Account created — welcome to Naija Solar!", True), HIDE, SHOW, acc_greeting(user), acc_history_html(user)
+
+
+def do_login(email, pw):
+    user, err = store.STORE.login(email, pw)
+    if err:
+        return None, _accmsg(err, False), SHOW, HIDE, "", ""
+    return user, _accmsg("Signed in.", True), HIDE, SHOW, acc_greeting(user), acc_history_html(user)
+
+
+def do_logout():
+    return None, "", SHOW, HIDE, "", ""
+
+
+def save_after_size(r, df, user, state, lang):
+    """When a signed-in user sizes a system, save it to their history and refresh the account panel."""
+    if user and r:
+        try:
+            sel = _df_to_sel(df)
+            if sel:
+                store.STORE.add_sizing(user["email"], _rec_history(sel, r, state, lang))
+                user = store.STORE.get(user["email"]) or user      # refresh the saved count
+        except Exception:
+            pass
+    return (acc_greeting(user) if user else ""), (acc_history_html(user) if user else ""), user
+
+
+def do_feedback(rating, comment, user, lang):
+    msg = submit_feedback(rating, comment)
+    comment = (comment or "").strip()
+    if rating == "up" and len(comment) >= 6:                        # a positive comment becomes a public review
+        name = (user.get("name") if user else "") or "A Naija Solar user"
+        try:
+            store.STORE.add_testimonial({"name": name[:40], "text": comment[:240], "rating": 5,
+                                         "lang": lang if lang in _VALID_LANGS else "en"})
+        except Exception:
+            pass
+    return msg, reviews_html(), reviews_title()
+
+
 def build():
     with gr.Blocks(title="Naija Solar", analytics_enabled=False) as demo:   # css/theme/head are applied at launch()/mount in Gradio 6
         sess, result, lang = gr.State(None), gr.State(None), gr.State("en")
+        auth_state = gr.State(None)
         gr.HTML(logo_html())
         usercount = gr.HTML(count_html(), elem_id="ucount")
+        with gr.Accordion("👤 Account — sign in to save your sizings", open=False):
+            acc_msg = gr.HTML()
+            with gr.Column(visible=True) as acc_out:
+                with gr.Row():
+                    acc_email = gr.Textbox(placeholder="you@email.com", show_label=False, scale=2, elem_classes="typein")
+                    acc_pass = gr.Textbox(placeholder="password (6+ chars)", type="password", show_label=False, scale=2, elem_classes="typein")
+                acc_name = gr.Textbox(placeholder="your name (only needed for a new account)", show_label=False, elem_classes="typein")
+                with gr.Row():
+                    login_btn = gr.Button("Sign in", elem_classes="gobtn", scale=1)
+                    signup_btn = gr.Button("Create account", variant="primary", elem_classes="gobtn", scale=1)
+            with gr.Column(visible=False) as acc_in:
+                acc_greet = gr.HTML()
+                gr.HTML('<div class="sectitle">🗂️ My saved sizings</div>')
+                acc_hist = gr.HTML()
+                with gr.Row():
+                    logout_btn = gr.Button("Log out", scale=1)
+                    refresh_btn = gr.Button("Refresh", size="sm", scale=1)
         summary_bar = gr.HTML(elem_id="sumbar")
         gr.HTML('<div class="langlabel">🌍 CHOOSE YOUR LANGUAGE</div>')
         lang_sel = gr.Radio([("English", "en"), ("Naijá Pidgin", "pcm"), ("Yorùbá", "yo"), ("Hausa", "ha"), ("Ìgbò", "ig")],
                             value="en", show_label=False, elem_classes="langrow")
         hero = gr.HTML(hero_html("en"))
+        gr.HTML(stats_html())
         with gr.Accordion("New here? How Naija Solar works", open=False) as guide_acc:
             guide = gr.HTML(steps_html())
         with gr.Row(elem_classes="locrow"):
@@ -1504,6 +1714,12 @@ def build():
                 email_btn = gr.Button("Notify me", elem_classes="gobtn", scale=1)
             email_msg = gr.HTML()
 
+        gr.HTML('<div class="sectitle">⚙️ Powered by four small open models '
+                '<span>every one under 4B, self-hosted on Modal, scaled to zero</span></div>')
+        gr.HTML(models_html())
+        reviews_head = gr.HTML(reviews_title())
+        reviews_block = gr.HTML(reviews_html())
+
         gr.HTML('<div class="gfoot">☀️ <b>Naija&nbsp;Solar</b> &nbsp;·&nbsp; '
                 '<a href="/classic" target="_blank">the original hand-built UI ↗</a> &nbsp;·&nbsp; '
                 '<a href="https://github.com/Mystique1337/naija-solar" target="_blank">GitHub ↗</a> &nbsp;·&nbsp; '
@@ -1512,14 +1728,15 @@ def build():
         ins = [voice, text, state, geolat, lang, sess]
         outs = [hdata, flow, breakdown, content, applist, status, sess, result, lang, panel, appl_state]
         spk = (speak, [result, lang, sess], [walk_audio, sess])
+        save = (save_after_size, [result, appl_state, auth_state, state, lang], [acc_greet, acc_hist, auth_state])
         ls_outs = [lang, hero, text, fine, mode_v, mode_t, mode_p, text_btn, photo_btn, guide, guide_acc]
-        voice.stop_recording(show_thinking, None, status).then(run, ins, outs).then(set_summary, result, [summary_bar, home2d, usercount]).then(*spk)
-        text.submit(show_thinking, None, status).then(run, ins, outs).then(set_summary, result, [summary_bar, home2d, usercount]).then(*spk)
-        text_btn.click(show_thinking, None, status).then(run, ins, outs).then(set_summary, result, [summary_bar, home2d, usercount]).then(*spk)
+        voice.stop_recording(show_thinking, None, status).then(run, ins, outs).then(set_summary, result, [summary_bar, home2d, usercount]).then(*save).then(*spk)
+        text.submit(show_thinking, None, status).then(run, ins, outs).then(set_summary, result, [summary_bar, home2d, usercount]).then(*save).then(*spk)
+        text_btn.click(show_thinking, None, status).then(run, ins, outs).then(set_summary, result, [summary_bar, home2d, usercount]).then(*save).then(*spk)
         for _btn, (_lbl, _val) in zip(ex_btns, EXAMPLES):     # one-tap examples: fill, clear mic, then size
             _btn.click(lambda v=_val: (v, None), None, [text, voice]).then(
                 show_thinking, None, status).then(run, ins, outs).then(
-                set_summary, result, [summary_bar, home2d, usercount]).then(*spk)
+                set_summary, result, [summary_bar, home2d, usercount]).then(*save).then(*spk)
         lang_sel.change(set_lang, lang_sel, ls_outs)
         hdata.change(None, hdata, None, js=RENDER_JS)
         geo_btn.click(None, None, geolat, js=GEO_JS)
@@ -1527,14 +1744,21 @@ def build():
         add_btn.click(add_appliance, [picker, qty_in, appl_state], [appl_state, applist])
         clear_btn.click(clear_appliances, None, [appl_state, applist])
         photo_btn.click(show_photo_thinking, None, status).then(
-            from_photos, [photos, camera, state, geolat, lang, sess], outs).then(set_summary, result, [summary_bar, home2d, usercount]).then(*spk)
+            from_photos, [photos, camera, state, geolat, lang, sess], outs).then(set_summary, result, [summary_bar, home2d, usercount]).then(*save).then(*spk)
         recalc_btn.click(show_thinking, None, status).then(
-            recalc, [appl_state, state, geolat, sess], [hdata, flow, breakdown, content, status, sess, result, panel]).then(set_summary, result, [summary_bar, home2d, usercount]).then(*spk)
+            recalc, [appl_state, state, geolat, sess], [hdata, flow, breakdown, content, status, sess, result, panel]).then(set_summary, result, [summary_bar, home2d, usercount]).then(*save).then(*spk)
         sess_btn.click(lambda: sessions.render_html(12), None, sess_html)
         qa_btn.click(ask, [qa_in, result, lang, sess], [qa_out, sess])
         qa_in.submit(ask, [qa_in, result, lang, sess], [qa_out, sess])
-        fb_up.click(lambda c: submit_feedback("up", c), fb_comment, fb_msg)
-        fb_down.click(lambda c: submit_feedback("down", c), fb_comment, fb_msg)
+        # accounts: sign in / create / out (shared with the /classic SPA via store.STORE)
+        _acc_outs = [auth_state, acc_msg, acc_out, acc_in, acc_greet, acc_hist]
+        login_btn.click(do_login, [acc_email, acc_pass], _acc_outs)
+        signup_btn.click(do_signup, [acc_email, acc_pass, acc_name], _acc_outs)
+        logout_btn.click(do_logout, None, _acc_outs)
+        refresh_btn.click(lambda u: (acc_greeting(u), acc_history_html(u)), auth_state, [acc_greet, acc_hist])
+        # a positive comment becomes a public review on the wall below
+        fb_up.click(lambda c, u, l: do_feedback("up", c, u, l), [fb_comment, auth_state, lang], [fb_msg, reviews_block, reviews_head])
+        fb_down.click(lambda c, u, l: do_feedback("down", c, u, l), [fb_comment, auth_state, lang], [fb_msg, reviews_block, reviews_head])
         email_btn.click(submit_email, email_in, email_msg)
         demo.load(count_html, None, usercount)
     return demo
